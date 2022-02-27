@@ -1,0 +1,97 @@
+From b43f0fed677caccccea0f14ebd128d8715a952e1 Mon Sep 17 00:00:00 2001
+From: Alfred Mathew <alfredmathew05@gmail.com>
+Date: Sun, 20 Feb 2022 20:06:13 +0530
+Subject: [PATCH 03/11] Settings: add menu item to toggle app lock debugging
+
+Signed-off-by: Alfred Mathew <alfredmathew05@gmail.com>
+Signed-off-by: Joey Huab <joey@evolution-x.org>
+Signed-off-by: dlwlrma123 <alexfinhart@gmail.com>
+---
+ res/values/miku_strings.xml                   |  4 +-
+ .../applock/AppLockSettingsFragment.kt        | 40 ++++++++++++++++++-
+ 2 files changed, 42 insertions(+), 2 deletions(-)
+
+diff --git a/res/values/miku_strings.xml b/res/values/miku_strings.xml
+index 98d1233ecc..1e5e424be3 100644
+--- a/res/values/miku_strings.xml
++++ b/res/values/miku_strings.xml
+@@ -101,5 +101,7 @@
+     </string>
+     <string name="app_lock_notifications_disabled_summary">Protect an application first</string>
+     <string name="app_lock_footer_text">Bubbles will be automatically dismissed after timeout</string>
+-    
++    <string name="enable_debugging">Enable debugging</string>
++    <string name="disable_debugging">Disable debugging</string>
++
+ </resources>
+diff --git a/src/com/android/settings/security/applock/AppLockSettingsFragment.kt b/src/com/android/settings/security/applock/AppLockSettingsFragment.kt
+index b3f47cf944..e691d3b305 100644
+--- a/src/com/android/settings/security/applock/AppLockSettingsFragment.kt
++++ b/src/com/android/settings/security/applock/AppLockSettingsFragment.kt
+@@ -17,6 +17,10 @@
+ package com.android.settings.security.applock
+ 
+ import android.content.Context
++import android.os.SystemProperties
++import android.view.Menu
++import android.view.MenuInflater
++import android.view.MenuItem
+ 
+ import com.android.settings.R
+ import com.android.settings.search.BaseSearchIndexProvider
+@@ -26,7 +30,10 @@ import com.android.settingslib.search.SearchIndexable
+ import com.miku.exsettings.fragments.MikuDashboardFragment
+ 
+ @SearchIndexable
+-class AppLockSettingsFragment : MikuDashboardFragment() {
++class AppLockSettingsFragment : MikuDashboardFragment(),
++    MenuItem.OnMenuItemClickListener {
++
++    private var debugEnabled = SystemProperties.get(DEBUG_PROPERTY, null) == LEVEL_DEBUG
+ 
+     override protected fun getPreferenceScreenResId() = R.xml.app_lock_settings
+ 
+@@ -35,9 +42,40 @@ class AppLockSettingsFragment : MikuDashboardFragment() {
+     override protected fun createPreferenceControllers(context: Context) =
+         buildPreferenceControllers(context, settingsLifecycle)
+ 
++    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
++        super.onCreateOptionsMenu(menu, menuInflater)
++        menu.add(
++            0 /* groupId */,
++            MENU_ITEM_DEBUG_ID,
++            0 /* order */,
++            getDebugMenuItemTitle(),
++        ).setOnMenuItemClickListener(this)
++    }
++
++    private fun getDebugMenuItemTitle(): Int =
++        if (debugEnabled)
++            R.string.disable_debugging
++        else
++            R.string.enable_debugging
++
++    override fun onMenuItemClick(item: MenuItem): Boolean {
++        if (item.itemId == MENU_ITEM_DEBUG_ID) {
++            debugEnabled = !debugEnabled
++            SystemProperties.set(DEBUG_PROPERTY,
++                if (debugEnabled) LEVEL_DEBUG else null)
++            item.setTitle(getDebugMenuItemTitle())
++            return true
++        }
++        return false
++    }
++
+     companion object {
+         private const val TAG = "AppLockSettingsFragment"
+ 
++        private const val DEBUG_PROPERTY = "log.tag.AppLockManagerService"
++        private const val LEVEL_DEBUG = "DEBUG"
++        private const val MENU_ITEM_DEBUG_ID = 101
++
+         @JvmField
+         val SEARCH_INDEX_DATA_PROVIDER = object : BaseSearchIndexProvider(
+             R.xml.app_lock_settings
+-- 
+2.32.0 (Apple Git-132)
+

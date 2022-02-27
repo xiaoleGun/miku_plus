@@ -1,0 +1,52 @@
+From 4c3e7c9246d82ecb7e219b7fc5e938ff4d9112ce Mon Sep 17 00:00:00 2001
+From: xiaoleGun <1592501605@qq.com>
+Date: Sun, 27 Feb 2022 19:12:27 +0800
+Subject: [PATCH 11/11] [Miku-ify] Translate App lock and Faceunlock for Miku
+ UI [CN]
+
+Signed-off-by: xiaoleGun <1592501605@qq.com>
+---
+ res/values-zh-rCN/miku_strings.xml | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+
+diff --git a/res/values-zh-rCN/miku_strings.xml b/res/values-zh-rCN/miku_strings.xml
+index 0c7a21636d..7289c119b3 100644
+--- a/res/values-zh-rCN/miku_strings.xml
++++ b/res/values-zh-rCN/miku_strings.xml
+@@ -78,4 +78,33 @@
+     <!-- Label for device's hardware ram size [CHAR LIMIT=40] -->
+     <string name="total_ram">可以使用的总内存</string>
+ 
++    <!-- App lock -->
++    <string name="app_lock_title">应用锁</string>
++    <string name="app_lock_summary_singular">1应用受保护</string>
++    <string name="app_lock_summary_plural"><xliff:g example="2" id="Number of applications">%1$d</xliff:g> 应用受保护</string>
++    <string name="app_lock_authentication_dialog_title">解锁</string>
++    <string name="app_lock_packages_title">受保护的应用</string>
++    <string name="app_lock_packages_summary">选择要使用人脸、指纹或设备凭据保护的应用</string>
++    <string name="app_lock_timeout_title">自动锁定</string>
++    <string name="app_lock_timeout_summary">一段时间后，后台已解锁的应用将被自动锁定</string>
++    <string name="app_lock_notifications_title">折叠通知</string>
++    <string name="app_lock_notifications_summary">
++          锁定选定应用时，通知内容将被隐藏和折叠。
++          应用通知将被自动禁用。
++    </string>
++    <string name="app_lock_notifications_disabled_summary">首先保护应用程序</string>
++    <string name="app_lock_biometrics_allowed_title">启用人脸、指纹以解锁</string>
++    <string name="app_lock_footer_text">对话框将在超时后自动消失</string>
++    <string name="enable_debugging">启用Debug</string>
++    <string name="disable_debugging">关闭Debug</string>
++
++    <!-- Face Unlock -->
++    <string name="security_settings_face_unlock_redo_face_scan_summary">删除现有面部数据并重新扫描</string>
++    <string name="security_settings_face_unlock_redo_face_scan_title">重新扫描</string>
++    <string name="face_redo_confirm_btn">确定</string>
++    <string name="face_redo_warning_msg">是否要删除现有的面部数据并重新扫描？</string>
++    <string name="face_unlock_method_title">锁屏上的解锁方式</string>
++    <string name="face_unlock_method_default">打开屏幕直接扫描</string>
++    <string name="face_unlock_method_swipe">滑动一下才扫描</string>
++
+ </resources>
+-- 
+2.32.0 (Apple Git-132)
+

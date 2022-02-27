@@ -1,0 +1,376 @@
+From a4f3232aa60a0d4da8e03fdb4edd5a7a6d03ea9e Mon Sep 17 00:00:00 2001
+From: jhenrique09 <jhsv09@gmail.com>
+Date: Fri, 11 Feb 2022 22:34:49 -0300
+Subject: [PATCH 17/23] SystemUI: Tell user when face unlock detection is
+ running
+
+Google removed the animation on Android 12, let's use a text instead
+
+Change-Id: I93c4121c57137764edb0b31678d103fd5f7d4dcc
+Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>
+---
+ packages/SystemUI/res/values/miku_strings.xml | 19 +++++
+ .../keyguard/KeyguardUpdateMonitor.java       |  2 +-
+ ...ardIndicationRotateTextViewController.java | 28 +++++++
+ .../KeyguardIndicationController.java         | 75 +++++++++++++++++--
+ .../phone/StatusBarKeyguardViewManager.java   | 37 ++++++++-
+ 5 files changed, 153 insertions(+), 8 deletions(-)
+ create mode 100644 packages/SystemUI/res/values/miku_strings.xml
+
+diff --git a/packages/SystemUI/res/values/miku_strings.xml b/packages/SystemUI/res/values/miku_strings.xml
+new file mode 100644
+index 000000000000..646216e78fdd
+--- /dev/null
++++ b/packages/SystemUI/res/values/miku_strings.xml
+@@ -0,0 +1,19 @@
++<?xml version="1.0" encoding="utf-8"?>
++<!--
++     Copyright 2021 Miku UI
++     Licensed under the Apache License, Version 2.0 (the "License");
++     you may not use this file except in compliance with the License.
++     You may obtain a copy of the License at
++          http://www.apache.org/licenses/LICENSE-2.0
++     Unless required by applicable law or agreed to in writing, software
++     distributed under the License is distributed on an "AS IS" BASIS,
++     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++     See the License for the specific language governing permissions and
++     limitations under the License.
++-->
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++
++    <!-- Face Unlock -->
++    <string name="face_unlock_recognizing">Recognizing face...</string>
++
++</resources>
+\ No newline at end of file
+diff --git a/packages/SystemUI/src/com/android/keyguard/KeyguardUpdateMonitor.java b/packages/SystemUI/src/com/android/keyguard/KeyguardUpdateMonitor.java
+index 1d8d984cc49f..691cfa9d62e3 100644
+--- a/packages/SystemUI/src/com/android/keyguard/KeyguardUpdateMonitor.java
++++ b/packages/SystemUI/src/com/android/keyguard/KeyguardUpdateMonitor.java
+@@ -2525,7 +2525,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
+                 && mFpm.hasEnrolledTemplates(userId);
+     }
+ 
+-    private boolean isUnlockWithFacePossible(int userId) {
++    public boolean isUnlockWithFacePossible(int userId) {
+         return isFaceAuthEnabledForUser(userId) && !isFaceDisabled(userId);
+     }
+ 
+diff --git a/packages/SystemUI/src/com/android/systemui/keyguard/KeyguardIndicationRotateTextViewController.java b/packages/SystemUI/src/com/android/systemui/keyguard/KeyguardIndicationRotateTextViewController.java
+index a424674ed252..f4f2acdda20b 100644
+--- a/packages/SystemUI/src/com/android/systemui/keyguard/KeyguardIndicationRotateTextViewController.java
++++ b/packages/SystemUI/src/com/android/systemui/keyguard/KeyguardIndicationRotateTextViewController.java
+@@ -100,15 +100,36 @@ public class KeyguardIndicationRotateTextViewController extends
+      */
+     public void updateIndication(@IndicationType int type, KeyguardIndication newIndication,
+             boolean updateImmediately) {
++        updateIndication(type, newIndication, updateImmediately, false);
++    }
++
++    /**
++     * Update the indication type with the given String.
++     * @param type of indication
++     * @param newIndication message to associate with this indication type
++     * @param showImmediately if true: shows this indication message immediately. Else, the text
++     *                        associated with this type is updated and will show when its turn in
++     *                        the IndicationQueue comes around.
++     * @param fixed if true: keep message appearing until it is explicitly hidden
++     */
++    public void updateIndication(@IndicationType int type, KeyguardIndication newIndication,
++            boolean updateImmediately, boolean fixed) {
+         if (type == INDICATION_TYPE_REVERSE_CHARGING) {
+             // temporarily don't show here, instead use AmbientContainer b/181049781
+             return;
+         }
++        if (type == INDICATION_TYPE_FACE_RECOGNITION_STARTED){
++            mView.setAnimationsEnabled(false);
++        }
+         final boolean hasPreviousIndication = mIndicationMessages.get(type) != null;
+         final boolean hasNewIndication = newIndication != null;
+         if (!hasNewIndication) {
+             mIndicationMessages.remove(type);
+             mIndicationQueue.removeIf(x -> x == type);
++            if (mCurrIndicationType == INDICATION_TYPE_FACE_RECOGNITION_STARTED){
++                mCurrIndicationType = INDICATION_TYPE_NONE;
++                mView.setAnimationsEnabled(true);
++            }
+         } else {
+             if (!hasPreviousIndication) {
+                 mIndicationQueue.add(type);
+@@ -122,6 +143,7 @@ public class KeyguardIndicationRotateTextViewController extends
+         }
+ 
+         final boolean showNow = updateImmediately
++                || fixed
+                 || mCurrIndicationType == INDICATION_TYPE_NONE
+                 || mCurrIndicationType == type;
+         if (hasNewIndication) {
+@@ -194,6 +216,10 @@ public class KeyguardIndicationRotateTextViewController extends
+      * rotated through.
+      */
+     private void showIndication(@IndicationType int type) {
++        if (mCurrIndicationType == INDICATION_TYPE_FACE_RECOGNITION_STARTED){
++            return;
++        }
++
+         cancelScheduledIndication();
+ 
+         mCurrIndicationType = type;
+@@ -303,6 +329,7 @@ public class KeyguardIndicationRotateTextViewController extends
+     public static final int INDICATION_TYPE_RESTING = 7;
+     public static final int INDICATION_TYPE_USER_LOCKED = 8;
+     public static final int INDICATION_TYPE_REVERSE_CHARGING = 10;
++    public static final int INDICATION_TYPE_FACE_RECOGNITION_STARTED = 11;
+ 
+     @IntDef({
+             INDICATION_TYPE_NONE,
+@@ -316,6 +343,7 @@ public class KeyguardIndicationRotateTextViewController extends
+             INDICATION_TYPE_RESTING,
+             INDICATION_TYPE_USER_LOCKED,
+             INDICATION_TYPE_REVERSE_CHARGING,
++            INDICATION_TYPE_FACE_RECOGNITION_STARTED,
+     })
+     @Retention(RetentionPolicy.SOURCE)
+     public @interface IndicationType{}
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/KeyguardIndicationController.java b/packages/SystemUI/src/com/android/systemui/statusbar/KeyguardIndicationController.java
+index 8a397199dc84..593d0a2f4afd 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/KeyguardIndicationController.java
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/KeyguardIndicationController.java
+@@ -29,6 +29,7 @@ import static com.android.systemui.keyguard.KeyguardIndicationRotateTextViewCont
+ import static com.android.systemui.keyguard.KeyguardIndicationRotateTextViewController.INDICATION_TYPE_RESTING;
+ import static com.android.systemui.keyguard.KeyguardIndicationRotateTextViewController.INDICATION_TYPE_TRUST;
+ import static com.android.systemui.keyguard.KeyguardIndicationRotateTextViewController.INDICATION_TYPE_USER_LOCKED;
++import static com.android.systemui.keyguard.KeyguardIndicationRotateTextViewController.INDICATION_TYPE_FACE_RECOGNITION_STARTED;
+ import static com.android.systemui.plugins.FalsingManager.LOW_PENALTY;
+ 
+ import android.animation.Animator;
+@@ -103,6 +104,8 @@ public class KeyguardIndicationController {
+ 
+     private static final int MSG_HIDE_TRANSIENT = 1;
+     private static final int MSG_SHOW_ACTION_TO_UNLOCK = 2;
++    private static final int MSG_SHOW_RECOGNIZING_FACE = 3;
++    private static final int MSG_HIDE_RECOGNIZING_FACE = 4;
+     private static final long TRANSIENT_BIOMETRIC_ERROR_TIMEOUT = 1300;
+     private static final float BOUNCE_ANIMATION_FINAL_Y = 0f;
+ 
+@@ -149,6 +152,8 @@ public class KeyguardIndicationController {
+     private String mMessageToShowOnScreenOn;
+     protected int mLockScreenMode;
+     private boolean mInited;
++    private boolean mFaceDetectionRunning;
++    private boolean mFaceDetectionIndicationShowing;
+ 
+     private KeyguardUpdateMonitorCallback mUpdateMonitorCallback;
+ 
+@@ -280,16 +285,41 @@ public class KeyguardIndicationController {
+      * Doesn't include disclosure which gets triggered separately.
+      */
+     private void updateIndications(boolean animate, int userId) {
++        if (mFaceDetectionIndicationShowing && mFaceDetectionRunning){
++            return;
++        }
++        updateFaceRecognition(true);
++        if (mFaceDetectionRunning){
++            mFaceDetectionIndicationShowing = true;
++            return;
++        }
++        updateTransient();
+         updateOwnerInfo();
+         updateBattery(animate);
+         updateUserLocked(userId);
+-        updateTransient();
+         updateTrust(userId, getTrustGrantedIndication(), getTrustManagedIndication());
+         updateAlignment();
+         updateLogoutView();
+         updateResting();
+     }
+ 
++    private void updateFaceRecognition(boolean hide){
++        if (mFaceDetectionRunning) {
++            mFaceDetectionIndicationShowing = true;
++            mRotateTextViewController.updateIndication(
++                    INDICATION_TYPE_FACE_RECOGNITION_STARTED,
++                    new KeyguardIndication.Builder()
++                            .setMessage(mContext.getResources().getText(
++                                    R.string.face_unlock_recognizing))
++                            .setTextColor(mInitialTextColorState)
++                            .build(),
++                    true, true);
++        } else if (hide){
++            mFaceDetectionIndicationShowing = false;
++            mRotateTextViewController.hideIndication(INDICATION_TYPE_FACE_RECOGNITION_STARTED);
++        }
++    }
++
+     private void updateDisclosure() {
+         // avoid calling this method since it has an IPC
+         if (whitelistIpcs(this::isOrganizationOwnedDevice)) {
+@@ -792,6 +822,14 @@ public class KeyguardIndicationController {
+                 hideTransientIndication();
+             } else if (msg.what == MSG_SHOW_ACTION_TO_UNLOCK) {
+                 showActionToUnlock();
++            } else if (msg.what == MSG_SHOW_RECOGNIZING_FACE){
++                mMessageToShowOnScreenOn = null;
++                hideTransientIndication();
++            } else if (msg.what == MSG_HIDE_RECOGNIZING_FACE){
++                mMessageToShowOnScreenOn = null;
++                mFaceDetectionIndicationShowing = false;
++                mRotateTextViewController.hideIndication(INDICATION_TYPE_FACE_RECOGNITION_STARTED);
++                updateIndication(false);
+             }
+         }
+     };
+@@ -1017,16 +1055,41 @@ public class KeyguardIndicationController {
+                 hideTransientIndicationDelayed(HIDE_DELAY_MS);
+                 mMessageToShowOnScreenOn = null;
+             }
++            updateFaceRecognition(false);
++        }
++
++        @Override
++        public void onScreenTurnedOff() {
++            if (mFaceDetectionRunning || mFaceDetectionIndicationShowing) {
++                mFaceDetectionRunning = false;
++                mFaceDetectionIndicationShowing = false;
++                mMessageToShowOnScreenOn = null;
++                mRotateTextViewController.hideIndication(INDICATION_TYPE_FACE_RECOGNITION_STARTED);
++                updateIndication(false);
++            }
++        }
++
++        @Override
++        public void onKeyguardBouncerChanged(boolean bouncer) {
++            if (!bouncer){
++                updateFaceRecognition(false);
++            }
+         }
+ 
+         @Override
+         public void onBiometricRunningStateChanged(boolean running,
+                 BiometricSourceType biometricSourceType) {
+-            if (running && biometricSourceType == BiometricSourceType.FACE) {
+-                // Let's hide any previous messages when authentication starts, otherwise
+-                // multiple auth attempts would overlap.
+-                hideTransientIndication();
+-                mMessageToShowOnScreenOn = null;
++            if (biometricSourceType == BiometricSourceType.FACE) {
++                mFaceDetectionRunning = running;
++                if (running) {
++                    mHandler.removeMessages(MSG_HIDE_RECOGNIZING_FACE);
++                    mHandler.removeMessages(MSG_SHOW_RECOGNIZING_FACE);
++                    mHandler.sendEmptyMessageDelayed(MSG_SHOW_RECOGNIZING_FACE, 100);
++                }else{
++                    mHandler.removeMessages(MSG_SHOW_RECOGNIZING_FACE);
++                    mHandler.removeMessages(MSG_HIDE_RECOGNIZING_FACE);
++                    mHandler.sendEmptyMessageDelayed(MSG_HIDE_RECOGNIZING_FACE, 100);
++                }
+             }
+         }
+ 
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarKeyguardViewManager.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarKeyguardViewManager.java
+index cc6ee1fa0931..db894ce84ee1 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarKeyguardViewManager.java
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarKeyguardViewManager.java
+@@ -24,6 +24,7 @@ import android.content.Context;
+ import android.content.res.ColorStateList;
+ import android.hardware.biometrics.BiometricSourceType;
+ import android.os.Bundle;
++import android.os.Handler;
+ import android.os.SystemClock;
+ import android.view.KeyEvent;
+ import android.view.MotionEvent;
+@@ -44,6 +45,7 @@ import com.android.keyguard.KeyguardViewController;
+ import com.android.keyguard.ViewMediatorCallback;
+ import com.android.systemui.DejankUtils;
+ import com.android.systemui.dagger.SysUISingleton;
++import com.android.systemui.dagger.qualifiers.Main;
+ import com.android.systemui.dock.DockManager;
+ import com.android.systemui.keyguard.FaceAuthScreenBrightnessController;
+ import com.android.systemui.keyguard.WakefulnessLifecycle;
+@@ -60,6 +62,8 @@ import com.android.systemui.statusbar.notification.ViewGroupFadeHelper;
+ import com.android.systemui.statusbar.phone.KeyguardBouncer.BouncerExpansionCallback;
+ import com.android.systemui.statusbar.policy.ConfigurationController;
+ import com.android.systemui.statusbar.policy.KeyguardStateController;
++import com.android.systemui.R;
++
+ import java.io.PrintWriter;
+ import java.util.ArrayList;
+ import java.util.Objects;
+@@ -106,6 +110,7 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
+             updateStates();
+             mStatusBar.wakeUpIfDozing(SystemClock.uptimeMillis(), mContainer, "BOUNCER_VISIBLE");
+             onKeyguardBouncerFullyShownChanged(true);
++            showFaceRecognizingMessage();
+         }
+         @Override
+         public void onStartingToHide() {
+@@ -192,6 +197,10 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
+     private final KeyguardUpdateMonitor mKeyguardUpdateManager;
+     private KeyguardBypassController mBypassController;
+     @Nullable private AlternateAuthInterceptor mAlternateAuthInterceptor;
++    private boolean mFaceRecognitionRunning = false;
++    private Handler mHandler;
++    private Handler mFaceRecognizingHandler;
++
+     private final KeyguardUpdateMonitorCallback mUpdateMonitorCallback =
+             new KeyguardUpdateMonitorCallback() {
+         @Override
+@@ -202,6 +211,20 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
+                 reset(true /* hideBouncerWhenShowing */);
+             }
+         }
++
++        @Override
++        public void onBiometricRunningStateChanged(boolean running,
++                BiometricSourceType biometricSourceType) {
++            if (biometricSourceType == BiometricSourceType.FACE &&
++                    mKeyguardUpdateManager.isUnlockWithFacePossible(mKeyguardUpdateManager.getCurrentUser())){
++                mFaceRecognitionRunning = running;
++                if (!mFaceRecognitionRunning){
++                    mFaceRecognizingHandler.removeCallbacksAndMessages(null);
++                }else{
++                    mFaceRecognizingHandler.postDelayed(() -> showFaceRecognizingMessage(), 100);
++                }
++            }
++        }
+     };
+     @Inject
+     public StatusBarKeyguardViewManager(
+@@ -220,7 +243,9 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
+             KeyguardBouncer.Factory keyguardBouncerFactory,
+             WakefulnessLifecycle wakefulnessLifecycle,
+             UnlockedScreenOffAnimationController unlockedScreenOffAnimationController,
+-            KeyguardMessageAreaController.Factory keyguardMessageAreaFactory) {
++            KeyguardMessageAreaController.Factory keyguardMessageAreaFactory,
++            @Main Handler handler,
++            @Main Handler faceRecognizingHandler) {
+         mContext = context;
+         mViewMediatorCallback = callback;
+         mLockPatternUtils = lockPatternUtils;
+@@ -237,6 +262,8 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
+         mWakefulnessLifecycle = wakefulnessLifecycle;
+         mUnlockedScreenOffAnimationController = unlockedScreenOffAnimationController;
+         mKeyguardMessageAreaFactory = keyguardMessageAreaFactory;
++        mHandler = handler;
++        mFaceRecognizingHandler = faceRecognizingHandler;
+     }
+     @Override
+     public void registerStatusBar(StatusBar statusBar,
+@@ -1010,6 +1037,14 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
+             executeAfterKeyguardGoneAction();
+         }
+     }
++
++    private void showFaceRecognizingMessage(){
++        if (mFaceRecognitionRunning &&
++                mKeyguardUpdateManager.isUnlockWithFacePossible(mKeyguardUpdateManager.getCurrentUser())) {
++            showBouncerMessage(mContext.getString(R.string.face_unlock_recognizing), null);
++        }
++    }
++
+     public void showBouncerMessage(String message, ColorStateList colorState) {
+         if (isShowingAlternateAuth()) {
+             if (mKeyguardMessageAreaController != null) {
+-- 
+2.32.0 (Apple Git-132)
+

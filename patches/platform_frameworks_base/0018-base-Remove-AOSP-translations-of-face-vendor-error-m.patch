@@ -1,0 +1,1969 @@
+From b4d9e91e1642b8704b53a1ed609b606310b6ba6f Mon Sep 17 00:00:00 2001
+From: jhenrique09 <jhsv09@gmail.com>
+Date: Sun, 13 Feb 2022 11:39:22 -0300
+Subject: [PATCH 18/23] base: Remove AOSP translations of face vendor error
+ messages
+
+Change-Id: Id21b9fd5b2ae11fc27fe919079c3afbb2724c064
+Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>
+---
+ core/res/res/values-af/strings.xml        | 4 ----
+ core/res/res/values-am/strings.xml        | 4 ----
+ core/res/res/values-ar/strings.xml        | 4 ----
+ core/res/res/values-as/strings.xml        | 4 ----
+ core/res/res/values-az/strings.xml        | 4 ----
+ core/res/res/values-b+sr+Latn/strings.xml | 4 ----
+ core/res/res/values-be/strings.xml        | 4 ----
+ core/res/res/values-bg/strings.xml        | 4 ----
+ core/res/res/values-bn/strings.xml        | 4 ----
+ core/res/res/values-bs/strings.xml        | 4 ----
+ core/res/res/values-ca/strings.xml        | 4 ----
+ core/res/res/values-cs/strings.xml        | 4 ----
+ core/res/res/values-da/strings.xml        | 4 ----
+ core/res/res/values-de/strings.xml        | 4 ----
+ core/res/res/values-el/strings.xml        | 4 ----
+ core/res/res/values-en-rAU/strings.xml    | 4 ----
+ core/res/res/values-en-rCA/strings.xml    | 4 ----
+ core/res/res/values-en-rGB/strings.xml    | 4 ----
+ core/res/res/values-en-rIN/strings.xml    | 4 ----
+ core/res/res/values-en-rXC/strings.xml    | 4 ----
+ core/res/res/values-es-rUS/strings.xml    | 4 ----
+ core/res/res/values-es/strings.xml        | 4 ----
+ core/res/res/values-et/strings.xml        | 4 ----
+ core/res/res/values-eu/strings.xml        | 4 ----
+ core/res/res/values-fa/strings.xml        | 4 ----
+ core/res/res/values-fi/strings.xml        | 4 ----
+ core/res/res/values-fr-rCA/strings.xml    | 4 ----
+ core/res/res/values-fr/strings.xml        | 4 ----
+ core/res/res/values-gl/strings.xml        | 4 ----
+ core/res/res/values-gu/strings.xml        | 4 ----
+ core/res/res/values-hi/strings.xml        | 4 ----
+ core/res/res/values-hr/strings.xml        | 4 ----
+ core/res/res/values-hu/strings.xml        | 4 ----
+ core/res/res/values-hy/strings.xml        | 4 ----
+ core/res/res/values-in/strings.xml        | 4 ----
+ core/res/res/values-is/strings.xml        | 4 ----
+ core/res/res/values-it/strings.xml        | 4 ----
+ core/res/res/values-iw/strings.xml        | 4 ----
+ core/res/res/values-ja/strings.xml        | 4 ----
+ core/res/res/values-ka/strings.xml        | 4 ----
+ core/res/res/values-kk/strings.xml        | 4 ----
+ core/res/res/values-km/strings.xml        | 4 ----
+ core/res/res/values-kn/strings.xml        | 4 ----
+ core/res/res/values-ko/strings.xml        | 4 ----
+ core/res/res/values-ky/strings.xml        | 4 ----
+ core/res/res/values-lo/strings.xml        | 4 ----
+ core/res/res/values-lt/strings.xml        | 4 ----
+ core/res/res/values-lv/strings.xml        | 4 ----
+ core/res/res/values-mk/strings.xml        | 4 ----
+ core/res/res/values-ml/strings.xml        | 4 ----
+ core/res/res/values-mn/strings.xml        | 4 ----
+ core/res/res/values-mr/strings.xml        | 4 ----
+ core/res/res/values-ms/strings.xml        | 4 ----
+ core/res/res/values-my/strings.xml        | 4 ----
+ core/res/res/values-nb/strings.xml        | 4 ----
+ core/res/res/values-ne/strings.xml        | 4 ----
+ core/res/res/values-nl/strings.xml        | 4 ----
+ core/res/res/values-or/strings.xml        | 4 ----
+ core/res/res/values-pa/strings.xml        | 4 ----
+ core/res/res/values-pl/strings.xml        | 4 ----
+ core/res/res/values-pt-rBR/strings.xml    | 4 ----
+ core/res/res/values-pt-rPT/strings.xml    | 4 ----
+ core/res/res/values-pt/strings.xml        | 4 ----
+ core/res/res/values-ro/strings.xml        | 4 ----
+ core/res/res/values-ru/strings.xml        | 4 ----
+ core/res/res/values-si/strings.xml        | 4 ----
+ core/res/res/values-sk/strings.xml        | 4 ----
+ core/res/res/values-sl/strings.xml        | 4 ----
+ core/res/res/values-sq/strings.xml        | 4 ----
+ core/res/res/values-sr/strings.xml        | 4 ----
+ core/res/res/values-sv/strings.xml        | 4 ----
+ core/res/res/values-sw/strings.xml        | 4 ----
+ core/res/res/values-ta/strings.xml        | 4 ----
+ core/res/res/values-te/strings.xml        | 4 ----
+ core/res/res/values-th/strings.xml        | 4 ----
+ core/res/res/values-tl/strings.xml        | 4 ----
+ core/res/res/values-tr/strings.xml        | 4 ----
+ core/res/res/values-uk/strings.xml        | 4 ----
+ core/res/res/values-ur/strings.xml        | 4 ----
+ core/res/res/values-uz/strings.xml        | 4 ----
+ core/res/res/values-vi/strings.xml        | 4 ----
+ core/res/res/values-zh-rCN/strings.xml    | 4 ----
+ core/res/res/values-zh-rHK/strings.xml    | 4 ----
+ core/res/res/values-zh-rTW/strings.xml    | 4 ----
+ core/res/res/values-zu/strings.xml        | 4 ----
+ 85 files changed, 340 deletions(-)
+
+diff --git a/core/res/res/values-af/strings.xml b/core/res/res/values-af/strings.xml
+index 4541366c31cb..fe21b6f2c9d5 100644
+--- a/core/res/res/values-af/strings.xml
++++ b/core/res/res/values-af/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Draai jou kop \'n bietjie minder."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Verwyder enigiets wat jou gesig versteek."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Maak die bokant van jou skerm skoon, insluitend die swart balk"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Kan nie gesig verifieer nie. Hardeware nie beskikbaar nie."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Probeer Gesigslot weer"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Kan nie nuwe gesigdata berg nie. Vee eers \'n ou een uit."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Gebruik Gesigslot of Skermslot"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Gebruik jou gesig om voort te gaan"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Gebruik jou gesig of skermslot om voort te gaan"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Iets is fout. Probeer weer."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Gesig-ikoon"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"lees sinkroniseer-instellings"</string>
+diff --git a/core/res/res/values-am/strings.xml b/core/res/res/values-am/strings.xml
+index 4da99e27ebf7..89b6d1541581 100644
+--- a/core/res/res/values-am/strings.xml
++++ b/core/res/res/values-am/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"ጭንቅላትዎን ትንሽ ብቻ ያዙሩት።"</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"የእርስዎን ፊት የሚደብቀውን ሁሉንም ነገር በማስወገድ ላይ"</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"የማያ ገጽዎን አናት ያጽዱት፣ ጥቁር አሞሌውን ጨምሮ"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"መልክን ማረጋገጥ አይቻልም። ሃርድዌር የለም።"</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"በመልክ መክፈትን እንደገና ይሞክሩ"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"አዲስ የመልክ ውውሂብ ማስቀመጥ አልተቻለም። መጀመሪያ የድሮውን ይሰርዙት።"</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"የመልክ ወይም የማያ ገጽ መቆለፊያን ይጠቀሙ"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"ለመቀጠል መልክዎን ይጠቀሙ"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"ለመቀጠል መልክዎን ወይም የማያ ገጽዎን መቆለፊያ ይጠቀሙ"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"የሆነ ችግር ተፈጥሯል። እንደገና ይሞክሩ።"</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"የፊት አዶ"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"የሥምሪያ ቅንብሮች አንብብ"</string>
+diff --git a/core/res/res/values-ar/strings.xml b/core/res/res/values-ar/strings.xml
+index 3746f3e14b42..ab032cb952d1 100644
+--- a/core/res/res/values-ar/strings.xml
++++ b/core/res/res/values-ar/strings.xml
+@@ -653,8 +653,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"حرّك رأسك قليلاً نحو الوسط."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"عليك بإزالة أي شيء يُخفي وجهك."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"يُرجى تنظيف الجزء العلوي من الشاشة، بما في ذلك الشريط الأسود."</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"يتعذّر التحقُّق من الوجه. الجهاز غير مُتاح."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"جرِّب \"فتح الجهاز بالتعرف على الوجه\" مرة أخرى."</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"يتعذَّر تخزين بيانات الوجه الجديد. احذف الوجه القديم أولاً."</string>
+@@ -672,8 +670,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"استخدام ميزة \"فتح الجهاز بالتعرف على الوجه\" أو ميزة \"قفل الشاشة\""</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"استخدِم الوجه للمتابعة"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"استخدام ميزة \"فتح القفل بالوجه\" أو ميزة \"قفل الشاشة\" للمتابعة"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"حدث خطأ، يُرجى إعادة المحاولة."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"رمز الوجه"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"قراءة إعدادات المزامنة"</string>
+diff --git a/core/res/res/values-as/strings.xml b/core/res/res/values-as/strings.xml
+index 0da3b0bb28b8..faaad41cdf28 100644
+--- a/core/res/res/values-as/strings.xml
++++ b/core/res/res/values-as/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"আপোনাৰ মূৰটো সামান্য কমকৈ ঘূৰাওক।"</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"আপোনাৰ মুখখন ঢাকি ৰখা বস্তুবোৰ আঁতৰাওক।"</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"ক’লা বাৰডালকে ধৰি আপোনাৰ স্ক্রীনৰ ওপৰৰ অংশ চাফা কৰক"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"মুখমণ্ডল সত্যাপন কৰিব পৰা নগ’ল। হাৰ্ডৱেৰ নাই।"</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"ফেচ আনলক পুনৰ ব্যৱহাৰ কৰি চাওক"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"নতুন মুখমণ্ডলৰ ডেটা জমা কৰিব পৰা নাই। প্ৰথমে পুৰণি এখন মচক।"</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"ফেচ আনলক অথবা স্ক্ৰীন লক ব্যৱহাৰ কৰক"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"অব্যাহত ৰাখিবলৈ নিজৰ মুখাৱয়ব ব্যৱহাৰ কৰক"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"অব্যাহত ৰাখিবলৈ আপোনাৰ মুখাৱয়ব অথবা স্ক্ৰীন লক ব্যৱহাৰ কৰক"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"কিবা ভুল হ’ল। পুনৰ চেষ্টা কৰক।"</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"মুখমণ্ডলৰ আইকন"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"ছিংকৰ ছেটিং পঢ়ক"</string>
+diff --git a/core/res/res/values-az/strings.xml b/core/res/res/values-az/strings.xml
+index 7d415342d1b8..9b4d9cad079d 100644
+--- a/core/res/res/values-az/strings.xml
++++ b/core/res/res/values-az/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Başınızı bir az döndərin."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Üzünüzü gizlədən maneələri kənarlaşdırın."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Qara panel daxil olmaqla, ekranın yuxarısını təmizləyin"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Üz doğrulanmadı. Avadanlıq əlçatan deyil."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Üz ilə kiliddən çıxarmanı yenidən sınayın"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Yeni üz datası saxlanmadı. Əvvəlcə köhnə olanı silin."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Üz və ya ekran kilidindən istifadə edin"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Davam etmək üçün üzünüzdən istifadə edin"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Davam etmək üçün üz və ya ekran kilidinizdən istifadə edin"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Xəta oldu. Yenə cəhd edin."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Üz işarəsi"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"sinx ayarlarını oxu"</string>
+diff --git a/core/res/res/values-b+sr+Latn/strings.xml b/core/res/res/values-b+sr+Latn/strings.xml
+index 7f7d62e8ce7d..550065354041 100644
+--- a/core/res/res/values-b+sr+Latn/strings.xml
++++ b/core/res/res/values-b+sr+Latn/strings.xml
+@@ -644,8 +644,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Malo manje pomerite glavu."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Uklonite sve što vam zaklanja lice."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Očistite gornji deo ekrana, uključujući crnu traku"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Provera lica nije uspela. Hardver nije dostupan."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Probajte ponovo otključavanje licem"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Novi podaci o licu nisu sačuvani. Prvo izbrišete prethodne."</string>
+@@ -663,8 +661,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Koristite zaključavanje licem ili zaključavanje ekrana"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Potvrdite identitet licem da biste nastavili"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Koristite lice ili zaključavanje ekrana da biste nastavili"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Došlo je do problema. Probajte ponovo."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Ikona lica"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"čitanje podešavanja sinhronizacije"</string>
+diff --git a/core/res/res/values-be/strings.xml b/core/res/res/values-be/strings.xml
+index 49938844104a..6d18823c6246 100644
+--- a/core/res/res/values-be/strings.xml
++++ b/core/res/res/values-be/strings.xml
+@@ -647,8 +647,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Вы занадта моцна павярнулі галаву."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Прыміце ўсё, што закрывае ваш твар."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Ачысціце ад бруду верхнюю частку экрана, у тым ліку чорную панэль"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Твар не спраўджаны. Абсталяванне недаступнае."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Выканайце распазнаванне твару паўторна"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Новыя даныя пра твар не захаваны. Спачатку выдаліце старыя."</string>
+@@ -666,8 +664,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Выкарыстоўваць распазнаванне твару ці блакіроўку экрана"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Каб працягнуць, скарыстайце распазнаванне твару"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Каб працягнуць, скарыстайце распазнаванне твару ці сродак разблакіроўкі экрана"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Нешта пайшло не так. Паўтарыце спробу."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Значок твару"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"чытаць параметры сінхранізацыі"</string>
+diff --git a/core/res/res/values-bg/strings.xml b/core/res/res/values-bg/strings.xml
+index 0baf2f1f0969..1b8bc3925d75 100644
+--- a/core/res/res/values-bg/strings.xml
++++ b/core/res/res/values-bg/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Не завъртайте главата си толкова много."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Премахнете всичко, което закрива лицето ви."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Почистете горната част на екрана си, включително черната лента"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Лицето не може да се потвърди. Хардуерът не е налице."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Опитайте отново да отключите с лице"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Не може да се запази ново лице. Първо изтрийте старо."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Използване на отключването с лице или опцията за заключване на екрана"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Използвайте лицето си, за да продължите"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Използвайте лицето си или опцията за заключване на екрана, за да продължите"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Нещо се обърка. Опитайте отново."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Икона на лице"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"четене на настройките за синхронизиране"</string>
+diff --git a/core/res/res/values-bn/strings.xml b/core/res/res/values-bn/strings.xml
+index 5543d724becc..fd104ca41207 100644
+--- a/core/res/res/values-bn/strings.xml
++++ b/core/res/res/values-bn/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"আপনার মাথাটি সামান্য ঘোরান।"</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"আপনার ফেসকে আড়াল করে এমন সব কিছু সরিয়ে দিন।"</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"ব্ল্যাক বার সহ আপনার স্ক্রিনের উপরের অংশ মুছে ফেলুন"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"ফেস যাচাই করা যায়নি। হার্ডওয়্যার উপলভ্য নেই।"</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"\'ফেস আনলক\' আবার ব্যবহার করার চেষ্টা করুন"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"নতুন ফেস ডেটা স্টোর করা যায়নি। প্রথমে পুরনোটি মুছে ফেলুন।"</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"ফেস অথবা স্ক্রিন লক ব্যবহার করুন"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"চালিয়ে যেতে আপনার মুখ ব্যবহার করুন"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"চালিয়ে যেতে আপনার ফেস বা স্ক্রিন লক ব্যবহার করুন"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"কোনও সমস্যা হয়েছে। আবার করে দেখুন।"</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"ফেস আইকন"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"সিঙ্ক সেটিংস পড়ে"</string>
+diff --git a/core/res/res/values-bs/strings.xml b/core/res/res/values-bs/strings.xml
+index 1e574bddc045..2647ff2636be 100644
+--- a/core/res/res/values-bs/strings.xml
++++ b/core/res/res/values-bs/strings.xml
+@@ -644,8 +644,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Malo manje zakrenite glavu."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Uklonite prepreke koje blokiraju vaše lice."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Očistite vrh ekrana, uključujući crnu traku"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Nije moguće potvrditi lice. Hardver nije dostupan."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Pokušajte ponovo s otključavanjem licem"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Nije moguće sačuvati nove podatke o licu. Prvo izbrišite stare."</string>
+@@ -663,8 +661,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Koristi otključavanje licem ili zaključavanje ekrana"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Koristite lice da nastavite"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Koristite lice ili zaključavanje ekrana da nastavite"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Nešto nije uredu. Pokušajte ponovo."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Ikona lica"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"čitanje postavki za sinhroniziranje"</string>
+diff --git a/core/res/res/values-ca/strings.xml b/core/res/res/values-ca/strings.xml
+index 6256eb4c4c89..35e4f0dc2e25 100644
+--- a/core/res/res/values-ca/strings.xml
++++ b/core/res/res/values-ca/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"No giris tant el cap."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Suprimeix qualsevol cosa que amagui la teva cara."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Neteja la part superior de la pantalla, inclosa la barra negra"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"No es pot verificar la cara. Maquinari no disponible."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Torna a provar Desbloqueig facial"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"No es poden desar dades facials noves. Suprimeix-ne d\'antigues."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Utilitza el desbloqueig facial o de pantalla"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Utilitza la teva cara per continuar"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Utilitza la cara o el bloqueig de pantalla per continuar"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"S\'ha produït un error. Torna-ho a provar."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Icona facial"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"llegir la configuració de sincronització"</string>
+diff --git a/core/res/res/values-cs/strings.xml b/core/res/res/values-cs/strings.xml
+index 3469a6def770..0cbf9fd96635 100644
+--- a/core/res/res/values-cs/strings.xml
++++ b/core/res/res/values-cs/strings.xml
+@@ -647,8 +647,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Natočte hlavu o něco méně."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Odstraňte vše, co vám zakrývá obličej."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Očistěte horní část obrazovky včetně černé části"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Obličej nelze ověřit. Hardware není dostupný."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Zopakujte odemknutí obličejem"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Údaje o novém obličeji nelze uložit. Nejdřív vymažte starý."</string>
+@@ -666,8 +664,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Použít odemknutí obličejem nebo zámek obrazovky"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Pokračujte ověřením obličeje"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Pokračujte ověřením pomocí obličeje nebo zámku obrazovky"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Došlo k chybě. Zkuste to znovu."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Ikona obličeje"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"čtení nastavení synchronizace"</string>
+diff --git a/core/res/res/values-da/strings.xml b/core/res/res/values-da/strings.xml
+index bcca73465b9a..4ab113a958d5 100644
+--- a/core/res/res/values-da/strings.xml
++++ b/core/res/res/values-da/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Du skal ikke dreje hovedet så meget."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Hvis noget skjuler dit ansigt, skal du fjerne det."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Rengør toppen af din skærm, inkl. den sorte bjælke"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Ansigt ikke bekræftet. Hardware ikke tilgængelig."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Prøv ansigtslås igen"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Der kan ikke gemmes nye ansigtsdata. Slet et gammelt først."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Brug ansigts- eller skærmlås"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Brug dit ansigt for at fortsætte"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Brug din ansigts- eller skærmlås for at fortsætte"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Noget gik galt. Prøv igen."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Ansigt"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"læse indstillinger for synkronisering"</string>
+diff --git a/core/res/res/values-de/strings.xml b/core/res/res/values-de/strings.xml
+index 795c42571261..58990477fdb4 100644
+--- a/core/res/res/values-de/strings.xml
++++ b/core/res/res/values-de/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Neig den Kopf etwas weniger stark."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Entferne alles, was dein Gesicht verdeckt."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Reinige den oberen Teil deines Bildschirms, einschließlich der schwarzen Leiste"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Gesicht nicht erkannt. Hardware nicht verfügbar."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Versuche es noch mal mit der Gesichtsentsperrung"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Kein Speicherplatz frei. Bitte erst ein Gesicht löschen."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Entsperrung per Gesichtserkennung oder Displaysperre verwenden"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Gesichtserkennung verwenden, um fortzufahren"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Verwende die Gesichtserkennung oder deine Display-Entsperrmethode, um fortzufahren"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Ein Problem ist aufgetreten. Versuch es noch einmal."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Gesichtssymbol"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"Synchronisierungseinstellungen lesen"</string>
+diff --git a/core/res/res/values-el/strings.xml b/core/res/res/values-el/strings.xml
+index a8dcc4f835e8..9d3e985bb069 100644
+--- a/core/res/res/values-el/strings.xml
++++ b/core/res/res/values-el/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Στρέψτε λιγότερο το κεφάλι σας."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Απομακρύνετε οτιδήποτε κρύβει το πρόσωπό σας."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Καθαρίστε το επάνω μέρος της οθόνης σας, συμπεριλαμβανομένης της μαύρης γραμμής"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Αδύν. επαλήθ. προσώπου. Μη διαθέσιμος εξοπλισμός."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Δοκιμάστε ξανά το Ξεκλείδωμα με το πρόσωπο"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Η αποθήκ. νέων δεδομ. προσώπ. είναι αδύν. Διαγρ. ένα παλιό."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Χρήση προσώπου ή κλειδώματος οθόνης"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Χρησιμοποιήστε το πρόσωπό σας για να συνεχίσετε"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Χρησιμοποιήστε το πρόσωπό σας ή το κλείδωμα οθόνης για συνέχεια"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Παρουσιάστηκε κάποιο πρόβλημα. Δοκιμάστε ξανά."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Εικ. προσ."</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"διαβάζει τις ρυθμίσεις συγχρονισμού"</string>
+diff --git a/core/res/res/values-en-rAU/strings.xml b/core/res/res/values-en-rAU/strings.xml
+index c268eda05323..13e5d27a2f4a 100644
+--- a/core/res/res/values-en-rAU/strings.xml
++++ b/core/res/res/values-en-rAU/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Turn your head a little less."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Remove anything hiding your face."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Clean the top of your screen, including the black bar"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Can’t verify face. Hardware not available."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Try Face Unlock again"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Can’t store new face data. Delete an old one first."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Use face or screen lock"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Use your face to continue"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Use your face or screen lock to continue"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Something went wrong. Try again."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Face icon"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"read sync settings"</string>
+diff --git a/core/res/res/values-en-rCA/strings.xml b/core/res/res/values-en-rCA/strings.xml
+index 5e5ffbe49268..e462d11d8b46 100644
+--- a/core/res/res/values-en-rCA/strings.xml
++++ b/core/res/res/values-en-rCA/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Turn your head a little less."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Remove anything hiding your face."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Clean the top of your screen, including the black bar"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Can’t verify face. Hardware not available."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Try Face Unlock again"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Can’t store new face data. Delete an old one first."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Use face or screen lock"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Use your face to continue"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Use your face or screen lock to continue"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Something went wrong. Try again."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Face icon"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"read sync settings"</string>
+diff --git a/core/res/res/values-en-rGB/strings.xml b/core/res/res/values-en-rGB/strings.xml
+index c65b8bbdbfdc..87df10bed15f 100644
+--- a/core/res/res/values-en-rGB/strings.xml
++++ b/core/res/res/values-en-rGB/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Turn your head a little less."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Remove anything hiding your face."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Clean the top of your screen, including the black bar"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Can’t verify face. Hardware not available."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Try Face Unlock again"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Can’t store new face data. Delete an old one first."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Use face or screen lock"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Use your face to continue"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Use your face or screen lock to continue"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Something went wrong. Try again."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Face icon"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"read sync settings"</string>
+diff --git a/core/res/res/values-en-rIN/strings.xml b/core/res/res/values-en-rIN/strings.xml
+index baa35172c964..2a74578a1b6c 100644
+--- a/core/res/res/values-en-rIN/strings.xml
++++ b/core/res/res/values-en-rIN/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Turn your head a little less."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Remove anything hiding your face."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Clean the top of your screen, including the black bar"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Can’t verify face. Hardware not available."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Try Face Unlock again"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Can’t store new face data. Delete an old one first."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Use face or screen lock"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Use your face to continue"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Use your face or screen lock to continue"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Something went wrong. Try again."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Face icon"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"read sync settings"</string>
+diff --git a/core/res/res/values-en-rXC/strings.xml b/core/res/res/values-en-rXC/strings.xml
+index dcf237ed3929..7e2f8dc7e644 100644
+--- a/core/res/res/values-en-rXC/strings.xml
++++ b/core/res/res/values-en-rXC/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‎‏‏‎‏‎‎‎‎‎‎‎‏‎‏‏‏‏‏‎‏‏‎‏‎‏‏‎‎‏‎‏‏‎‏‎‏‎‎‏‎‎‎‏‎‏‏‏‎‎‎‎‏‎‎‏‎‎‏‏‎‎‏‎Turn your head a little less.‎‏‎‎‏‎"</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‎‎‎‏‎‎‎‎‏‏‏‏‏‎‏‏‏‏‏‎‏‎‏‎‎‎‎‏‎‏‏‎‎‏‏‏‏‏‏‏‎‎‎‏‏‎‎‏‎‎‏‎‎‎‎‎‏‎‏‏‏‏‎Remove anything hiding your face.‎‏‎‎‏‎"</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‏‏‏‏‎‎‎‏‏‏‎‏‏‎‎‎‏‎‎‎‎‎‏‏‏‎‏‎‎‎‏‎‎‎‏‎‏‎‏‎‏‏‎‏‏‏‏‏‎‎‎‎‏‎‏‎‎‎‏‏‏‎‎Clean the top of your screen, including the black bar‎‏‎‎‏‎"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‎‎‎‏‏‎‏‎‎‏‎‎‏‎‎‏‎‎‎‏‎‎‎‏‏‏‏‎‎‎‎‏‎‏‏‏‏‏‎‎‎‎‏‎‏‎‏‏‏‎‏‎‎‏‏‎‏‏‎‎‎‎‎Can’t verify face. Hardware not available.‎‏‎‎‏‎"</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‎‏‎‎‏‎‎‎‎‎‎‏‏‏‏‏‏‏‎‎‎‏‎‎‎‎‏‎‎‎‎‎‎‎‎‏‏‎‏‏‎‏‏‏‏‎‎‏‎‏‏‎‎‎‏‏‏‏‎‎‎‏‎‎Try Face Unlock again‎‏‎‎‏‎"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‎‎‏‏‏‎‎‏‏‎‎‏‏‎‎‎‏‏‎‏‏‏‏‎‏‏‏‎‏‎‏‎‎‏‎‎‎‏‎‏‏‎‏‎‏‏‎‎‎‎‏‎‎‏‎‏‎‏‏‎‏‏‎Can’t store new face data. Delete an old one first.‎‏‎‎‏‎"</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‎‏‏‎‏‏‎‎‎‏‏‏‏‏‏‏‎‎‎‎‏‏‏‏‎‎‏‎‏‏‏‎‎‏‎‎‏‎‏‎‏‏‏‏‎‎‏‎‏‏‎‎‎‎‏‎‎‏‏‎‎‏‎‎Use face or screen lock‎‏‎‎‏‎"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‎‏‏‎‏‏‏‏‏‎‎‎‎‎‏‎‏‏‎‏‏‏‎‎‏‎‎‎‏‏‎‎‎‎‏‎‏‏‎‎‎‎‎‏‎‎‎‏‎‎‎‎‎‎‎‎‏‎‎‏‎‏‎Use your face to continue‎‏‎‎‏‎"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‎‎‎‏‎‏‎‏‏‏‏‎‏‎‎‎‏‏‏‏‎‏‎‏‏‏‏‎‏‎‎‏‎‎‎‏‏‎‏‏‎‎‎‏‎‎‏‏‏‎‏‎‎‎‏‏‎‏‎‏‎‎‎Use your face or screen lock to continue‎‏‎‎‏‎"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‏‎‎‏‏‎‏‎‎‎‎‎‏‏‏‏‏‎‏‎‏‎‏‏‎‎‎‎‎‏‏‏‎‏‎‏‏‏‏‎‎‎‎‏‏‏‎‏‎‎‏‏‏‎‏‎‏‏‎‏‏‎‎Something went wrong. Try again.‎‏‎‎‏‎"</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‎‏‏‏‏‎‎‏‏‏‎‏‎‎‎‎‎‏‏‏‏‎‏‏‎‏‎‎‎‏‏‎‏‏‎‎‎‎‎‎‎‎‎‎‎‏‏‏‏‎‎‏‎‏‏‏‏‏‏‎‎‎‎Face icon‎‏‎‎‏‎"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‎‏‎‏‏‎‏‎‏‏‏‏‏‎‎‏‎‏‏‎‏‎‏‎‎‎‎‏‏‎‎‎‎‏‏‏‎‎‏‏‎‏‏‏‎‎‎‏‏‏‏‎‏‏‏‎‏‏‎‏‎‏‎read sync settings‎‏‎‎‏‎"</string>
+diff --git a/core/res/res/values-es-rUS/strings.xml b/core/res/res/values-es-rUS/strings.xml
+index 8987cda96efa..920357cde559 100644
+--- a/core/res/res/values-es-rUS/strings.xml
++++ b/core/res/res/values-es-rUS/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Gira la cabeza un poco menos."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Quítate cualquier objeto que te cubra el rostro."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Limpia la parte superior de la pantalla, incluida la barra negra"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"No se verificó el rostro. Hardware no disponible."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Vuelve a probar Desbloqueo facial"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"No hay espacio para datos faciales nuevos. Borra uno viejo."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Usar desbloqueo facial o de pantalla"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Usa el rostro para continuar"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Usa tu rostro o bloqueo de pantalla para continuar"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Se produjo un error. Vuelve a intentarlo."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Ícono cara"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"leer la configuración de sincronización"</string>
+diff --git a/core/res/res/values-es/strings.xml b/core/res/res/values-es/strings.xml
+index 81d36263fef0..dc09f12e4faa 100644
+--- a/core/res/res/values-es/strings.xml
++++ b/core/res/res/values-es/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"No gires tanto la cabeza."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Retira cualquier objeto que te tape la cara."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Limpia la parte superior de la pantalla, incluida la barra de color negro"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"No se puede verificar. Hardware no disponible."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Vuelve a probar Desbloqueo facial"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Para guardar nuevos datos faciales, borra otros antiguos."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Usar Desbloqueo facial o Bloqueo de pantalla"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Usa tu cara para continuar"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Usa tu cara o tu bloqueo de pantalla para continuar"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Se ha producido un error. Inténtalo de nuevo."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Icono cara"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"leer la configuración de sincronización"</string>
+diff --git a/core/res/res/values-et/strings.xml b/core/res/res/values-et/strings.xml
+index b76e7e3ddf7a..36b95d274508 100644
+--- a/core/res/res/values-et/strings.xml
++++ b/core/res/res/values-et/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Pöörake oma pead veidi vähem."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Eemaldage kõik, mis varjab teie nägu."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Puhastage ekraani ülaosa, sh musta värvi riba"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Nägu ei saa kinnitada. Riistvara pole saadaval."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Proovige näoga avamist uuesti"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Uue näo andmeid ei saa salvestada. Kustutage enne vanad."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Näoga avamise või ekraaniluku kasutamine"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Jätkamiseks kasutage oma nägu"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Jätkamiseks kasutage oma nägu või ekraanilukku"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Midagi läks valesti. Proovige uuesti."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Näoikoon"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"loe sünkroonimisseadeid"</string>
+diff --git a/core/res/res/values-eu/strings.xml b/core/res/res/values-eu/strings.xml
+index cc394dddc4fd..e711762fc572 100644
+--- a/core/res/res/values-eu/strings.xml
++++ b/core/res/res/values-eu/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Biratu burua pixka bat gutxiago."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Kendu aurpegia estaltzen dizuten gauzak."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Garbitu pantailaren goialdea, barra beltza barne"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Ezin da egiaztatu aurpegia. Hardwarea ez dago erabilgarri."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Saiatu berriro aurpegi bidez desblokeatzen"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Ezin dira gorde aurpegiaren datu berriak. Ezabatu zaharrak."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Erabili aurpegia edo pantailaren blokeoa"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Aurrera egiteko, erabili aurpegia"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Aurrera egiteko, erabili aurpegia edo pantailaren blokeoa"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Arazoren bat izan da. Saiatu berriro."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Aurpegiaren ikonoa"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"irakurri sinkronizazio-ezarpenak"</string>
+diff --git a/core/res/res/values-fa/strings.xml b/core/res/res/values-fa/strings.xml
+index 5155dfa9071b..1dce84e3cb96 100644
+--- a/core/res/res/values-fa/strings.xml
++++ b/core/res/res/values-fa/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"سرتان را کمی صاف بگیرید."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"هرچیزی را که حائل چهره‌تان است بردارید."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"بالای صفحه و همچنین نوار مشکی را تمیز کنید."</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"چهره تأیید نشد. سخت‌افزار در دسترس نیست."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"«قفل‌گشایی با چهره» را دوباره امتحان کنید"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"داده‌ چهره جدید ذخیره نشد. اول داده‌ چهره قدیمی را حذف کنید."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"استفاده از قفل صفحه یا چهره"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"برای ادامه، از چهره‌تان استفاده کنید"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"برای ادامه، از تشخیص چهره یا قفل صفحه استفاده کنید"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"مشکلی پیش آمد. دوباره امتحان کنید."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"نماد چهره"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"خواندن تنظیمات همگام‌سازی"</string>
+diff --git a/core/res/res/values-fi/strings.xml b/core/res/res/values-fi/strings.xml
+index 1e491e5b7482..a8bdfd532c9c 100644
+--- a/core/res/res/values-fi/strings.xml
++++ b/core/res/res/values-fi/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Käännä päätä vähän vähemmän."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Poista esteet kasvojesi edestä."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Puhdista näytön yläreuna, mukaan lukien musta palkki"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Kasvoja ei voi vahvistaa. Laitteisto ei käytettäv."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Yritä käyttää kasvojentunnistusavausta uudelleen"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Uutta kasvodataa ei voi tallentaa. Poista ensin vanhaa."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Käytä kasvojentunnistusavausta tai näytön lukitusta"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Jatka kasvojesi avulla"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Jatka kasvojentunnistuksen tai näytön lukituksen avulla"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Jotain meni vikaan. Yritä uudelleen."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Kasvokuvake"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"lue synkronointiasetuksia"</string>
+diff --git a/core/res/res/values-fr-rCA/strings.xml b/core/res/res/values-fr-rCA/strings.xml
+index 46994f07b18c..718fdbe9ccc7 100644
+--- a/core/res/res/values-fr-rCA/strings.xml
++++ b/core/res/res/values-fr-rCA/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Tournez un peu moins votre tête."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Retirez tout ce qui pourrait couvrir votre visage."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Nettoyez le haut de l\'écran, y compris la barre noire"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Imposs. de vérif. visage. Matériel non accessible."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Réessayez déverrouillage reconnaissance faciale"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Impossible de stocker de nouveaux visages. Supprimez-en un."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Utiliser la reconnaissance faciale ou le verrouillage de l\'écran"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Utilisez votre visage pour continuer"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Utilisez votre visage ou le verrouillage de l\'écran pour continuer"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Un problème est survenu. Réessayez."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Icône visage"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"lire les paramètres de synchronisation"</string>
+diff --git a/core/res/res/values-fr/strings.xml b/core/res/res/values-fr/strings.xml
+index b1a7eece28ed..39c3e67aee6a 100644
+--- a/core/res/res/values-fr/strings.xml
++++ b/core/res/res/values-fr/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Tournez un peu moins la tête."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Retirez tout ce qui cache votre visage."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Nettoyez la partie supérieure de l\'écran, y compris la barre noire"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Imposs. valider visage. Matériel non disponible."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Réessayez d\'utiliser le déverrouillage facial"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Impossible stocker nouv. visages. Veuillez en supprimer un."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Utiliser déverrouillage par authent. faciale ou verrouillage écran"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Utilisez la reconnaissance faciale pour continuer"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Utilisez la reconnaissance faciale ou le verrouillage de l\'écran pour continuer"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Un problème est survenu. Réessayez."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Icône visage"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"lire les paramètres de synchronisation"</string>
+diff --git a/core/res/res/values-gl/strings.xml b/core/res/res/values-gl/strings.xml
+index 50117568dad4..ed4004c3c2c4 100644
+--- a/core/res/res/values-gl/strings.xml
++++ b/core/res/res/values-gl/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Xira a cabeza un pouco menos."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Quita todo o que oculte a túa cara."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Limpa a parte superior da pantalla, incluída a barra de cor negra"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Sen verificar a cara. Hardware non dispoñible."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Tenta utilizar o desbloqueo facial de novo"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Para gardar novos datos faciais, elimina os antigos."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Utilizar desbloqueo facial ou credencial do dispositivo"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Usa a cara para continuar"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Para continuar, utiliza o desbloqueo facial ou a credencial do dispositivo"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Produciuse un erro. Téntao de novo."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Icona cara"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"ler a configuración de vinculación"</string>
+diff --git a/core/res/res/values-gu/strings.xml b/core/res/res/values-gu/strings.xml
+index e1d89ab6ab73..6c3c1bdcd222 100644
+--- a/core/res/res/values-gu/strings.xml
++++ b/core/res/res/values-gu/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"તમારું માથું થોડું ઓછું ફેરવો."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"તમારા ચહેરાને છુપાવતી કંઈપણ વસ્તુ દૂર કરો."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"કાળી પટ્ટી સહિત, તમારી સ્ક્રીનની ટોચ સાફ કરો"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"ચહેરો ચકાસી શકાતો નથી. હાર્ડવેર ઉપલબ્ધ નથી."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"ફેસ અનલૉકને ફરી અજમાવો"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"ચહેરાનો નવો ડેટા સ્ટોર કરી શકતાં નથી. પહેલા જૂનો ડિલીટ કરો."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"ફેસ લૉક અથવા સ્ક્રીન લૉકનો ઉપયોગ કરો"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"આગળ વધવા માટે તમારા ચહેરાનો ઉપયોગ કરો"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"ચાલુ રાખવા માટે તમારા ફેસ લૉક અથવા સ્ક્રીન લૉકનો ઉપયોગ કરો"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"કંઈક ખોટું થયું. ફરી પ્રયાસ કરો."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"ચહેરા આઇકન"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"સિંક સેટિંગ વાંચો"</string>
+diff --git a/core/res/res/values-hi/strings.xml b/core/res/res/values-hi/strings.xml
+index 8df37722e5d9..bebabee01d5f 100644
+--- a/core/res/res/values-hi/strings.xml
++++ b/core/res/res/values-hi/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"अपना सिर थोड़ा कम घुमाएं."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"आपके चेहरे को छिपाने वाली सभी चीज़ों को हटाएं."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"अपनी स्क्रीन के सबसे ऊपरी हिस्से को साफ़ करें, जिसमें काले रंग वाला बार भी शामिल है"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"चेहरा नहीं पहचान पा रहे. हार्डवेयर उपलब्ध नहीं है."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"फ़ेस अनलॉक की सुविधा फिर से आज़माएं"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"चेहरे का नया डेटा सेव नहीं हो सकता. कोई पुराना डेटा मिटाएं."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"\'फ़ेस अनलॉक\' या स्क्रीन लॉक का क्रेडेंशियल इस्तेमाल करें"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"जारी रखने के लिए, अपने चेहरे की मदद से पुष्टि करें"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"जारी रखने के लिए, अपना चेहरा दिखाकर या स्क्रीन लॉक क्रेडेंशियल डालकर पुष्टि करें"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"कोई गड़बड़ी हुई. फिर से कोशिश करें."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"चेहरे का आइकॉन"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"समन्वयन सेटिंग पढ़ें"</string>
+diff --git a/core/res/res/values-hr/strings.xml b/core/res/res/values-hr/strings.xml
+index 7dd2ad39891f..3ec7720c594c 100644
+--- a/core/res/res/values-hr/strings.xml
++++ b/core/res/res/values-hr/strings.xml
+@@ -644,8 +644,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Nagnite glavu malo manje."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Uklonite sve što vam zakriva lice."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Očistite vrh zaslona, uključujući crnu traku"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Lice nije potvrđeno. Hardver nije dostupan."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Ponovo pokušajte otključavanje licem"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Podaci o novom licu nisu pohranjeni. Izbrišite neko staro."</string>
+@@ -663,8 +661,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Upotreba otključavanja licem ili zaključavanja zaslona"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Autentificirajte se licem da biste nastavili"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Za nastavak se identificirajte licem ili vjerodajnicom zaključavanja zaslona"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Nešto nije u redu. Pokušajte ponovo."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Ikona lica"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"čitanje postavki sinkronizacije"</string>
+diff --git a/core/res/res/values-hu/strings.xml b/core/res/res/values-hu/strings.xml
+index 0e20f2051c29..c77ad0c960d3 100644
+--- a/core/res/res/values-hu/strings.xml
++++ b/core/res/res/values-hu/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Kicsit kevésbé fordítsa el a fejét."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Távolítson el mindent, ami takarja az arcát."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Tisztítsa meg a képernyő tetejét, a fekete sávot is beleértve."</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Sikertelen arcellenőrzés. A hardver nem érhető el."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Próbálja újra az Arcalapú feloldást"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Nem tárolhatók újabb arcadatok. Törölje valamelyik arcot."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"A folytatás arcalapú feloldással vagy képernyőzárral lehetséges"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"A folytatáshoz használja az arcalapú feloldást"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"A folytatás arcalapú feloldással vagy a képernyőzár feloldásával lehetséges"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Hiba történt. Próbálja újra."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Arcikon"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"szinkronizálási beállítások olvasása"</string>
+diff --git a/core/res/res/values-hy/strings.xml b/core/res/res/values-hy/strings.xml
+index f94c8114a0e6..0ae844a8f62d 100644
+--- a/core/res/res/values-hy/strings.xml
++++ b/core/res/res/values-hy/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Գլուխն ուղիղ պահեք։"</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Հեռացրեք այն ամենը, ինչը թաքցնում է ձեր երեսը:"</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Մաքրեք էկրանի վերևի մասը, ներառյալ սև գոտին"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Չհաջողվեց հաստատել դեմքը։ Սարքն անհասանելի է:"</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Նորից փորձեք դեմքով ապակողպումը"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Չհաջողվեց պահել նոր դեմքը։ Ջնջեք հին տարբերակը։"</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Օգտագործել դեմքով ապակողպում կամ էկրանի կողպում"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Շարունակելու համար օգտագործեք դեմքի նույնականացումը"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Շարունակելու համար օգտագործեք ձեր դեմքը կամ էկրանի կողպումը"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Սխալ առաջացավ։ Նորից փորձեք։"</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Դեմքի պատկերակ"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"կարդալ համաժամացման կարգավորումները"</string>
+diff --git a/core/res/res/values-in/strings.xml b/core/res/res/values-in/strings.xml
+index 5f9ad9d7d456..b86327b130a3 100644
+--- a/core/res/res/values-in/strings.xml
++++ b/core/res/res/values-in/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Putar sedikit kepala Anda."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Singkirkan apa saja yang menutupi wajah Anda."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Bersihkan bagian atas layar, termasuk kotak hitam"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Tidak dapat memverifikasi wajah. Hardware tidak tersedia."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Coba Face Unlock lagi"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Tidak dapat menyimpan data wajah. Hapus dahulu data lama."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Gunakan face lock atau kunci layar"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Gunakan wajah untuk melanjutkan"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Gunakan face lock atau kunci layar untuk melanjutkan"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Terjadi error. Coba lagi."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Ikon wajah"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"baca setelan sinkronisasi"</string>
+diff --git a/core/res/res/values-is/strings.xml b/core/res/res/values-is/strings.xml
+index 76c583720c4d..327c747e219c 100644
+--- a/core/res/res/values-is/strings.xml
++++ b/core/res/res/values-is/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Snúðu höfðinu aðeins minna."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Fjarlægðu það sem kann að hylja andlitið."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Hreinsaðu efsta hluta skjásins þíns, þ.m.t. svörtu stikuna"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Andlit ekki staðfest. Vélbúnaður er ekki tiltækur."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Prófaðu andlitskenni aftur."</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Ekki er hægt að vista ný andlitsgögn. Eyddu gömlu fyrst."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Nota andlit eða skjálás"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Notaðu andlitið þitt til að halda áfram"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Notaðu andlitið eða skjálás til að halda áfram"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Eitthvað fór úrskeiðis. Reyndu aftur."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Andlitstákn"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"lesa samstillingar"</string>
+diff --git a/core/res/res/values-it/strings.xml b/core/res/res/values-it/strings.xml
+index c4493a188a22..aecfc667ea89 100644
+--- a/core/res/res/values-it/strings.xml
++++ b/core/res/res/values-it/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Gira un po\' meno la testa."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Rimuovi tutto ciò che ti nasconde il viso."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Pulisci la parte superiore dello schermo, inclusa la barra nera"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Imposs. verificare volto. Hardware non disponibile."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Riprova lo sblocco con il volto"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Imposs. salvare dati nuovi volti. Elimina un volto vecchio."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Usa lo sblocco con il volto o il blocco schermo"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Usa il tuo volto per continuare"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Per continuare devi usare il tuo volto o il tuo blocco schermo"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Si è verificato un errore. Riprova."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Icona volto"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"lettura impostazioni di sincronizz."</string>
+diff --git a/core/res/res/values-iw/strings.xml b/core/res/res/values-iw/strings.xml
+index 02ff0f561e58..b27ccf8f4160 100644
+--- a/core/res/res/values-iw/strings.xml
++++ b/core/res/res/values-iw/strings.xml
+@@ -647,8 +647,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"צריך ליישר קצת את הראש."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"יש להסיר כל דבר שמסתיר את הפנים."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"צריך לנקות את החלק העליון של המסך, כולל הסרגל השחור"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"לא ניתן לאמת את הפנים. החומרה לא זמינה."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"יש לנסות שוב את הפתיחה ע\"י זיהוי הפנים"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"לא ניתן לאחסן נתוני פנים חדשים. תחילה יש למחוק את הנתונים הישנים."</string>
+@@ -666,8 +664,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"שימוש בזיהוי פנים או בנעילת מסך"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"יש להשתמש באימות פנים כדי להמשיך"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"יש להשתמש בזיהוי הפנים או בנעילת המסך כדי להמשיך"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"משהו השתבש. עליך לנסות שוב."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"סמל הפנים"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"קריאת הגדרות הסנכרון"</string>
+diff --git a/core/res/res/values-ja/strings.xml b/core/res/res/values-ja/strings.xml
+index 0ef14c2c82a2..3b5335116842 100644
+--- a/core/res/res/values-ja/strings.xml
++++ b/core/res/res/values-ja/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"顔の向きを少し戻してください。"</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"顔を隠しているものをすべて外してください"</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"黒いバーを含め、画面の上部をきれいにしてください"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"顔を確認できません。ハードウェアを利用できません。"</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"顔認証をもう一度お試しください"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"新しい顔データを保存できません。古いデータを削除してください。"</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"顔認証または画面ロックの使用"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"続行するには顔認証を使用してください"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"続行するには、顔認証または画面ロックを使用してください"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"エラーが発生しました。もう一度お試しください。"</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"顔アイコン"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"同期設定の読み取り"</string>
+diff --git a/core/res/res/values-ka/strings.xml b/core/res/res/values-ka/strings.xml
+index b29ce0aa3795..4ec73ac3e851 100644
+--- a/core/res/res/values-ka/strings.xml
++++ b/core/res/res/values-ka/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"თავი ცოტა ნაკლებად მიაბრუნეთ."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"მოაშორეთ ყველაფერი, რაც სახეს გიფარავთ."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"გაწმინდეთ ეკრანის ზედა ნაწილი, შავი ზოლის ჩათვლით."</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"სახე ვერ დასტურდება. აპარატი მიუწვდომელია."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"ხელახლა ცადეთ სახით განბლოკვა"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"სახის ახალი მონაცემები ვერ ინახება. ჯერ ძველი წაშალეთ."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"გამოიყენეთ სახით ან ეკრანის დაბლოკვა"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"გასაგრძელებლად გამოიყენეთ თქვენი სახე"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"გასაგრძელებლად გამოიყენეთ თქვენი სახე ან ეკრანის განბლოკვის ნიმუში"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"რაღაც შეცდომა მოხდა. ცადეთ ხელახლა."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"სახის ხატულა"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"სინქრონიზაციის პარამეტრების წაკითხვა"</string>
+diff --git a/core/res/res/values-kk/strings.xml b/core/res/res/values-kk/strings.xml
+index 086a033e44dd..ed9ac3f3d7e4 100644
+--- a/core/res/res/values-kk/strings.xml
++++ b/core/res/res/values-kk/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Басыңызды кішкене бұрыңыз."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Бетіңізді жауып тұрған нәрсені алып тастаңыз."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Экранның жоғарғы жағын, сонымен қатар қара жолақты өшіріңіз."</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Бетті тану мүмкін емес. Жабдық қолжетімді емес."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Бет тану функциясын қайта қолданып көріңіз."</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Жаңа бетті сақтау мүмкін емес. Алдымен ескісін жойыңыз."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Face Lock функциясын немесе экран құлпын пайдалану"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Жалғастыру үшін бетіңізді көрсетіңіз."</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Жалғастыру үшін бетті анықтау функциясын немесе экран құлпын пайдаланыңыз."</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Бірдеңе дұрыс болмады. Қайталап көріңіз."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Бет белгішесі"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"синх параметрлерін оқу"</string>
+diff --git a/core/res/res/values-km/strings.xml b/core/res/res/values-km/strings.xml
+index 8b4d9b63c3ea..cdcc7945fc21 100644
+--- a/core/res/res/values-km/strings.xml
++++ b/core/res/res/values-km/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"ងាកក្បាល​របស់អ្នក​បន្តិចទៀត។"</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"យកអ្វី​ដែលបាំង​មុខ​របស់អ្នកចេញ។"</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"សម្អាតផ្នែកខាង​លើនៃ​អេក្រង់​របស់​អ្នក រួមទាំង​របារខ្មៅ"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"មិនអាច​ផ្ទៀងផ្ទាត់​មុខបានទេ។ មិនមាន​ហាតវែរទេ។"</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"សាកល្បង​ដោះសោតាមទម្រង់មុខ​ម្ដងទៀត"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"មិនអាច​ផ្ទុកទិន្នន័យទម្រង់​មុខថ្មី​បានទេ។ សូមលុបទិន្នន័យទម្រង់​មុខចាស់ជាមុនសិន។"</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"ប្រើមុខ ឬ​ការចាក់សោអេក្រង់"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"ប្រើមុខរបស់អ្នក ដើម្បីបន្ត"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"ប្រើការចាក់សោអេក្រង់ ឬមុខរបស់អ្នក ដើម្បីបន្ត"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"មានអ្វីមួយខុសប្រក្រតី។ សូមព្យាយាមម្ដងទៀត។"</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"រូប​ផ្ទៃមុខ"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"អាន​ការ​កំណត់​ធ្វើ​សម​កាល​កម្ម"</string>
+diff --git a/core/res/res/values-kn/strings.xml b/core/res/res/values-kn/strings.xml
+index af6df158afbe..74a9d2c849b6 100644
+--- a/core/res/res/values-kn/strings.xml
++++ b/core/res/res/values-kn/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"ನಿಮ್ಮ ತಲೆಯನ್ನು ಸ್ವಲ್ಪ ಕಡಿಮೆ ತಿರುಗಿಸಿ."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"ನಿಮ್ಮ ಮುಖವನ್ನು ಮರೆಮಾಡುವ ಯಾವುದನ್ನಾದರೂ ತೆಗೆದುಹಾಕಿ."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"ಬ್ಲ್ಯಾಕ್ ಬಾರ್ ಸೇರಿದಂತೆ ನಿಮ್ಮ ಸ್ಕ್ರೀನ್‌ನ ಮೇಲ್ಭಾಗವನ್ನು ತೆರವುಗೊಳಿಸಿ"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"ಮುಖ ದೃಢೀಕರಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ಹಾರ್ಡ್‌ವೇರ್ ಲಭ್ಯವಿಲ್ಲ."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"ಫೇಸ್ ಅನ್‌ಲಾಕ್ ಅನ್ನು ಪುನಃ ಪ್ರಯತ್ನಿಸಿ"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"ಹೊಸ ಮುಖ ಡೇಟಾ ಸಂಗ್ರಹಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ಮೊದಲು ಹಳೆಯದನ್ನು ಅಳಿಸಿ"</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"ಫೇಸ್ ಅಥವಾ ಸ್ಕ್ರೀನ್ ಲಾಕ್ ಅನ್ನು ಬಳಸಿ"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"ಮುಂದುವರಿಸಲು ನಿಮ್ಮ ಮುಖವನ್ನು ಬಳಸಿ"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"ಮುಂದುವರಿಸಲು ನಿಮ್ಮ ಮುಖ ಅಥವಾ ಸ್ಕ್ರೀನ್ ಲಾಕ್ ಅನ್ನು ಬಳಸಿ"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"ಏನೋ ತಪ್ಪಾಗಿದೆ. ಪುನಃ ಪ್ರಯತ್ನಿಸಿ."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"ಮುಖದ ಐಕಾನ್‌"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"ಸಿಂಕ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ರೀಡ್‌ ಮಾಡು"</string>
+diff --git a/core/res/res/values-ko/strings.xml b/core/res/res/values-ko/strings.xml
+index 1bf33df04aff..900371ef666e 100644
+--- a/core/res/res/values-ko/strings.xml
++++ b/core/res/res/values-ko/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"고개를 조금 덜 돌려 보세요."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"얼굴이 가려지지 않도록 해 주세요."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"검은색 바를 포함한 화면 상단을 청소하세요."</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"얼굴을 확인할 수 없습니다. 하드웨어를 사용할 수 없습니다."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"얼굴 인식 잠금 해제를 다시 시도해 주세요."</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"새 얼굴 데이터를 저장할 수 없습니다. 먼저 기존 얼굴 데이터를 삭제하세요."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"얼굴 또는 화면 잠금 사용"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"계속하려면 얼굴로 인증하세요"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"계속하려면 얼굴 또는 화면 잠금을 사용하세요"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"문제가 발생했습니다. 다시 시도해 보세요."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"얼굴 아이콘"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"동기화 설정 읽기"</string>
+diff --git a/core/res/res/values-ky/strings.xml b/core/res/res/values-ky/strings.xml
+index 89b6e1573e78..5d947d025ea1 100644
+--- a/core/res/res/values-ky/strings.xml
++++ b/core/res/res/values-ky/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Башыңызды бир аз гана эңкейтиңиз."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Жүзүңүздү жашырып турган нерселерди алып салыңыз."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Экраныңыздын жогору жагын, анын ичинде тилкени да тазалаңыз"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Жүз ырасталбай жатат. Аппараттык камсыздоо жеткиликсиз."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Жүзүнөн таанып ачуу функциясын кайрадан колдонуңуз"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Жаңы жүздү сактоо мүмкүн эмес. Адегенде эскисин өчүрүңүз."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Жүзүнөн таанып ачууну же экрандын кулпусун колдонуу"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Улантуу үчүн жүзүңүздү көрсөтүңүз"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Улантуу үчүн жүзүңүздү же экрандын кулпусун колдонуңуз"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Бир жерден ката кетти. Кайра аракет кылыңыз."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Жүздүн сүрөтчөсү"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"шайкештирүү жөндөөлөрүн окуу"</string>
+diff --git a/core/res/res/values-lo/strings.xml b/core/res/res/values-lo/strings.xml
+index 9849b2988aca..517c345dc2a2 100644
+--- a/core/res/res/values-lo/strings.xml
++++ b/core/res/res/values-lo/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"ອຽງຫົວຂອງທ່ານໜ້ອຍໜຶ່ງ."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"ນຳສິ່ງທີ່ກີດຂວາງໃບໜ້າທ່ານອອກ."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"ທຳຄວາມສະອາດສ່ວນເທິງສຸດຂອງໜ້າຈໍທ່ານ, ຮວມທັງແຖບດຳນຳ"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"ບໍ່ສາມາດຢັ້ງຢືນໃບໜ້າໄດ້. ບໍ່ມີຮາດແວໃຫ້ໃຊ້."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"ກະລຸນາລອງປົດລັອກດ້ວຍໜ້າອີກເທື່ອໜຶ່ງ"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"ບໍ່ສາມາດບັນທຶກຂໍ້ມູນໃບໜ້າໃໝ່ໄດ້. ກະລຸນາລຶບຂໍ້ມູນເກົ່າອອກກ່ອນ."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"ໃຊ້ໃບໜ້າ ຫຼື ການລັອກໜ້າຈໍ"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"ໃຊ້ໜ້າທ່ານເພື່ອສືບຕໍ່"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"ໃຊ້ໃບໜ້າ ຫຼື ການລັອກໜ້າຈໍຂອງທ່ານເພື່ອດຳເນີນການຕໍ່"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"ມີບາງຢ່າງຜິດພາດເກີດຂຶ້ນ. ກະລຸນາລອງໃໝ່."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"ໄອຄອນໃບໜ້າ"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"ອ່ານການຕັ້ງຄ່າຊິ້ງຂໍ້ມູນ"</string>
+diff --git a/core/res/res/values-lt/strings.xml b/core/res/res/values-lt/strings.xml
+index 32cf15edfd4a..685c9288ad12 100644
+--- a/core/res/res/values-lt/strings.xml
++++ b/core/res/res/values-lt/strings.xml
+@@ -647,8 +647,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Nesukite tiek galvos."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Patraukite viską, kas užstoja jūsų veidą."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Išvalykite ekrano viršų, įskaitant juodą juostą"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Nepavyko patv. veido. Aparatinė įranga negalima."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Bandykite dar kartą naudoti atrakinimą pagal veidą"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Nepavyko išs. naujų veido duomenų. Pirm. ištrinkite senus."</string>
+@@ -666,8 +664,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Naudoti atrakinimą pagal veidą arba ekrano užraktą"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Jei norite tęsti, naudokite atpažinimą pagal veidą"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Jei norite tęsti, naudokite veido atpažinimo funkciją arba ekrano užraktą"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Kažkas nepavyko. Bandykite dar kartą."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Veido pkt."</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"skaityti sinchronizavimo nustatymus"</string>
+diff --git a/core/res/res/values-lv/strings.xml b/core/res/res/values-lv/strings.xml
+index 48318cdef17b..ba0b701b7c6c 100644
+--- a/core/res/res/values-lv/strings.xml
++++ b/core/res/res/values-lv/strings.xml
+@@ -644,8 +644,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Pagrieziet galvu nedaudz mazāk."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Noņemiet visu, kas aizsedz jūsu seju."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Notīriet ekrāna augšdaļu, tostarp melno joslu."</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Nevar verificēt seju. Aparatūra nav pieejama."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Vēlreiz mēģiniet veikt autorizāciju pēc sejas."</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Nevar saglabāt jaunās sejas datus. Dzēsiet kādu no vecajām."</string>
+@@ -663,8 +661,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Autorizācijas pēc sejas vai ekrāna bloķēšanas metodes izmantošana"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Lai turpinātu, veiciet autorizāciju pēc sejas"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Izmantojiet autorizāciju pēc sejas vai ekrāna bloķēšanas opciju, lai turpinātu"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Radās kļūda. Mēģiniet vēlreiz."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Sejas ikona"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"lasīt sinhronizācijas iestatījumus"</string>
+diff --git a/core/res/res/values-mk/strings.xml b/core/res/res/values-mk/strings.xml
+index 34a1d29d0810..a76ec169661c 100644
+--- a/core/res/res/values-mk/strings.xml
++++ b/core/res/res/values-mk/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Не вртете ја главата толку многу."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Отстранете ги работите што ви го покриваат лицето."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Исчистете го врвот на екранот, вклучувајќи ја црната лента"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Ликот не може да се потврди. Хардвер - недостапен."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Пробајте „Отклучување со лик“ повторно"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Не се зачуваа податоците за нов лик. Избришете го стариот."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Користи лик или заклучување екран"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Користете го вашиот лик за да продолжите"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Користете отклучување со лик или заклучување екран за да продолжите"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Нешто не е во ред. Обидете се повторно."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Икона"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"чита поставки за синхронизација"</string>
+diff --git a/core/res/res/values-ml/strings.xml b/core/res/res/values-ml/strings.xml
+index 14aab7185c7b..3c035cf286d9 100644
+--- a/core/res/res/values-ml/strings.xml
++++ b/core/res/res/values-ml/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"നിങ്ങളുടെ തല ഇത്ര തിരിക്കേണ്ട."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"നിങ്ങളുടെ മുഖം മറയ്‌ക്കുന്നത് എല്ലാം നീക്കം ചെയ്യൂ."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"കറുപ്പ് ബാർ ഉൾപ്പെടെ നിങ്ങളുടെ സ്ക്രീനിന്റെ മുകൾഭാഗം വൃത്തിയാക്കുക"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"മുഖം പരിശോധിക്കാൻ കഴിയില്ല. ഹാർഡ്‌വെയർ ലഭ്യമല്ല."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"ഫെയ്‌സ് അൺലോക്ക് വീണ്ടും പരീക്ഷിച്ച് നോക്കൂ"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"പുതിയ മുഖ ഡാറ്റ സംഭരിക്കാനാകില്ല. ആദ്യം പഴയത് ഇല്ലാതാക്കുക."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"ഫെയ്‌സ് അല്ലെങ്കിൽ സ്‌ക്രീൻ ലോക്ക് ഉപയോഗിക്കുക"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"തുടരാൻ നിങ്ങളുടെ മുഖം ഉപയോഗിക്കുക"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"തുടരാൻ നിങ്ങളുടെ മുഖം‌ അല്ലെങ്കിൽ സ്‌ക്രീൻ ലോക്ക് ഉപയോഗിക്കുക"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"എന്തോ കുഴപ്പമുണ്ടായി. വീണ്ടും ശ്രമിക്കുക."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"മുഖത്തിന്റെ ഐക്കൺ"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"സമന്വയ ക്രമീകരണങ്ങൾ റീഡുചെയ്യുക"</string>
+diff --git a/core/res/res/values-mn/strings.xml b/core/res/res/values-mn/strings.xml
+index f7be6ee95bb5..09b12a55d631 100644
+--- a/core/res/res/values-mn/strings.xml
++++ b/core/res/res/values-mn/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Толгойгоо арай багаар эргүүлнэ үү."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Таны нүүрийг далдалж буй аливаа зүйлийг хасна уу."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Хар хэсэг зэрэг дэлгэцийнхээ дээд хэсгийг цэвэрлэнэ үү"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Царайг бататгаж чадсангүй. Техник хангамж боломжгүй байна."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Царайгаар түгжээ тайлахыг дахин оролдоно уу"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Царайн шинэ өгөгдлийг хадгалж чадсангүй. Эхлээд хуучин өгөгдлийг устгана уу."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Царайгаар түгжээ тайлах эсвэл дэлгэцийн түгжээ ашиглах"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Үргэлжлүүлэхийн тулд царайгаа ашиглана уу"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Үргэлжлүүлэхийн тулд царай эсвэл дэлгэцийн түгжээгээ ашиглана уу"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Алдаа гарлаа. Дахин оролдоно уу."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Царайны дүрс тэмдэг"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"синк тохиргоог унших"</string>
+diff --git a/core/res/res/values-mr/strings.xml b/core/res/res/values-mr/strings.xml
+index bed5dfc2ff7c..1757fdb4dd2c 100644
+--- a/core/res/res/values-mr/strings.xml
++++ b/core/res/res/values-mr/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"तुमचे डोके थोडे कमी फिरवा."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"तुमचा चहेरा लपवणारे काहीही काढून टाका."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"ब्लॅक बार सह तुमच्या स्क्रीनची वरची बाजू साफ करा"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"चेहरा पडताळू शकत नाही. हार्डवेअर उपलब्ध नाही."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"फेस अनलॉक वापरण्याचा पुन्हा प्रयत्न करा"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"नवीन फेस डेटा स्टोअर करू शकत नाही. आधी जुना हटवा."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"फेस किंवा स्क्रीन लॉक वापरा"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"पुढे सुरू ठेवण्यासाठी तुमचा चेहरा वापरा"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"पुढे सुरू ठेवण्यासाठी तुमचा चेहरा किंवा स्क्रीन लॉक वापरा"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"काहीतरी चूक झाली. पुन्हा प्रयत्न करा."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"चेहरा आयकन"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"सिंक सेटिंग्‍ज वाचा"</string>
+diff --git a/core/res/res/values-ms/strings.xml b/core/res/res/values-ms/strings.xml
+index 2844e1e22f6d..db2fdf4dfaec 100644
+--- a/core/res/res/values-ms/strings.xml
++++ b/core/res/res/values-ms/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Pusingkan kepala anda kurang sedikit."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Alih keluar apa saja yang melindungi wajah anda."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Bersihkan bahagian atas skrin anda, termasuk bar hitam"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Tdk dpt sahkan wajah. Perkakasan tidak tersedia."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Cuba Buka Kunci Wajah sekali lagi"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Tdk dpt menyimpan data wajah baharu. Padamkan yg lama dahulu."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Gunakan kunci wajah atau skrin"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Gunakan wajah untuk teruskan"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Gunakan wajah atau kunci skrin anda untuk meneruskan"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Kesilapan telah berlaku. Cuba lagi."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Ikon wajah"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"membaca tetapan penyegerakan"</string>
+diff --git a/core/res/res/values-my/strings.xml b/core/res/res/values-my/strings.xml
+index c2643a56ec68..3462431ac00b 100644
+--- a/core/res/res/values-my/strings.xml
++++ b/core/res/res/values-my/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"ခေါင်းကို သိပ်မလှည့်ပါနှင့်။"</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"သင့်မျက်နှာကို ကွယ်နေသည့်အရာအားလုံး ဖယ်ပါ။"</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"အနက်ရောင်ဘားအပါအဝင် ဖန်သားပြင်ထိပ်ကို သန့်ရှင်းရေး လုပ်ပါ"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"မျက်နှာကို အတည်ပြု၍ မရပါ။ ဟာ့ဒ်ဝဲ မရနိုင်ပါ။"</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"မျက်နှာပြ လော့ခ်ဖွင့်ခြင်းကို ထပ်စမ်းကြည့်ပါ"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"မျက်နှာဒေတာအသစ် သိမ်း၍မရပါ။ အဟောင်းကို အရင်ဖျက်ပါ။"</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"မျက်နှာမှတ်သော့ဖွင့်ခြင်း (သို့) ဖန်သားပြင်လော့ခ်ချခြင်းကို သုံးခြင်း"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"ရှေ့ဆက်ရန် သင့်မျက်နှာကို သုံးပါ"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"ရှေ့ဆက်ရန် သင်၏ မျက်နှာ (သို့) ဖန်သားပြင်လော့ခ်ကို သုံးပါ"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"တစ်ခုခုမှားသွားသည်။ ထပ်စမ်းကြည့်ပါ။"</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"မျက်နှာသင်္ကေတ"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"ထပ်တူပြုအဆင်အပြင်အားဖတ်ခြင်း"</string>
+diff --git a/core/res/res/values-nb/strings.xml b/core/res/res/values-nb/strings.xml
+index 0252eb354609..90accd808896 100644
+--- a/core/res/res/values-nb/strings.xml
++++ b/core/res/res/values-nb/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Vri hodet ditt litt mindre."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Fjern alt som skjuler ansiktet ditt."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Rengjør den øverste delen av skjermen, inkludert den svarte linjen"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Kan ikke bekrefte ansikt. Utilgjengelig maskinvare."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Prøv ansiktslås igjen"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Kan ikke lagre nye ansiktsdata. Slett gamle data først."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Bruk ansikts- eller skjermlås"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Bruk ansiktet for å fortsette"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Bruk ansikts- eller skjermlåsen for å fortsette"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Noe gikk galt. Prøv på nytt."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Ansiktikon"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"lese synkroniseringsinnstillinger"</string>
+diff --git a/core/res/res/values-ne/strings.xml b/core/res/res/values-ne/strings.xml
+index fbf40cfa5fb7..8901142ea145 100644
+--- a/core/res/res/values-ne/strings.xml
++++ b/core/res/res/values-ne/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"आफ्नो टाउको अलि थोरै घुमाउनुहोस्।"</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"तपाईंको अनुहार लुकाउने सबै कुरा लुकाउनुहोस्।"</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"कालो रङको पट्टीलगायत आफ्नो स्क्रिनको माथिल्लो भाग सफा गर्नुहोस्"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"अनुहार पुष्टि गर्न सकिएन। हार्डवेयर उपलब्ध छैन।"</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"फेरि फेस अनलक प्रयोग गरी हेर्नुहोस्"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"अनुहारसम्बन्धी नयाँ डेटा भण्डारण गर्न सकिएन। पहिले कुनै पुरानो डेटा मेटाउनुहोस्।"</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"फेस अनलक वा स्क्रिन लक प्रयोग गर्नुहोस्"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"जारी राख्न आफ्नो अनुहारको सहायताले पुष्टि गर्नुहोस्"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"जारी राख्न आफ्नो फेस वा स्क्रिन लक प्रयोग गरी पुष्टि गर्नुहोस्"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"केही चिज गडबड भयो। फेरि प्रयास गर्नुहोस्।"</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"अनुहारको आइकन"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"समीकरण सेटिङहरू पढ्नुहोस्"</string>
+diff --git a/core/res/res/values-nl/strings.xml b/core/res/res/values-nl/strings.xml
+index ef6a441897be..83f5ff1d22da 100644
+--- a/core/res/res/values-nl/strings.xml
++++ b/core/res/res/values-nl/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Draai je hoofd iets minder."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Zorg dat je gezicht volledig zichtbaar is."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Reinig de bovenkant van je scherm, inclusief de zwarte balk"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Kan gezicht niet verifiëren. Hardware niet beschikbaar."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Ontgrendel opnieuw via gezichtsherkenning"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Kan nieuwe gezichten niet opslaan. Verwijder eerst een oude."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Gezicht of schermgrendeling gebruiken"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Gebruik je gezicht om door te gaan"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Gebruik je gezicht of schermvergrendeling om door te gaan"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Er is iets misgegaan. Probeer het opnieuw."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Gezichtspictogram"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"synchronisatie-instellingen lezen"</string>
+diff --git a/core/res/res/values-or/strings.xml b/core/res/res/values-or/strings.xml
+index 291c1cc13e88..8732d120fee4 100644
+--- a/core/res/res/values-or/strings.xml
++++ b/core/res/res/values-or/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"ଆପଣଙ୍କର ମୁଣ୍ଡକୁ ଟିକିଏ ବୁଲାନ୍ତୁ।"</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"ଆପଣଙ୍କର ମୁହଁ ଲୁଚାଉଥିବା ଜିନିଷକୁ କାଢ଼ି ଦିଅନ୍ତୁ।"</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"କଳା ବାର୍ ସମେତ ଆପଣଙ୍କ ସ୍କ୍ରିନ୍‌ର ଶୀର୍ଷକୁ ସଫା କରନ୍ତୁ"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"ମୁହଁ ଚିହ୍ନଟ କରିପାରିଲା ନାହିଁ। ହାର୍ଡୱେୟାର୍ ଉପଲବ୍ଧ ନାହିଁ।"</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"ଫେସ୍ ଅନଲକ୍ ପୁଣି ବ୍ୟବହାର କରି ଦେଖନ୍ତୁ"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"ନୂଆ ମୁହଁ ଡାଟା ଷ୍ଟୋର୍ ହେବ ନାହିଁ। ପ୍ରଥମେ ପୁରୁଣାକୁ ଡିଲିଟ୍ କରନ୍ତୁ।"</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"ଫେସ୍ ବା ସ୍କ୍ରିନ୍ ଲକ୍ ବ୍ୟବହାର କରନ୍ତୁ"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"ଜାରି ରଖିବାକୁ ଆପଣଙ୍କ ଚେହେରା ବ୍ୟବହାର କରନ୍ତୁ"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"ଜାରି ରଖିବାକୁ ଆପଣଙ୍କ ଚେହେରା କିମ୍ବା ସ୍କ୍ରିନ୍ ଲକ୍ ବ୍ୟବହାର କରନ୍ତୁ"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"କିଛି ତ୍ରୁଟି ହୋଇଛି। ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ।"</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"ଫେସ୍ ଆଇକନ୍"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"ସିଙ୍କ ସେଟିଙ୍ଗକୁ ପଢ଼ନ୍ତୁ"</string>
+diff --git a/core/res/res/values-pa/strings.xml b/core/res/res/values-pa/strings.xml
+index 6e5aacf74f56..130386a0f3db 100644
+--- a/core/res/res/values-pa/strings.xml
++++ b/core/res/res/values-pa/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"ਆਪਣਾ ਸਿਰ ਥੋੜਾ ਜਿਹਾ ਝੁਕਾਓ।"</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"ਤੁਹਾਡਾ ਚਿਹਰਾ ਲੁਕਾਉਣ ਵਾਲੀ ਕੋਈ ਵੀ ਚੀਜ਼ ਹਟਾਓ।"</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"ਕਾਲੀ ਪੱਟੀ ਸਮੇਤ, ਆਪਣੀ ਸਕ੍ਰੀਨ ਦੇ ਸਿਖਰ ਨੂੰ ਸਾਫ਼ ਕਰੋ"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"ਚਿਹਰੇ ਦੀ ਪੁਸ਼ਟੀ ਨਹੀਂ ਹੋ ਸਕੀ। ਹਾਰਡਵੇਅਰ ਉਪਲਬਧ ਨਹੀਂ।"</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"ਫ਼ੇਸ ਅਣਲਾਕ ਦੁਬਾਰਾ ਵਰਤ ਕੇ ਦੇਖੋ"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"ਨਵਾਂ ਚਿਹਰਾ ਡਾਟਾ ਸਟੋਰ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ। ਪਹਿਲਾਂ ਪੁਰਾਣਾ ਹਟਾਓ।"</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"ਫ਼ੇਸ ਜਾਂ ਸਕ੍ਰੀਨ ਲਾਕ ਦੀ ਵਰਤੋਂ ਕਰੋ"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"ਜਾਰੀ ਰੱਖਣ ਲਈ ਆਪਣੇ ਚਿਹਰੇ ਦੀ ਵਰਤੋਂ ਕਰੋ"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"ਜਾਰੀ ਰੱਖਣ ਲਈ ਆਪਣਾ ਚਿਹਰਾ ਜਾਂ ਸਕ੍ਰੀਨ ਲਾਕ ਵਰਤੋ"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"ਕੋਈ ਗੜਬੜ ਹੋ ਗਈ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"ਚਿਹਰਾ ਪ੍ਰਤੀਕ"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"ਸਿੰਕ ਸੈਟਿੰਗਾਂ ਪੜ੍ਹੋ"</string>
+diff --git a/core/res/res/values-pl/strings.xml b/core/res/res/values-pl/strings.xml
+index 2d9160f3e5dc..566dda6acb83 100644
+--- a/core/res/res/values-pl/strings.xml
++++ b/core/res/res/values-pl/strings.xml
+@@ -647,8 +647,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Trochę mniej obróć głowę."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Usuń wszystko, co zasłania Ci twarz."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Wyczyść górną krawędź ekranu, w tym czarny pasek"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Nie można zweryfikować twarzy. Sprzęt niedostępny."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Spróbuj ponownie użyć rozpoznawania twarzy"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Nie można przechowywać nowych danych twarzy. Usuń stare."</string>
+@@ -666,8 +664,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Używaj rozpoznawania twarzy lub blokady ekranu"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Użyj skanu twarzy, aby kontynuować"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Aby kontynuować, użyj rozpoznawania twarzy lub blokady ekranu"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Coś poszło nie tak. Spróbuj ponownie."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Ikona twarzy"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"czytanie ustawień synchronizacji"</string>
+diff --git a/core/res/res/values-pt-rBR/strings.xml b/core/res/res/values-pt-rBR/strings.xml
+index 3d55de4bbf67..568ef467f919 100644
+--- a/core/res/res/values-pt-rBR/strings.xml
++++ b/core/res/res/values-pt-rBR/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Incline a cabeça um pouco menos."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Remova tudo que esteja ocultando seu rosto."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Limpe a parte superior da tela, inclusive a barra preta"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Impossível verificar rosto. Hardware indisponível."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Tente usar o Desbloqueio facial novamente"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Não é possível salvar dados faciais. Exclua dados antigos."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Usar reconhecimento facial ou bloqueio de tela"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Use seu rosto para continuar"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Use seu rosto ou o bloqueio de tela para continuar"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Algo deu errado. Tente de novo."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Ícone facial"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"ler as configurações de sincronização"</string>
+diff --git a/core/res/res/values-pt-rPT/strings.xml b/core/res/res/values-pt-rPT/strings.xml
+index 64d28ba50104..7f7e8b4150ce 100644
+--- a/core/res/res/values-pt-rPT/strings.xml
++++ b/core/res/res/values-pt-rPT/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Rode a cabeça um pouco menos."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Remova tudo o que esteja a ocultar o seu rosto."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Limpe a parte superior do ecrã, incluindo a barra preta."</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Não pode validar o rosto. Hardware não disponível."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Experimente o Desbloqueio facial novamente"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Não pode guardar novos dados de rostos. Elimine um antigo."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Utilizar o bloqueio através do rosto ou de ecrã"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Utilize o rosto para continuar"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Utilize o rosto ou o bloqueio de ecrã para continuar"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Algo correu mal. Tente novamente."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Ícone de rosto"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"ler definições de sincronização"</string>
+diff --git a/core/res/res/values-pt/strings.xml b/core/res/res/values-pt/strings.xml
+index 3d55de4bbf67..568ef467f919 100644
+--- a/core/res/res/values-pt/strings.xml
++++ b/core/res/res/values-pt/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Incline a cabeça um pouco menos."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Remova tudo que esteja ocultando seu rosto."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Limpe a parte superior da tela, inclusive a barra preta"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Impossível verificar rosto. Hardware indisponível."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Tente usar o Desbloqueio facial novamente"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Não é possível salvar dados faciais. Exclua dados antigos."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Usar reconhecimento facial ou bloqueio de tela"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Use seu rosto para continuar"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Use seu rosto ou o bloqueio de tela para continuar"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Algo deu errado. Tente de novo."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Ícone facial"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"ler as configurações de sincronização"</string>
+diff --git a/core/res/res/values-ro/strings.xml b/core/res/res/values-ro/strings.xml
+index 9fb501c2c413..d232aeea8844 100644
+--- a/core/res/res/values-ro/strings.xml
++++ b/core/res/res/values-ro/strings.xml
+@@ -644,8 +644,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Întoarceți capul mai puțin."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Eliminați orice vă ascunde chipul."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Curățați partea de sus a ecranului, inclusiv bara neagră"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Nu se poate confirma fața. Hardware-ul nu este disponibil."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Încercați din nou Deblocarea facială"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Nu se pot stoca date faciale noi. Ștergeți întâi unele vechi."</string>
+@@ -663,8 +661,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Folosiți deblocarea facială sau ecranul de blocare"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Folosiți-vă chipul ca să continuați"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Folosiți-vă chipul sau blocarea ecranului pentru a continua"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"A apărut o eroare. Încercați din nou."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Pictograma chip"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"citire setări sincronizare"</string>
+diff --git a/core/res/res/values-ru/strings.xml b/core/res/res/values-ru/strings.xml
+index c4c69c90b8d0..31dba24bde5e 100644
+--- a/core/res/res/values-ru/strings.xml
++++ b/core/res/res/values-ru/strings.xml
+@@ -647,8 +647,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Держите голову ровнее."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Ваше лицо плохо видно."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Протрите верхнюю часть экрана (в том числе черную панель)."</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Не удалось распознать лицо. Сканер недоступен."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Попробуйте воспользоваться фейсконтролем ещё раз."</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Недостаточно места. Удалите старые данные для распознавания."</string>
+@@ -666,8 +664,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Использовать фейсконтроль или блокировку экрана"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Чтобы продолжить, используйте функцию фейсконтроля."</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Чтобы продолжить, посмотрите на экран или используйте данные для разблокировки."</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Произошла ошибка. Повторите попытку."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Значок лица"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"Просмотр настроек синхронизации"</string>
+diff --git a/core/res/res/values-si/strings.xml b/core/res/res/values-si/strings.xml
+index fd2e43bed403..4494597dc06e 100644
+--- a/core/res/res/values-si/strings.xml
++++ b/core/res/res/values-si/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"ඔබේ හිස ටිකක් අඩුවෙන් කරකවන්න."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"ඔබේ මුහුණ සඟවන කිසිවක් ඉවත් කරන්න."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"කලු තීරුව ඇතුළුව, ඔබේ තිරයෙහි මුදුන පිරිසිදු කරන්න"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"මුහුණ සත්‍යාපනය කළ නොහැක. දෘඩාංගය නොමැත."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"මුහුණෙන් අගුළු හැරීම නැවත උත්සාහ කරන්න."</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"නව මුහුණු දත්ත ගබඩා කළ නොහැක. පළමුව පැරණි එකක් මකන්න."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"මුහුණෙන් අගුළු හැරීම හෝ තිර අගුල භාවිත කරන්න"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"ඉදිරියට යාමට ඔබගේ මුහුණ භාවිත කරන්න"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"ඉදිරියට යාමට ඔබගේ මුහුණු හෝ තිර අගුල භාවිත කරන්න"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"යම් දෙයක් වැරදිණි. නැවත උත්සාහ කරන්න."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"මුහුණ නිරූපකය"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"සමමුහුර්ත සැකසීම් කියවන්න"</string>
+diff --git a/core/res/res/values-sk/strings.xml b/core/res/res/values-sk/strings.xml
+index c862bc269dcf..2420b0c2eeac 100644
+--- a/core/res/res/values-sk/strings.xml
++++ b/core/res/res/values-sk/strings.xml
+@@ -647,8 +647,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Otočte hlavu o niečo menej."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Odstráňte všetko, čo vám zakrýva tvár."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Vyčistite hornú časť obrazovky vrátane čierneho panela"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Tvár sa nedá overiť. Hardvér nie je k dispozícii."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Skúste znova použiť odomknutie tvárou"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Nové údaje o tvári sa nedajú uložiť. Najprv odstráňte jeden zo starých záznamov."</string>
+@@ -666,8 +664,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Použiť tvár alebo zámku obrazovky"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Pokračujte pomocou tváre"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Pokračujte použitím tváre alebo zámky obrazovky"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Vyskytla sa chyba. Skúste to znova."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Ikona tváre"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"čítať nastavenia synchronizácie"</string>
+diff --git a/core/res/res/values-sl/strings.xml b/core/res/res/values-sl/strings.xml
+index 9df733fd9be6..e667f26e7b63 100644
+--- a/core/res/res/values-sl/strings.xml
++++ b/core/res/res/values-sl/strings.xml
+@@ -647,8 +647,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Glejte malce bolj naravnost."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Umaknite vse, kar vam morda zakriva obraz."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Očistite vrhnji del zaslona, vključno s črno vrstico"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Obraza ni mogoče preveriti. Str. opr. ni na voljo."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Znova izvedite odklepanje z obrazom."</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Novega obraza ni mogoče shraniti. Najprej izbrišite starega."</string>
+@@ -666,8 +664,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Uporaba odklepanja z obrazom ali s poverilnico"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Uporabite obraz, če želite nadaljevati."</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Za nadaljevanje uporabite obraz ali odklepanje s poverilnico."</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Prišlo je do napake. Poskusite znova."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Ikona obraza"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"branje nastavitev sinhronizacije"</string>
+diff --git a/core/res/res/values-sq/strings.xml b/core/res/res/values-sq/strings.xml
+index 44c820a8a7f5..15f4cf6eef43 100644
+--- a/core/res/res/values-sq/strings.xml
++++ b/core/res/res/values-sq/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Ktheje kokën pak më pak."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Hiq gjithçka që fsheh fytyrën tënde."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Pastro kreun e ekranit, duke përfshirë shiritin e zi"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Fytyra s\'mund të verifikohet. Hardueri nuk ofrohet."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Provo përsëri \"Shkyçjen me fytyrë\""</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"S\'mund të ruhen të dhëna të reja fytyre. Fshi një të vjetër në fillim."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Përdor kyçjen me fytyrë ose kyçjen e ekranit"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Përdor fytyrën tënde për të vazhduar"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Përdor fytyrën tënde ose kyçjen e ekranit për të vazhduar"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Ndodhi një gabim. Provo sërish."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Ikona e fytyrës"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"lexo cilësimet e sinkronizimit"</string>
+diff --git a/core/res/res/values-sr/strings.xml b/core/res/res/values-sr/strings.xml
+index 911ba91d058e..937fa1cdbc2d 100644
+--- a/core/res/res/values-sr/strings.xml
++++ b/core/res/res/values-sr/strings.xml
+@@ -644,8 +644,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Мало мање померите главу."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Уклоните све што вам заклања лице."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Очистите горњи део екрана, укључујући црну траку"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Провера лица није успела. Хардвер није доступан."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Пробајте поново откључавање лицем"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Нови подаци о лицу нису сачувани. Прво избришете претходне."</string>
+@@ -663,8 +661,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Користите закључавање лицем или закључавање екрана"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Потврдите идентитет лицем да бисте наставили"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Користите лице или закључавање екрана да бисте наставили"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Дошло је до проблема. Пробајте поново."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Икона лица"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"читање подешавања синхронизације"</string>
+diff --git a/core/res/res/values-sv/strings.xml b/core/res/res/values-sv/strings.xml
+index 3c388f6cd308..20d7c4a83e1a 100644
+--- a/core/res/res/values-sv/strings.xml
++++ b/core/res/res/values-sv/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Vrid mindre på huvudet."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Ta bort allt som täcker ansiktet."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Rengör skärmens överkant, inklusive det svarta fältet"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Ansiktsverifiering går ej. Otillgänglig maskinvara."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Försök att använda ansiktslåset igen"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Kan inte lagra ny ansiktsdata. Radera först gammal data."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Använd ansiktslåset eller skärmlåset"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Fortsätt med hjälp av ditt ansikte"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Fortsätt med hjälp av ditt ansikte eller skärmlåset"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Något gick fel. Försök igen."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Ansikte"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"läsa synkroniseringsinställningar"</string>
+diff --git a/core/res/res/values-sw/strings.xml b/core/res/res/values-sw/strings.xml
+index eb679ff6fa1e..a9d59964ac7c 100644
+--- a/core/res/res/values-sw/strings.xml
++++ b/core/res/res/values-sw/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Geuza kichwa chako kidogo."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Ondoa kitu chochote kinachoficha uso wako."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Safisha sehemu ya juu ya skrini yako, ikiwa ni pamoja na upau mweusi"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Imeshindwa kuthibitisha uso. Maunzi hayapatikani."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Jaribu Kufungua kwa Uso tena"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Imeshindwa kuhifadhi data ya uso mpya. Futa wa kale kwanza."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Tumia uso au mbinu ya kufunga skrini"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Tumia uso wako ili uendelee"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Tumia uso au mbinu yako ya kufunga skrini ili uendelee"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Hitilafu fulani imetokea. Jaribu tena."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Aikoni ya uso"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"kusoma mipangilio ya usawazishaji"</string>
+diff --git a/core/res/res/values-ta/strings.xml b/core/res/res/values-ta/strings.xml
+index 398f60614395..ea869648be74 100644
+--- a/core/res/res/values-ta/strings.xml
++++ b/core/res/res/values-ta/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"உங்கள் தலையைச் சற்றுத் திருப்பவும்."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"உங்கள் முகத்தை மறைக்கும் அனைத்தையும் நீக்குக."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"திரையையும் அதிலுள்ள கருப்புப் பட்டியையும் சுத்தம் செய்யவும்"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"முகத்தைச் சரிபார்க்க இயலவில்லை. வன்பொருள் இல்லை."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"மீண்டும் \'முகம் காட்டித் திறத்தலை\' உபயோகிக்கவும்"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"புதிய முகங்களைச் சேர்க்க இயலவில்லை. பழையது ஒன்றை நீக்கவும்."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"முகம் காட்டித் திறத்தல் / திரைப் பூட்டைப் பயன்படுத்து"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"தொடர்வதற்கு உங்கள் முகத்தைப் பயன்படுத்துங்கள்"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"தொடர, உங்கள் முகத்தையோ திரைப் பூட்டையோ பயன்படுத்துங்கள்"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"ஏதோ தவறாகிவிட்டது. மீண்டும் முயலவும்."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"முக ஐகான்"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"ஒத்திசைவு அமைப்புகளைப் படித்தல்"</string>
+diff --git a/core/res/res/values-te/strings.xml b/core/res/res/values-te/strings.xml
+index 159c0e3a8f78..ac76c40e677d 100644
+--- a/core/res/res/values-te/strings.xml
++++ b/core/res/res/values-te/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"మీ తలను ఎడమ/కుడి వైపుగా ఇంకాస్త తిప్పండి."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"మీ ముఖానికి అడ్డుగా ఉన్నవాటిని తీసివేస్తుంది."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"నల్లని పట్టీతో సహా మీ స్క్రీన్ పైభాగం అంతటినీ శుభ్రంగా తుడవండి"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"ముఖం ధృవీకరించలేరు. హార్డ్‌వేర్ అందుబాటులో లేదు."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"ఫేస్ అన్‌లాక్‌ను మళ్లీ ట్రై చేయండి"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"కొత్త ముఖం డేటాను నిల్వ చేయడం కాదు. మొదట పాతది తొలిగించండి."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"ఫేస్ లేదా స్క్రీన్ లాక్‌ను ఉపయోగించండి"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"కొనసాగించడానికి మీ ముఖాన్ని ఉపయోగించండి"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"కొనసాగించడానికి మీ ముఖం లేదా స్క్రీన్ లాక్‌ను ఉపయోగించండి"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"ఏదో తప్పు జరిగింది. మళ్లీ ట్రై చేయండి."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"ముఖ చిహ్నం"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"సింక్ సెట్టింగ్‌లను చదవగలగడం"</string>
+diff --git a/core/res/res/values-th/strings.xml b/core/res/res/values-th/strings.xml
+index 9c6505efc7da..533cef03f048 100644
+--- a/core/res/res/values-th/strings.xml
++++ b/core/res/res/values-th/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"จัดตำแหน่งศีรษะให้ตรง"</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"เอาสิ่งที่ปิดบังใบหน้าออก"</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"ทำความสะอาดด้านบนของหน้าจอ รวมถึงแถบสีดำ"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"ยืนยันใบหน้าไม่ได้ ฮาร์ดแวร์ไม่พร้อมใช้งาน"</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"ลองใช้การปลดล็อกด้วยใบหน้าอีกครั้ง"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"จัดเก็บข้อมูลใบหน้าใหม่ไม่ได้ ลบข้อมูลเก่าออกไปก่อน"</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"ใช้การล็อกด้วยใบหน้าหรือการล็อกหน้าจอ"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"ใช้ใบหน้าของคุณเพื่อดำเนินการต่อ"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"ใช้ใบหน้าหรือการล็อกหน้าจอเพื่อดำเนินการต่อ"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"เกิดข้อผิดพลาด ลองอีกครั้ง"</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"ไอคอนใบหน้า"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"อ่านการตั้งค่าการซิงค์"</string>
+diff --git a/core/res/res/values-tl/strings.xml b/core/res/res/values-tl/strings.xml
+index c0bb5e3d4f96..919f8fbcc650 100644
+--- a/core/res/res/values-tl/strings.xml
++++ b/core/res/res/values-tl/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Huwag masyadong lumingon."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Alisin ang anumang humaharang sa iyong mukha."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Linisin ang itaas ng iyong screen, kasama ang itim na bar"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Di ma-verify ang mukha. Di available ang hardware."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Subukan ulit ang Pag-unlock Gamit ang Mukha"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Hindi ma-store ang data ng mukha. Mag-delete muna ng iba."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Gumamit ng mukha o lock ng screen"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Gamitin ang iyong mukha para magpatuloy"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Gamitin ang iyong mukha o lock ng screen para magpatuloy"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Nagkaproblema. Subukan ulit."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Face icon"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"basahin ang mga setting ng sync"</string>
+diff --git a/core/res/res/values-tr/strings.xml b/core/res/res/values-tr/strings.xml
+index d69635988c6e..50e736205afc 100644
+--- a/core/res/res/values-tr/strings.xml
++++ b/core/res/res/values-tr/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Başınızı biraz daha az çevirin."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Yüzünüzün görünmesini engelleyen şeyleri kaldırın."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Siyah çubuk da dahil olmak üzere ekranınızın üst kısmını temizleyin"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Yüz doğrulanamıyor. Donanım kullanılamıyor."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Yüz Tanıma Kilidi\'ni yeniden deneyin"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Yeni yüz verisi depolanamıyor. Önce eski bir tanesini silin."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Yüz tanıma veya ekran kilidi kullan"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Devam etmek için yüzünüzü kullanın"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Devam etmek için yüz veya ekran kilidinizi kullanın"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Bir hata oluştu. Tekrar deneyin."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Yüz simgesi"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"senk. ayarlarını okuma"</string>
+diff --git a/core/res/res/values-uk/strings.xml b/core/res/res/values-uk/strings.xml
+index 4b7643d8a97a..9a53f1653ef6 100644
+--- a/core/res/res/values-uk/strings.xml
++++ b/core/res/res/values-uk/strings.xml
+@@ -647,8 +647,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Трохи поверніть обличчя."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Приберіть об’єкти, які затуляють ваше обличчя."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Очистьте верхню частину екрана, зокрема чорну панель"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Не вдається перевірити обличчя. Апаратне забезпечення недоступне."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Скористайтеся фейсконтролем ще раз"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Не вдається зберегти нові дані про обличчя. Видаліть старі."</string>
+@@ -666,8 +664,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Використовувати фейсконтроль або дані для розблокування екрана"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Щоб продовжити, скористайтеся фейсконтролем"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Щоб продовжити, скористайтеся фейсконтролем або даними для розблокування екрана"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Сталася помилка. Повторіть спробу."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Значок обличчя"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"читати налаштування синхронізації"</string>
+diff --git a/core/res/res/values-ur/strings.xml b/core/res/res/values-ur/strings.xml
+index 16e4549debfc..20594aaabfed 100644
+--- a/core/res/res/values-ur/strings.xml
++++ b/core/res/res/values-ur/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"اپنا سر تھوڑا کم کریں۔"</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"آپ کے چہرہ کو چھپانے والی ہر چیز کو ہٹائیں۔"</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"سیاہ بار سمیت، اپنی اسکرین کے اوپری حصے کو صاف کریں"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"چہرے کی توثیق نہیں کی جا سکی۔ ہارڈ ویئر دستیاب نہیں ہے۔"</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"فیس اَنلاک کو دوبارہ آزمائیں"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"چہرے کا نیا ڈیٹا اسٹور نہیں کر سکتے۔ پہلے پرانا حذف کریں۔"</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"فیس یا اسکرین لاک استعمال کریں"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"جاری رکھنے کے لیے اپنے چہرے کا استعمال کریں"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"جاری رکھنے کے لیے اپنے چہرے یا اسکرین لاک کا استعمال کریں"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"کچھ غلط ہو گیا۔ دوبارہ کوشش کریں۔"</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"چہرے کا آئیکن"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"مطابقت پذیری کی ترتیبات پڑھیں"</string>
+diff --git a/core/res/res/values-uz/strings.xml b/core/res/res/values-uz/strings.xml
+index 48841acdfa95..7a3d8e86f9dd 100644
+--- a/core/res/res/values-uz/strings.xml
++++ b/core/res/res/values-uz/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Boshingizni asta buring."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Yuzingizni berkitayotgan narsalarni olib tashlang."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Ekranning yuqori qismini, shuningdek, qora panelni ham tozalang"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Yuzingiz tasdiqlanmadi. Qurilma ishlamayapti."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Yana yuz bilan ochishga urining"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Yuzga oid axborot saqlanmadi. Avval eskilari tozalansin."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Yuz bilan ochish yoki ekran qulfi"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Yuz tekshiruvi bilan davom eting"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Davom etish uchun yuz tekshiruvi yoki ekran qulfidan foydalaning"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Xatolik yuz berdi. Qayta urining."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Yuz belgisi"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"sinx-sh sozlamalarini o‘qish"</string>
+diff --git a/core/res/res/values-vi/strings.xml b/core/res/res/values-vi/strings.xml
+index fa69be9188fa..2e0ff89688f9 100644
+--- a/core/res/res/values-vi/strings.xml
++++ b/core/res/res/values-vi/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Hãy bớt di chuyển đầu."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Hãy loại bỏ mọi thứ che khuất khuôn mặt bạn."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Vệ sinh phần đầu màn hình, bao gồm cả thanh màu đen"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Không thể xác minh khuôn mặt. Phần cứng không có sẵn."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Hãy thử lại thao tác Mở khóa bằng khuôn mặt"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Không lưu được dữ liệu khuôn mặt mới. Hãy xóa dữ liệu cũ trước."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Dùng khuôn mặt hoặc phương thức khóa màn hình"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Hãy dùng khuôn mặt của bạn để tiếp tục"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Dùng khuôn mặt của bạn hoặc phương thức khóa màn hình để tiếp tục"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Đã xảy ra lỗi. Hãy thử lại."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Biểu tượng khuôn mặt"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"đọc cài đặt đồng bộ hóa"</string>
+diff --git a/core/res/res/values-zh-rCN/strings.xml b/core/res/res/values-zh-rCN/strings.xml
+index f1de264d438e..bb36f15427f4 100644
+--- a/core/res/res/values-zh-rCN/strings.xml
++++ b/core/res/res/values-zh-rCN/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"请将您的头稍微左右旋转。"</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"请移除所有遮挡您面部的物体。"</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"请将屏幕顶部（包括黑色条栏）清理干净"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"无法验证人脸。硬件无法使用。"</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"请重新尝试人脸解锁"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"无法存储新的人脸数据。请先删除旧的人脸数据。"</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"使用人脸解锁或屏幕锁定凭据"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"使用您的面孔验证身份才能继续"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"使用人脸解锁或屏幕锁定凭据验证身份，才能继续操作"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"出了点问题。请重试。"</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"面孔图标"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"读取同步设置"</string>
+diff --git a/core/res/res/values-zh-rHK/strings.xml b/core/res/res/values-zh-rHK/strings.xml
+index 36b616ae6ece..62d4e4e18e94 100644
+--- a/core/res/res/values-zh-rHK/strings.xml
++++ b/core/res/res/values-zh-rHK/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"減少頭部左右轉動幅度。"</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"移除遮住您臉孔的任何東西。"</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"請清理螢幕頂部，包括黑色列"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"無法驗證臉孔，硬件無法使用。"</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"請再次嘗試「面孔解鎖」"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"無法儲存新的臉容資料，請先刪除舊資料。"</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"使用臉孔或螢幕鎖定"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"如要繼續操作，請使用您的面孔驗證身分"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"請使用面孔解鎖或螢幕鎖定功能驗證身分，才能繼續操作"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"發生錯誤，請再試一次。"</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"臉孔圖示"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"讀取同步處理設定"</string>
+diff --git a/core/res/res/values-zh-rTW/strings.xml b/core/res/res/values-zh-rTW/strings.xml
+index 20fcadfb103e..67e7ce4886a9 100644
+--- a/core/res/res/values-zh-rTW/strings.xml
++++ b/core/res/res/values-zh-rTW/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"請將你的頭部稍微向左或向右旋轉。"</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"請移除任何會遮住臉孔的物體。"</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"請清理螢幕頂端，包括黑色橫列"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"相關硬體無法使用，因此無法驗證臉孔。"</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"請重新進行人臉解鎖"</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"無法儲存新的臉孔資料，請先刪除舊的資料。"</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"使用人臉解鎖或螢幕鎖定功能"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"如要繼續操作，請透過你的臉孔驗證身分"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"請使用人臉解鎖或螢幕鎖定功能驗證身分，才能繼續操作"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"發生錯誤，請再試一次。"</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"臉孔圖示"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"讀取同步處理設定"</string>
+diff --git a/core/res/res/values-zu/strings.xml b/core/res/res/values-zu/strings.xml
+index db19c084316e..055829d77d70 100644
+--- a/core/res/res/values-zu/strings.xml
++++ b/core/res/res/values-zu/strings.xml
+@@ -641,8 +641,6 @@
+     <string name="face_acquired_roll_too_extreme" msgid="1442830503572636825">"Jikisa ikhanda lakho kancane."</string>
+     <string name="face_acquired_obscured" msgid="4917643294953326639">"Susa noma yini efihle ubuso bakho."</string>
+     <string name="face_acquired_sensor_dirty" msgid="8968391891086721678">"Hlanza okuphezulu kwesikrini sakho, kufaka phakathi ibha emnyama"</string>
+-  <string-array name="face_acquired_vendor">
+-  </string-array>
+     <string name="face_error_hw_not_available" msgid="5085202213036026288">"Ayikwazi ukuqinisekisa ubuso. Izingxenyekazi zekhompyutha azitholakali."</string>
+     <string name="face_error_timeout" msgid="2598544068593889762">"Zama Ukuvula ngobuso futhi."</string>
+     <string name="face_error_no_space" msgid="5649264057026021723">"Ayikwazi ukulondoloza idatha yobuso. Susa endala."</string>
+@@ -660,8 +658,6 @@
+     <string name="face_or_screen_lock_app_setting_name" msgid="1603149075605709106">"Sebenzisa i-face lock noma ukukhiya isikrini"</string>
+     <string name="face_dialog_default_subtitle" msgid="6620492813371195429">"Sebenzisa ubuso bakho ukuze uqhubeke"</string>
+     <string name="face_or_screen_lock_dialog_default_subtitle" msgid="5006381531158341844">"Sebenzisa ubuso bakho noma ukukhiya isikrini ukuze uqhubeke"</string>
+-  <string-array name="face_error_vendor">
+-  </string-array>
+     <string name="face_error_vendor_unknown" msgid="7387005932083302070">"Kunento engahambanga kahle. Zama futhi."</string>
+     <string name="face_icon_content_description" msgid="465030547475916280">"Isithonjana sobuso"</string>
+     <string name="permlab_readSyncSettings" msgid="6250532864893156277">"funda izilungiselelo zokuvumelanisa"</string>
+-- 
+2.32.0 (Apple Git-132)
+

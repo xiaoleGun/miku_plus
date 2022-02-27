@@ -1,0 +1,64 @@
+From 595807d9cbb9d01d969df73319ef99822794ea98 Mon Sep 17 00:00:00 2001
+From: jhonboy121 <alfredmathew05@gmail.com>
+Date: Fri, 4 Feb 2022 23:31:15 +0530
+Subject: [PATCH 1/2] miku: introduce app lock [4/4]
+
+Signed-off-by: jhonboy121 <alfredmathew05@gmail.com>
+---
+ build/product/miku_product.mk                 |  4 +++
+ .../permissions/privapp-permissions-miku.xml  | 27 +++++++++++++++++++
+ 2 files changed, 31 insertions(+)
+ create mode 100644 config/permissions/privapp-permissions-miku.xml
+
+diff --git a/build/product/miku_product.mk b/build/product/miku_product.mk
+index 83d59fd9..9e66ade4 100644
+--- a/build/product/miku_product.mk
++++ b/build/product/miku_product.mk
+@@ -47,6 +47,10 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+ PRODUCT_PACKAGES += \
+     bootanimation.zip
+ 
++# Miku UI permission
++ PRODUCT_COPY_FILES += \
++     vendor/miku/config/permissions/privapp-permissions-miku.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-miku.xml
++
+ # OTA support
+ PRODUCT_PACKAGES += \
+     recovery-refresh \
+diff --git a/config/permissions/privapp-permissions-miku.xml b/config/permissions/privapp-permissions-miku.xml
+new file mode 100644
+index 00000000..543e3722
+--- /dev/null
++++ b/config/permissions/privapp-permissions-miku.xml
+@@ -0,0 +1,27 @@
++<?xml version="1.0" encoding="utf-8"?>
++<!--
++     Copyright (C) 2021-2022 Miku UI
++     Licensed under the Apache License, Version 2.0 (the "License");
++     you may not use this file except in compliance with the License.
++     You may obtain a copy of the License at
++          http://www.apache.org/licenses/LICENSE-2.0
++     Unless required by applicable law or agreed to in writing, software
++     distributed under the License is distributed on an "AS IS" BASIS,
++     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++     See the License for the specific language governing permissions and
++     limitations under the License.
++ -->
++
++ <!--
++ This XML file declares which signature|privileged permissions should be granted to privileged
++ applications on GMS or Google-branded devices.
++ It allows additional grants on top of privapp-permissions-platform.xml
++ -->
++ <permissions>
++
++     <privapp-permissions package="com.android.settings">
++         <permission name="android.permission.MANAGE_APP_LOCK" />
++     </privapp-permissions>
++
++ </permissions>
++ 
+\ No newline at end of file
+-- 
+2.32.0 (Apple Git-132)
+

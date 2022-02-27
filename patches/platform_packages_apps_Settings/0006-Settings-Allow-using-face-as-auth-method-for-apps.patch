@@ -1,0 +1,217 @@
+From 4c099f0665f4fcb30f9d8a321f5fd72f3e0829c7 Mon Sep 17 00:00:00 2001
+From: jhenrique09 <jhenrique09.mcz@hotmail.com>
+Date: Sun, 7 Mar 2021 01:26:34 -0300
+Subject: [PATCH 06/11] Settings: Allow using face as auth method for apps
+
+Change-Id: Ib259d1f020f9ac29a9d85ae7edba55a2b2daa101
+Signed-off-by: dlwlrma123 <alexfinhart@gmail.com>
+---
+ res/values/miku_strings.xml                   |  4 +--
+ .../security_settings_combined_biometric.xml  |  3 +-
+ ...metricSettingsAppPreferenceController.java |  4 ++-
+ ...iometricWaysToUsePreferenceController.java | 35 +++++++++++++++++++
+ .../FaceSettingsAppPreferenceController.java  |  7 +---
+ ...aceSettingsFooterPreferenceController.java | 14 +++-----
+ ...tingsRemoveButtonPreferenceController.java |  9 +----
+ ...aceUnlockCategoryPreferenceController.java |  2 +-
+ 8 files changed, 48 insertions(+), 30 deletions(-)
+ create mode 100644 src/com/android/settings/biometrics/combination/BiometricWaysToUsePreferenceController.java
+
+diff --git a/res/values/miku_strings.xml b/res/values/miku_strings.xml
+index bcc61b9f1c..59ccb43499 100644
+--- a/res/values/miku_strings.xml
++++ b/res/values/miku_strings.xml
+@@ -105,8 +105,6 @@
+     <string name="disable_debugging">Disable debugging</string>
+ 
+     <!-- Face Unlock -->
+-    <string name="security_settings_face_settings_footer_custom">Face unlock lets you unlock your device by looking at it. Keep in mind:\n\n● Your device may unlock any time you look at it.\n● Your device can be unlocked by someone else if they hold it in front of your face while your eyes are open.\n● Your device may also be unlocked by someone who looks a lot like you, such as a child or identical sibling.</string>
+-    <string name="security_settings_face_settings_remove_dialog_details_custom">Data recorded by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern, or password to unlock your phone.</string>
+     <string name="security_settings_face_unlock_redo_face_scan_summary">Remove existing face scan and create a new scan</string>
+     <string name="security_settings_face_unlock_redo_face_scan_title">Redo face scan</string>
+     <string name="face_redo_confirm_btn">Redo</string>
+@@ -114,5 +112,5 @@
+     <string name="face_unlock_method_title">Allow face unlock on lock screen</string>
+     <string name="face_unlock_method_default">When the screen is turned on</string>
+     <string name="face_unlock_method_swipe">When swiping on lock screen</string>
+-    
++
+ </resources>
+diff --git a/res/xml/security_settings_combined_biometric.xml b/res/xml/security_settings_combined_biometric.xml
+index a394b7b468..6f51f4509f 100644
+--- a/res/xml/security_settings_combined_biometric.xml
++++ b/res/xml/security_settings_combined_biometric.xml
+@@ -44,7 +44,8 @@
+ 
+     <PreferenceCategory
+         android:key="biometric_ways_to_use"
+-        android:title="@string/biometric_settings_category_ways_to_use">
++        android:title="@string/biometric_settings_category_ways_to_use"
++        settings:controller="com.android.settings.biometrics.combination.BiometricWaysToUsePreferenceController">
+ 
+         <com.android.settingslib.RestrictedSwitchPreference
+             android:key="biometric_settings_biometric_keyguard"
+diff --git a/src/com/android/settings/biometrics/combination/BiometricSettingsAppPreferenceController.java b/src/com/android/settings/biometrics/combination/BiometricSettingsAppPreferenceController.java
+index 2da81641c7..ce1649c52d 100644
+--- a/src/com/android/settings/biometrics/combination/BiometricSettingsAppPreferenceController.java
++++ b/src/com/android/settings/biometrics/combination/BiometricSettingsAppPreferenceController.java
+@@ -28,6 +28,8 @@ import com.android.settings.core.TogglePreferenceController;
+ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+ import com.android.settingslib.RestrictedLockUtilsInternal;
+ 
++import com.android.settings.custom.biometrics.FaceUtils;
++
+ /**
+  * Preference controller that controls whether the biometrics authentication to be used in apps.
+  */
+@@ -69,7 +71,7 @@ public class BiometricSettingsAppPreferenceController extends TogglePreferenceCo
+ 
+     @Override
+     public int getAvailabilityStatus() {
+-        if (!Utils.isMultipleBiometricsSupported(mContext)) {
++        if (!Utils.isMultipleBiometricsSupported(mContext) || FaceUtils.isFaceUnlockSupported()) {
+             return UNSUPPORTED_ON_DEVICE;
+         }
+         if (mFaceManager == null || mFingerprintManager == null) {
+diff --git a/src/com/android/settings/biometrics/combination/BiometricWaysToUsePreferenceController.java b/src/com/android/settings/biometrics/combination/BiometricWaysToUsePreferenceController.java
+new file mode 100644
+index 0000000000..99105be43f
+--- /dev/null
++++ b/src/com/android/settings/biometrics/combination/BiometricWaysToUsePreferenceController.java
+@@ -0,0 +1,35 @@
++/*
++ * Copyright (C) 2021 The Android Open Source Project
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package com.android.settings.biometrics.combination;
++
++import android.content.Context;
++
++import com.android.settings.Utils;
++import com.android.settings.core.BasePreferenceController;
++
++import com.android.settings.custom.biometrics.FaceUtils;
++
++public class BiometricWaysToUsePreferenceController extends BasePreferenceController {
++
++    public BiometricWaysToUsePreferenceController(Context context, String key) {
++        super(context, key);
++    }
++
++    @Override
++    public int getAvailabilityStatus() {
++        return FaceUtils.isFaceUnlockSupported() ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
++    }
++}
+diff --git a/src/com/android/settings/biometrics/face/FaceSettingsAppPreferenceController.java b/src/com/android/settings/biometrics/face/FaceSettingsAppPreferenceController.java
+index c838df5805..69a019c589 100644
+--- a/src/com/android/settings/biometrics/face/FaceSettingsAppPreferenceController.java
++++ b/src/com/android/settings/biometrics/face/FaceSettingsAppPreferenceController.java
+@@ -25,7 +25,6 @@ import android.provider.Settings;
+ import androidx.preference.Preference;
+ 
+ import com.android.settings.Utils;
+-
+ import com.android.settings.custom.biometrics.FaceUtils;
+ 
+ /**
+@@ -80,12 +79,8 @@ public class FaceSettingsAppPreferenceController extends FaceSettingsPreferenceC
+ 
+     @Override
+     public int getAvailabilityStatus() {
+-        if (FaceUtils.isFaceUnlockSupported()){
+-            return UNSUPPORTED_ON_DEVICE;
+-        }
+-
+         // When the device supports multiple biometrics auth, this preference will be hidden.
+-        if (Utils.isMultipleBiometricsSupported(mContext)) {
++        if (Utils.isMultipleBiometricsSupported(mContext) && !FaceUtils.isFaceUnlockSupported()) {
+             return UNSUPPORTED_ON_DEVICE;
+         }
+ 
+diff --git a/src/com/android/settings/biometrics/face/FaceSettingsFooterPreferenceController.java b/src/com/android/settings/biometrics/face/FaceSettingsFooterPreferenceController.java
+index fa144c819a..ba1047b0d4 100644
+--- a/src/com/android/settings/biometrics/face/FaceSettingsFooterPreferenceController.java
++++ b/src/com/android/settings/biometrics/face/FaceSettingsFooterPreferenceController.java
+@@ -27,8 +27,6 @@ import com.android.settings.overlay.FeatureFactory;
+ import com.android.settings.utils.AnnotationSpan;
+ import com.android.settingslib.HelpUtils;
+ 
+-import com.android.settings.custom.biometrics.FaceUtils;
+-
+ /**
+  * Footer for face settings showing the help text and help link.
+  */
+@@ -57,14 +55,10 @@ public class FaceSettingsFooterPreferenceController extends BasePreferenceContro
+         final AnnotationSpan.LinkInfo linkInfo =
+                 new AnnotationSpan.LinkInfo(mContext, ANNOTATION_URL, helpIntent);
+ 
+-        final int footerRes;
+-        if (FaceUtils.isFaceUnlockSupported()) {
+-            footerRes = R.string.security_settings_face_settings_footer_custom;
+-        } else if (mProvider.isAttentionSupported(mContext)) {
+-            footerRes = R.string.security_settings_face_settings_footer;
+-        } else {
+-            footerRes = R.string.security_settings_face_settings_footer_attention_not_supported;
+-        }
++        final int footerRes = mProvider.isAttentionSupported(mContext)
++                ? R.string.security_settings_face_settings_footer
++                : R.string.security_settings_face_settings_footer_attention_not_supported;
++
+         preference.setTitle(AnnotationSpan.linkify(
+                 mContext.getText(footerRes), linkInfo));
+     }
+diff --git a/src/com/android/settings/biometrics/face/FaceSettingsRemoveButtonPreferenceController.java b/src/com/android/settings/biometrics/face/FaceSettingsRemoveButtonPreferenceController.java
+index 79521729a2..2649bdf023 100644
+--- a/src/com/android/settings/biometrics/face/FaceSettingsRemoveButtonPreferenceController.java
++++ b/src/com/android/settings/biometrics/face/FaceSettingsRemoveButtonPreferenceController.java
+@@ -39,8 +39,6 @@ import com.android.settingslib.widget.LayoutPreference;
+ 
+ import java.util.List;
+ 
+-import com.android.settings.custom.biometrics.FaceUtils;
+-
+ /**
+  * Controller for the remove button. This assumes that there is only a single face enrolled. The UI
+  * will likely change if multiple enrollments are allowed/supported.
+@@ -64,13 +62,8 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
+         public Dialog onCreateDialog(Bundle savedInstanceState) {
+             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+ 
+-            int dialogMessage = R.string.security_settings_face_settings_remove_dialog_details;
+-            if (FaceUtils.isFaceUnlockSupported()) {
+-                dialogMessage = R.string.security_settings_face_settings_remove_dialog_details_custom;
+-            }
+-
+             builder.setTitle(R.string.security_settings_face_settings_remove_dialog_title)
+-                    .setMessage(dialogMessage)
++                    .setMessage(R.string.security_settings_face_settings_remove_dialog_details)
+                     .setPositiveButton(R.string.delete, mOnClickListener)
+                     .setNegativeButton(R.string.cancel, mOnClickListener);
+             AlertDialog dialog = builder.create();
+diff --git a/src/com/android/settings/biometrics/face/FaceUnlockCategoryPreferenceController.java b/src/com/android/settings/biometrics/face/FaceUnlockCategoryPreferenceController.java
+index a7dd0aadf4..870756ef29 100644
+--- a/src/com/android/settings/biometrics/face/FaceUnlockCategoryPreferenceController.java
++++ b/src/com/android/settings/biometrics/face/FaceUnlockCategoryPreferenceController.java
+@@ -33,6 +33,6 @@ public class FaceUnlockCategoryPreferenceController extends BasePreferenceContro
+ 
+     @Override
+     public int getAvailabilityStatus() {
+-        return Utils.isMultipleBiometricsSupported(mContext) || FaceUtils.isFaceUnlockSupported() ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
++        return Utils.isMultipleBiometricsSupported(mContext) && !FaceUtils.isFaceUnlockSupported() ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
+     }
+ }
+-- 
+2.32.0 (Apple Git-132)
+

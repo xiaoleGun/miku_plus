@@ -1,0 +1,300 @@
+From 6ee7bfab499bd1135383841bdb2a190a5ea885de Mon Sep 17 00:00:00 2001
+From: jhonboy121 <alfredmathew05@gmail.com>
+Date: Fri, 25 Feb 2022 13:06:42 +0530
+Subject: [PATCH 11/23] services: applock: lock all packages when device is
+ locked
+
+Signed-off-by: jhonboy121 <alfredmathew05@gmail.com>
+Signed-off-by: spezi77 <spezi7713@gmx.net>
+---
+ .../server/app/AppLockManagerService.kt       | 169 ++++++++++++------
+ .../app/AppLockManagerServiceInternal.kt      |   5 +
+ .../server/trust/TrustManagerService.java     |  12 ++
+ 3 files changed, 128 insertions(+), 58 deletions(-)
+
+diff --git a/services/core/java/com/android/server/app/AppLockManagerService.kt b/services/core/java/com/android/server/app/AppLockManagerService.kt
+index c4a890fc09d2..c721c246e7d6 100644
+--- a/services/core/java/com/android/server/app/AppLockManagerService.kt
++++ b/services/core/java/com/android/server/app/AppLockManagerService.kt
+@@ -118,6 +118,12 @@ class AppLockManagerService(private val context: Context) :
+         LocalServices.getService(ActivityManagerInternal::class.java)
+     }
+ 
++    private val packageManager: PackageManager by lazy {
++        context.packageManager
++    }
++
++    private var deviceLocked = false
++
+     private val alarmsMutex = Mutex()
+ 
+     @GuardedBy("alarmsMutex")
+@@ -126,10 +132,6 @@ class AppLockManagerService(private val context: Context) :
+     private val whiteListedSystemApps = context.resources.getStringArray(
+         R.array.config_appLockAllowedSystemApps)
+ 
+-    private val packageManager: PackageManager by lazy {
+-        context.packageManager
+-    }
+-
+     private val packageChangeReceiver = object : BroadcastReceiver() {
+         override fun onReceive(context: Context?, intent: Intent?) {
+             if (intent?.action != Intent.ACTION_PACKAGE_REMOVED) return
+@@ -164,7 +166,9 @@ class AppLockManagerService(private val context: Context) :
+                 mutex.withLock {
+                     unlockedPackages.remove(packageName)
+                     if (config.removePackage(packageName)) {
+-                        config.write()
++                        withContext(Dispatchers.IO) {
++                            config.write()
++                        }
+                     }
+                 }
+             }
+@@ -218,26 +222,37 @@ class AppLockManagerService(private val context: Context) :
+         }
+     }
+ 
+-    private val lockAlarmReceiver = object : BroadcastReceiver() {
+-        override fun onReceive(context: Context?, intent: Intent?) {
+-            logD("Lock alarm received")
+-            if (intent?.action != ACTION_APP_LOCK_TIMEOUT) return
+-            val packageName = intent.getStringExtra(EXTRA_PACKAGE) ?: return
+-            logD("$packageName timed out")
+-            serviceScope.launch {
+-                mutex.withLock {
+-                    if (topPackages.contains(packageName)) {
+-                        logD("$packageName is currently in foreground, skipping lock")
+-                        return@withLock
+-                    }
+-                    unlockedPackages.remove(packageName)
+-                }
+-                notificationManagerInternal.updateSecureNotifications(
+-                    packageName, true, currentUserId)
+-                alarmsMutex.withLock {
+-                    scheduledAlarms.remove(packageName)
++    private fun scheduleLockAlarm(pkg: String) {
++        logD("scheduleLockAlarm, package = $pkg")
++        serviceScope.launch {
++            alarmsMutex.withLock {
++                if (scheduledAlarms.containsKey(pkg)) {
++                    logD("Alarm already scheduled for package $pkg")
++                    return@launch
+                 }
+             }
++            val timeout = mutex.withLock {
++                userConfigMap[currentUserId]?.appLockTimeout
++            } ?: run {
++                Slog.e(TAG, "Failed to retrieve user config for $currentUserId")
++                return@launch
++            }
++            val pendingIntent = PendingIntent.getBroadcast(
++                context,
++                pkg.hashCode(),
++                Intent(ACTION_APP_LOCK_TIMEOUT).apply {
++                    putExtra(EXTRA_PACKAGE, pkg)
++                },
++                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
++            )
++            alarmManager.setExactAndAllowWhileIdle(
++                AlarmManager.ELAPSED_REALTIME_WAKEUP,
++                SystemClock.elapsedRealtime() + timeout,
++                pendingIntent
++            )
++            alarmsMutex.withLock {
++                scheduledAlarms[pkg] = pendingIntent
++            }
+         }
+     }
+ 
+@@ -272,36 +287,25 @@ class AppLockManagerService(private val context: Context) :
+         }
+     }
+ 
+-    private fun scheduleLockAlarm(pkg: String) {
+-        logD("scheduleLockAlarm, package = $pkg")
+-        serviceScope.launch {
+-            alarmsMutex.withLock {
+-                if (scheduledAlarms.containsKey(pkg)) {
+-                    logD("Alarm already scheduled for package $pkg")
+-                    return@launch
++    private val lockAlarmReceiver = object : BroadcastReceiver() {
++        override fun onReceive(context: Context?, intent: Intent?) {
++            if (intent?.action != ACTION_APP_LOCK_TIMEOUT) return
++            logD("Lock alarm received")
++            val packageName = intent.getStringExtra(EXTRA_PACKAGE) ?: return
++            logD("$packageName timed out")
++            serviceScope.launch {
++                mutex.withLock {
++                    if (topPackages.contains(packageName)) {
++                        logD("$packageName is currently in foreground, skipping lock")
++                        return@withLock
++                    }
++                    unlockedPackages.remove(packageName)
++                }
++                notificationManagerInternal.updateSecureNotifications(
++                    packageName, true, currentUserId)
++                alarmsMutex.withLock {
++                    scheduledAlarms.remove(packageName)
+                 }
+-            }
+-            val timeout = mutex.withLock {
+-                userConfigMap[currentUserId]?.appLockTimeout
+-            } ?: run {
+-                Slog.e(TAG, "Failed to retrieve user config for $currentUserId")
+-                return@launch
+-            }
+-            val pendingIntent = PendingIntent.getBroadcast(
+-                context,
+-                pkg.hashCode(),
+-                Intent(ACTION_APP_LOCK_TIMEOUT).apply {
+-                    putExtra(EXTRA_PACKAGE, pkg)
+-                },
+-                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+-            )
+-            alarmManager.setExactAndAllowWhileIdle(
+-                AlarmManager.ELAPSED_REALTIME_WAKEUP,
+-                SystemClock.elapsedRealtime() + timeout,
+-                pendingIntent
+-            )
+-            alarmsMutex.withLock {
+-                scheduledAlarms[pkg] = pendingIntent
+             }
+         }
+     }
+@@ -336,16 +340,16 @@ class AppLockManagerService(private val context: Context) :
+         }
+     }
+ 
+-    private fun getLabelForPackage(pkg: String, userId: Int): String? {
+-        return try {
+-            val aInfo = packageManager.getApplicationInfoAsUser(pkg,
+-                PackageManager.MATCH_ALL, userId)
+-            aInfo.loadLabel(packageManager).toString()
++    private fun getLabelForPackage(pkg: String, userId: Int): String? =
++        try {
++            packageManager.getApplicationInfoAsUser(pkg,
++                PackageManager.MATCH_ALL,
++                userId,
++            ).loadLabel(packageManager).toString()
+         } catch(e: PackageManager.NameNotFoundException) {
+             Slog.e(TAG, "Package $pkg not found")
+             null
+         }
+-    }
+ 
+     /**
+      * Add an application to be protected.
+@@ -827,6 +831,55 @@ class AppLockManagerService(private val context: Context) :
+                 }
+             }
+         }
++
++        override fun notifyDeviceLocked(locked: Boolean, userId: Int) {
++            logD("Device locked = $locked for user $userId")
++            if (userId != currentUserId ||
++                    !isDeviceSecure ||
++                    deviceLocked == locked) return
++            deviceLocked = locked
++            serviceScope.launch {
++                val config = mutex.withLock {
++                    userConfigMap[currentUserId] ?: run {
++                        Slog.e(TAG, "Config unavailable for user $currentUserId")
++                        return@launch
++                    }
++                }
++                if (deviceLocked) {
++                    mutex.withLock {
++                        if (unlockedPackages.isEmpty()) return@withLock
++                        logD("Locking all packages")
++                        unlockedPackages.clear()
++                    }
++                    alarmsMutex.withLock {
++                        if (scheduledAlarms.isEmpty()) return@withLock
++                        scheduledAlarms.values.forEach {
++                            alarmManager.cancel(it)
++                        }
++                        scheduledAlarms.clear()
++                    }
++                } else {
++                    mutex.withLock {
++                        if (config.appLockPackages.isEmpty() ||
++                                topPackages.isEmpty()) return@withLock
++                        // If device is locked with an app in the foreground,
++                        // even if it is removed from [unlockedPackages], it will
++                        // still be shown when unlocked, so we need to start home
++                        // activity as soon as such a condition is detected on unlock.
++                        val shouldGoToHome = topPackages.any {
++                            config.appLockPackages.contains(it) &&
++                                !unlockedPackages.contains(it)
++                        }
++                        if (!shouldGoToHome) return@withLock
++                        logD("Locking foreground package")
++                        context.mainExecutor.execute {
++                            atmInternal.startHomeActivity(currentUserId,
++                                "Locked package in foreground")
++                        }
++                    }
++                }
++            }
++        }
+     }
+ 
+     class Lifecycle(context: Context): SystemService(context) {
+diff --git a/services/core/java/com/android/server/app/AppLockManagerServiceInternal.kt b/services/core/java/com/android/server/app/AppLockManagerServiceInternal.kt
+index 4e790617d206..798114738a10 100644
+--- a/services/core/java/com/android/server/app/AppLockManagerServiceInternal.kt
++++ b/services/core/java/com/android/server/app/AppLockManagerServiceInternal.kt
+@@ -64,6 +64,11 @@ abstract class AppLockManagerServiceInternal {
+      */
+     abstract fun isNotificationSecured(packageName: String, userId: Int): Boolean
+ 
++    /**
++     * Notify that the device is locked for current user.
++     */
++    abstract fun notifyDeviceLocked(locked: Boolean, userId: Int)
++
+     @FunctionalInterface
+     interface UnlockCallback {
+         /**
+diff --git a/services/core/java/com/android/server/trust/TrustManagerService.java b/services/core/java/com/android/server/trust/TrustManagerService.java
+index 4b71742c86c8..2707d4361308 100644
+--- a/services/core/java/com/android/server/trust/TrustManagerService.java
++++ b/services/core/java/com/android/server/trust/TrustManagerService.java
+@@ -73,6 +73,8 @@ import com.android.internal.annotations.GuardedBy;
+ import com.android.internal.content.PackageMonitor;
+ import com.android.internal.util.DumpUtils;
+ import com.android.internal.widget.LockPatternUtils;
++import com.android.server.app.AppLockManagerServiceInternal;
++import com.android.server.LocalServices;
+ import com.android.server.SystemService;
+ import com.android.server.SystemService.TargetUser;
+ 
+@@ -189,6 +191,8 @@ public class TrustManagerService extends SystemService {
+     private boolean mTrustAgentsCanRun = false;
+     private int mCurrentUser = UserHandle.USER_SYSTEM;
+ 
++    private AppLockManagerServiceInternal mAppLockManagerService = null;
++
+     public TrustManagerService(Context context) {
+         super(context);
+         mContext = context;
+@@ -688,7 +692,15 @@ public class TrustManagerService extends SystemService {
+             boolean deviceLocked = secure && showingKeyguard && !trusted &&
+                     !biometricAuthenticated;
+             setDeviceLockedForUser(id, deviceLocked);
++            getAppLockManagerService().notifyDeviceLocked(deviceLocked, id);
++        }
++    }
++
++    private AppLockManagerServiceInternal getAppLockManagerService() {
++        if (mAppLockManagerService == null) {
++            mAppLockManagerService = LocalServices.getService(AppLockManagerServiceInternal.class);
+         }
++        return mAppLockManagerService;
+     }
+ 
+     private void setDeviceLockedForUser(@UserIdInt int userId, boolean locked) {
+-- 
+2.32.0 (Apple Git-132)
+

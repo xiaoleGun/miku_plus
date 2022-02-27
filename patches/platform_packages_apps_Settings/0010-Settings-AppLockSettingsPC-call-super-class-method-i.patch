@@ -1,0 +1,27 @@
+From 167ba289265afacbabba0b66bb3fc67e73c28367 Mon Sep 17 00:00:00 2001
+From: jhonboy121 <alfredmathew05@gmail.com>
+Date: Thu, 24 Feb 2022 11:59:18 +0530
+Subject: [PATCH 10/11] Settings: AppLockSettingsPC: call super class method if
+ preference click is not handled
+
+Signed-off-by: jhonboy121 <alfredmathew05@gmail.com>
+---
+ .../security/applock/AppLockSettingsPreferenceController.kt     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/com/android/settings/security/applock/AppLockSettingsPreferenceController.kt b/src/com/android/settings/security/applock/AppLockSettingsPreferenceController.kt
+index e9c2bbad97..b8312b428f 100644
+--- a/src/com/android/settings/security/applock/AppLockSettingsPreferenceController.kt
++++ b/src/com/android/settings/security/applock/AppLockSettingsPreferenceController.kt
+@@ -114,7 +114,7 @@ class AppLockSettingsPreferenceController(
+             )
+             return true
+         }
+-        return false
++        return super.handlePreferenceTreeClick(preference)
+     }
+ 
+     companion object {
+-- 
+2.32.0 (Apple Git-132)
+

@@ -1,0 +1,157 @@
+From abbb556b44c22a1c441264dda0816793bf96a700 Mon Sep 17 00:00:00 2001
+From: jhenrique09 <jhsv09@gmail.com>
+Date: Mon, 14 Feb 2022 14:14:38 -0300
+Subject: [PATCH 20/23] FaceService: Allow our face unlock to be used on
+ third-party apps
+
+Change-Id: Ib9041442572885ceda3afbafd23f8e89226b0364
+Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>
+---
+ .../server/biometrics/AuthSession.java        |  5 +++++
+ .../server/biometrics/BiometricService.java   | 20 +++++--------------
+ .../server/biometrics/PreAuthInfo.java        |  5 +++++
+ .../biometrics/sensors/face/FaceService.java  |  3 ++-
+ 4 files changed, 17 insertions(+), 16 deletions(-)
+
+diff --git a/services/core/java/com/android/server/biometrics/AuthSession.java b/services/core/java/com/android/server/biometrics/AuthSession.java
+index 0da6a1ba3109..1196c5d55c3d 100644
+--- a/services/core/java/com/android/server/biometrics/AuthSession.java
++++ b/services/core/java/com/android/server/biometrics/AuthSession.java
+@@ -72,6 +72,8 @@ import java.util.List;
+ import java.util.Random;
+ import java.util.function.Function;
+ 
++import com.android.internal.util.custom.faceunlock.FaceUnlockUtils;
++
+ /**
+  * Class that defines the states of an authentication session invoked via
+  * {@link android.hardware.biometrics.BiometricPrompt}, as well as all of the necessary
+@@ -331,6 +333,9 @@ public final class AuthSession implements IBinder.DeathRecipient {
+     }
+ 
+     private boolean isConfirmationRequired(BiometricSensor sensor) {
++        if (sensor.modality == TYPE_FACE && FaceUnlockUtils.isFaceUnlockSupported()) {
++            return true;
++        }
+         return sensor.confirmationSupported()
+                 && (sensor.confirmationAlwaysRequired(mUserId)
+                 || mPreAuthInfo.confirmationRequested);
+diff --git a/services/core/java/com/android/server/biometrics/BiometricService.java b/services/core/java/com/android/server/biometrics/BiometricService.java
+index e0775d48b42f..2a7a2b275cdd 100644
+--- a/services/core/java/com/android/server/biometrics/BiometricService.java
++++ b/services/core/java/com/android/server/biometrics/BiometricService.java
+@@ -85,6 +85,8 @@ import java.util.Random;
+ import java.util.Set;
+ import java.util.concurrent.atomic.AtomicLong;
+ 
++import com.android.internal.util.custom.faceunlock.FaceUnlockUtils;
++
+ /**
+  * System service that arbitrates the modality for BiometricPrompt to use.
+  */
+@@ -350,10 +352,6 @@ public class BiometricService extends SystemService {
+         private static final boolean DEFAULT_APP_ENABLED = true;
+         private static final boolean DEFAULT_ALWAYS_REQUIRE_CONFIRMATION = false;
+ 
+-        // Some devices that shipped before S already have face-specific settings. Instead of
+-        // migrating, which is complicated, let's just keep using the existing settings.
+-        private final boolean mUseLegacyFaceOnlySettings;
+-
+         // Only used for legacy face-only devices
+         private final Uri FACE_UNLOCK_KEYGUARD_ENABLED =
+                 Settings.Secure.getUriFor(Settings.Secure.FACE_UNLOCK_KEYGUARD_ENABLED);
+@@ -393,18 +391,13 @@ public class BiometricService extends SystemService {
+             final boolean hasFace = context.getPackageManager()
+                     .hasSystemFeature(PackageManager.FEATURE_FACE);
+ 
+-            // Use the legacy setting on face-only devices that shipped on or before Q
+-            mUseLegacyFaceOnlySettings =
+-                    Build.VERSION.DEVICE_INITIAL_SDK_INT <= Build.VERSION_CODES.Q
+-                    && hasFace && !hasFingerprint;
+-
+             updateContentObserver();
+         }
+ 
+         public void updateContentObserver() {
+             mContentResolver.unregisterContentObserver(this);
+ 
+-            if (mUseLegacyFaceOnlySettings) {
++            if (FaceUnlockUtils.isFaceUnlockSupported()) {
+                 mContentResolver.registerContentObserver(FACE_UNLOCK_KEYGUARD_ENABLED,
+                         false /* notifyForDescendants */,
+                         this /* observer */,
+@@ -474,7 +467,7 @@ public class BiometricService extends SystemService {
+ 
+         public boolean getEnabledOnKeyguard(int userId) {
+             if (!mBiometricEnabledOnKeyguard.containsKey(userId)) {
+-                if (mUseLegacyFaceOnlySettings) {
++                if (FaceUnlockUtils.isFaceUnlockSupported()) {
+                     onChange(true /* selfChange */, FACE_UNLOCK_KEYGUARD_ENABLED, userId);
+                 } else {
+                     onChange(true /* selfChange */, BIOMETRIC_KEYGUARD_ENABLED, userId);
+@@ -485,7 +478,7 @@ public class BiometricService extends SystemService {
+ 
+         public boolean getEnabledForApps(int userId) {
+             if (!mBiometricEnabledForApps.containsKey(userId)) {
+-                if (mUseLegacyFaceOnlySettings) {
++                if (FaceUnlockUtils.isFaceUnlockSupported()) {
+                     onChange(true /* selfChange */, FACE_UNLOCK_APP_ENABLED, userId);
+                 } else {
+                     onChange(true /* selfChange */, BIOMETRIC_APP_ENABLED, userId);
+@@ -1477,9 +1470,6 @@ public class BiometricService extends SystemService {
+     }
+ 
+     private void dumpInternal(PrintWriter pw) {
+-        pw.println("Legacy Settings: " + mSettingObserver.mUseLegacyFaceOnlySettings);
+-        pw.println();
+-
+         pw.println("Sensors:");
+         for (BiometricSensor sensor : mSensors) {
+             pw.println(" " + sensor);
+diff --git a/services/core/java/com/android/server/biometrics/PreAuthInfo.java b/services/core/java/com/android/server/biometrics/PreAuthInfo.java
+index cd0ff10168bb..7ada12d443b0 100644
+--- a/services/core/java/com/android/server/biometrics/PreAuthInfo.java
++++ b/services/core/java/com/android/server/biometrics/PreAuthInfo.java
+@@ -40,6 +40,8 @@ import java.lang.annotation.RetentionPolicy;
+ import java.util.ArrayList;
+ import java.util.List;
+ 
++import com.android.internal.util.custom.faceunlock.FaceUnlockUtils;
++
+ /**
+  * Class representing the calling client's request. Additionally, derives/calculates
+  * preliminary info that would be useful in helping serve this request. Note that generating
+@@ -197,6 +199,9 @@ class PreAuthInfo {
+ 
+     private static boolean isEnabledForApp(BiometricService.SettingObserver settingObserver,
+             @BiometricAuthenticator.Modality int modality, int userId) {
++        if (modality == TYPE_FINGERPRINT && FaceUnlockUtils.isFaceUnlockSupported()){
++            return true;
++        }
+         return settingObserver.getEnabledForApps(userId);
+     }
+ 
+diff --git a/services/core/java/com/android/server/biometrics/sensors/face/FaceService.java b/services/core/java/com/android/server/biometrics/sensors/face/FaceService.java
+index a92fab6ad4c5..bc952dfe1775 100644
+--- a/services/core/java/com/android/server/biometrics/sensors/face/FaceService.java
++++ b/services/core/java/com/android/server/biometrics/sensors/face/FaceService.java
+@@ -25,6 +25,7 @@ import android.annotation.NonNull;
+ import android.annotation.Nullable;
+ import android.content.Context;
+ import android.hardware.biometrics.BiometricManager;
++import android.hardware.biometrics.SensorProperties;
+ import android.hardware.biometrics.BiometricsProtoEnums;
+ import android.hardware.biometrics.IBiometricSensorReceiver;
+ import android.hardware.biometrics.IBiometricService;
+@@ -655,7 +656,7 @@ public class FaceService extends SystemService {
+ 
+         private void addCustomProviders() {
+             if (CustomFaceProvider.useCustomFaceUnlockService()) {
+-                mServiceProviders.add(new CustomFaceProvider(getContext(), new FaceSensorPropertiesInternal(CustomFaceProvider.DEVICE_ID, 0, 1, new ArrayList(), 1, false, false, false), mLockoutResetDispatcher));
++                mServiceProviders.add(new CustomFaceProvider(getContext(), new FaceSensorPropertiesInternal(CustomFaceProvider.DEVICE_ID, SensorProperties.STRENGTH_STRONG, 1, new ArrayList(), 1, false, false, false), mLockoutResetDispatcher));
+             }
+         }
+ 
+-- 
+2.32.0 (Apple Git-132)
+

@@ -1,0 +1,99 @@
+From 70e28e54b80253ef990613a73ceeee6a7a450825 Mon Sep 17 00:00:00 2001
+From: Alfred Mathew <alfredmathew05@gmail.com>
+Date: Sun, 20 Feb 2022 21:14:35 +0530
+Subject: [PATCH 02/11] Settings: applock: use property access syntax wherever
+ applicable
+
+Signed-off-by: Alfred Mathew <alfredmathew05@gmail.com>
+Signed-off-by: Joey Huab <joey@evolution-x.org>
+---
+ .../security/applock/AppLockNotificationListFragment.kt   | 4 ++--
+ .../applock/AppLockNotificationPreferenceController.kt    | 2 +-
+ .../security/applock/AppLockPackageListFragment.kt        | 8 ++++----
+ .../applock/AppLockTimeoutPreferenceController.kt         | 7 ++++---
+ 4 files changed, 11 insertions(+), 10 deletions(-)
+
+diff --git a/src/com/android/settings/security/applock/AppLockNotificationListFragment.kt b/src/com/android/settings/security/applock/AppLockNotificationListFragment.kt
+index a604f3b9fc..a77ae871e2 100644
+--- a/src/com/android/settings/security/applock/AppLockNotificationListFragment.kt
++++ b/src/com/android/settings/security/applock/AppLockNotificationListFragment.kt
+@@ -32,13 +32,13 @@ class AppLockNotificationListFragment : AppListFragment() {
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+         appLockManager = requireContext().getSystemService(AppLockManager::class.java)
+-        lockedPackages.addAll(appLockManager.getPackages())
++        lockedPackages.addAll(appLockManager.packages)
+     }
+ 
+     override protected fun getTitle(): Int = R.string.app_lock_notifications_title
+ 
+     override protected fun getInitialCheckedList(): List<String> =
+-        appLockManager.getPackagesWithSecureNotifications()
++        appLockManager.packagesWithSecureNotifications
+ 
+     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+         setDisplayCategory(CATEGORY_BOTH)
+diff --git a/src/com/android/settings/security/applock/AppLockNotificationPreferenceController.kt b/src/com/android/settings/security/applock/AppLockNotificationPreferenceController.kt
+index 583e09c61b..d716f7aca5 100644
+--- a/src/com/android/settings/security/applock/AppLockNotificationPreferenceController.kt
++++ b/src/com/android/settings/security/applock/AppLockNotificationPreferenceController.kt
+@@ -47,7 +47,7 @@ class AppLockNotificationPreferenceController(
+     }
+ 
+     override fun getAvailabilityStatus() =
+-        if (appLockManager.getPackages().isNotEmpty()) AVAILABLE else DISABLED_DEPENDENT_SETTING
++        if (appLockManager.packages.isNotEmpty()) AVAILABLE else DISABLED_DEPENDENT_SETTING
+ 
+     override fun onStateChanged(owner: LifecycleOwner, event: Event) {
+         if (event == Event.ON_START) {
+diff --git a/src/com/android/settings/security/applock/AppLockPackageListFragment.kt b/src/com/android/settings/security/applock/AppLockPackageListFragment.kt
+index c07df1930c..d7792bcf95 100644
+--- a/src/com/android/settings/security/applock/AppLockPackageListFragment.kt
++++ b/src/com/android/settings/security/applock/AppLockPackageListFragment.kt
+@@ -27,18 +27,18 @@ import com.miku.exsettings.fragments.AppListFragment
+ class AppLockPackageListFragment : AppListFragment() {
+ 
+     private lateinit var appLockManager: AppLockManager
+-    private val whiteListedPackages = mutableListOf<String>()
++    private lateinit var whiteListedPackages: Array<String>
+ 
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+         appLockManager = requireContext().getSystemService(AppLockManager::class.java)
+-        whiteListedPackages.addAll(requireContext().resources.getStringArray(
+-            com.android.internal.R.array.config_appLockAllowedSystemApps).toList())
++        whiteListedPackages = requireContext().resources.getStringArray(
++            com.android.internal.R.array.config_appLockAllowedSystemApps)
+     }
+ 
+     override protected fun getTitle(): Int = R.string.app_lock_packages_title
+ 
+-    override protected fun getInitialCheckedList(): List<String> = appLockManager.getPackages()
++    override protected fun getInitialCheckedList(): List<String> = appLockManager.packages
+ 
+     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+         setDisplayCategory(CATEGORY_BOTH)
+diff --git a/src/com/android/settings/security/applock/AppLockTimeoutPreferenceController.kt b/src/com/android/settings/security/applock/AppLockTimeoutPreferenceController.kt
+index 392c3d8ec7..04021223f7 100644
+--- a/src/com/android/settings/security/applock/AppLockTimeoutPreferenceController.kt
++++ b/src/com/android/settings/security/applock/AppLockTimeoutPreferenceController.kt
+@@ -35,12 +35,13 @@ class AppLockTimeoutPreferenceController(
+     override fun getAvailabilityStatus() = AVAILABLE
+ 
+     override fun updateState(preference: Preference) {
+-        val timeout = appLockManager.getTimeout()
+-        (preference as ListPreference).value = if (timeout == -1L) null else timeout.toString()
++        (preference as ListPreference).value = appLockManager.timeout.takeIf {
++            it != -1L
++        }?.toString()
+     }
+ 
+     override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
+-        appLockManager.setTimeout((newValue as String).toLong())
++        appLockManager.timeout = (newValue as String).toLong()
+         return true
+     }
+ }
+-- 
+2.32.0 (Apple Git-132)
+

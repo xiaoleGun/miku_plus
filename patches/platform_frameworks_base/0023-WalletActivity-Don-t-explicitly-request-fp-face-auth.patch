@@ -1,0 +1,45 @@
+From f6e9cce0b4d32fb756c749db20da0ce87641f70a Mon Sep 17 00:00:00 2001
+From: jhenrique09 <jhsv09@gmail.com>
+Date: Mon, 21 Feb 2022 00:34:45 -0300
+Subject: [PATCH 23/23] WalletActivity: Don't explicitly request fp/face auth
+
+There is currently no feedback or indication that biometric authentication is in progress.
+
+The user must explicitly tap the "Unlock to Pay" button for biometrics to be requested.
+
+Change-Id: I8b1a7bb160a2623cc0ec7ac0cc5060c7d6fad6c9
+Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>
+---
+ .../com/android/systemui/wallet/ui/WalletActivity.java    | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/packages/SystemUI/src/com/android/systemui/wallet/ui/WalletActivity.java b/packages/SystemUI/src/com/android/systemui/wallet/ui/WalletActivity.java
+index 99177778310d..0d225d7b9eac 100644
+--- a/packages/SystemUI/src/com/android/systemui/wallet/ui/WalletActivity.java
++++ b/packages/SystemUI/src/com/android/systemui/wallet/ui/WalletActivity.java
+@@ -205,18 +205,18 @@ public class WalletActivity extends LifecycleActivity implements
+     protected void onResume() {
+         super.onResume();
+         mWalletScreenController.queryWalletCards();
+-        mKeyguardViewManager.requestFp(
++        /*mKeyguardViewManager.requestFp(
+                 true,
+                 Utils.getColorAttrDefaultColor(
+                         this, com.android.internal.R.attr.colorAccentPrimary));
+-        mKeyguardViewManager.requestFace(true);
++        mKeyguardViewManager.requestFace(true);*/
+     }
+ 
+     @Override
+     protected void onPause() {
+         super.onPause();
+-        mKeyguardViewManager.requestFp(false, -1);
+-        mKeyguardViewManager.requestFace(false);
++        /*mKeyguardViewManager.requestFp(false, -1);
++        mKeyguardViewManager.requestFace(false);*/
+     }
+ 
+     @Override
+-- 
+2.32.0 (Apple Git-132)
+

@@ -1,0 +1,45 @@
+From 2c4da119109e4ab3962c7d5672b36743b13768fc Mon Sep 17 00:00:00 2001
+From: jhonboy121 <alfredmathew05@gmail.com>
+Date: Mon, 21 Feb 2022 09:55:03 -0600
+Subject: [PATCH] sepolicy: introduce app lock [2/4]
+
+---
+ common/private/service.te       | 2 +-
+ common/private/service_contexts | 3 ++-
+ common/private/system_server.te | 2 --
+ 3 files changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/common/private/service.te b/common/private/service.te
+index 3b44102..cbb17ee 100644
+--- a/common/private/service.te
++++ b/common/private/service.te
+@@ -6,4 +6,4 @@ type lineage_profile_service, system_api_service, system_server_service, service
+ type lineage_weather_service, system_api_service, system_server_service, service_manager_type;
+ 
+ # App Lock
+-type applock_service, system_api_service, system_server_service, service_manager_type;
++type app_lock_service, app_api_service, system_server_service, service_manager_type;
+diff --git a/common/private/service_contexts b/common/private/service_contexts
+index 0edd9c9..aafb9ad 100644
+--- a/common/private/service_contexts
++++ b/common/private/service_contexts
+@@ -7,4 +7,5 @@ profile                                   u:object_r:lineage_profile_service:s0
+ adbroot_service                           u:object_r:adbroot_service:s0
+ 
+ # App Lock
+-applock                                   u:object_r:applock_service:s0
++app_lock                                      u:object_r:app_lock_service:s0 
++
+diff --git a/common/private/system_server.te b/common/private/system_server.te
+index abef199..3c5afb6 100644
+--- a/common/private/system_server.te
++++ b/common/private/system_server.te
+@@ -6,5 +6,3 @@ allow system_server adbroot_service:service_manager find;
+ hal_client_domain(system_server, hal_lineage_fod)
+ hal_client_domain(system_server, hal_lineage_touch)
+ 
+-# App Lock
+-add_service(system_server, applock_service);
+-- 
+2.32.0 (Apple Git-132)
+

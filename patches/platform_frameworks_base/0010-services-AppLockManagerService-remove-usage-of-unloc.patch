@@ -1,0 +1,90 @@
+From 82c47df10ca6186dcaddc9537259e803c7b98bfb Mon Sep 17 00:00:00 2001
+From: jhonboy121 <alfredmathew05@gmail.com>
+Date: Thu, 24 Feb 2022 18:26:51 +0530
+Subject: [PATCH 10/23] services: AppLockManagerService: remove usage of
+ unlockScheduledPackage
+
+* this isn't needed anymore since we filtered out majority of false positives in onTaskStackChanged
+
+Signed-off-by: jhonboy121 <alfredmathew05@gmail.com>
+Signed-off-by: spezi77 <spezi7713@gmx.net>
+---
+ .../server/app/AppLockManagerService.kt       | 23 -------------------
+ 1 file changed, 23 deletions(-)
+
+diff --git a/services/core/java/com/android/server/app/AppLockManagerService.kt b/services/core/java/com/android/server/app/AppLockManagerService.kt
+index ac3bb208aa08..c4a890fc09d2 100644
+--- a/services/core/java/com/android/server/app/AppLockManagerService.kt
++++ b/services/core/java/com/android/server/app/AppLockManagerService.kt
+@@ -126,13 +126,6 @@ class AppLockManagerService(private val context: Context) :
+     private val whiteListedSystemApps = context.resources.getStringArray(
+         R.array.config_appLockAllowedSystemApps)
+ 
+-    // Sometimes onTaskStackChanged is called multiple times
+-    // during app switches and [unlockInternal] might be called
+-    // more than once for a locked package in [checkAndUnlockPackage].
+-    // Cache the queued package name to prevent duplicate prompts.
+-    @GuardedBy("mutex")
+-    private var unlockScheduledPackage: String? = null
+-
+     private val packageManager: PackageManager by lazy {
+         context.packageManager
+     }
+@@ -258,11 +251,6 @@ class AppLockManagerService(private val context: Context) :
+                     return@launch
+                 }
+                 if (!config.appLockPackages.contains(pkg)) return@launch
+-                if (unlockScheduledPackage == pkg) {
+-                    logD("Unlock already scheduled for $pkg, skipping")
+-                    return@launch
+-                }
+-                unlockScheduledPackage = pkg
+             }
+             logD("$pkg is locked out, asking user to unlock")
+             unlockInternal(pkg, currentUserId,
+@@ -270,16 +258,10 @@ class AppLockManagerService(private val context: Context) :
+                     serviceScope.launch {
+                         mutex.withLock {
+                             unlockedPackages.add(pkg)
+-                            unlockScheduledPackage = null
+                         }
+                     }
+                 },
+                 onCancel = {
+-                    serviceScope.launch {
+-                        mutex.withLock {
+-                            unlockScheduledPackage = null
+-                        }
+-                    }
+                     // Send user to home on cancel
+                     context.mainExecutor.execute {
+                         atmInternal.startHomeActivity(currentUserId,
+@@ -779,7 +761,6 @@ class AppLockManagerService(private val context: Context) :
+                             "that is not in list")
+                         return@withLock
+                     }
+-                    unlockScheduledPackage = packageName
+                 }
+                 unlockInternal(packageName, actualUserId,
+                     onSuccess = {
+@@ -787,7 +768,6 @@ class AppLockManagerService(private val context: Context) :
+                         serviceScope.launch {
+                             mutex.withLock {
+                                 unlockedPackages.add(packageName)
+-                                unlockScheduledPackage = null
+                             }
+                             unlockCallback?.onUnlocked(packageName)
+                             notificationManagerInternal.updateSecureNotifications(
+@@ -797,9 +777,6 @@ class AppLockManagerService(private val context: Context) :
+                     onCancel = {
+                         logD("Unlock cancelled")
+                         serviceScope.launch {
+-                            mutex.withLock {
+-                                unlockScheduledPackage = null
+-                            }
+                             cancelCallback?.onCancelled(packageName)
+                         }
+                     }
+-- 
+2.32.0 (Apple Git-132)
+

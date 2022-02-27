@@ -1,0 +1,35 @@
+From f66bdc1543cf5f840de81fefe633d1e0e5d421b6 Mon Sep 17 00:00:00 2001
+From: Alfred Mathew <alfredmathew05@gmail.com>
+Date: Mon, 21 Feb 2022 21:31:03 +0530
+Subject: [PATCH 07/11] Settings: exclude app lock subsettings from recents
+
+* prevents user from navigating back to app lock settings from recents, which is essentially a bypass to security prompt asked at start
+
+Signed-off-by: Alfred Mathew <alfredmathew05@gmail.com>
+---
+ .../security/applock/AppLockSettingsPreferenceController.kt     | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/com/android/settings/security/applock/AppLockSettingsPreferenceController.kt b/src/com/android/settings/security/applock/AppLockSettingsPreferenceController.kt
+index da0a62c491..639aa3dca8 100644
+--- a/src/com/android/settings/security/applock/AppLockSettingsPreferenceController.kt
++++ b/src/com/android/settings/security/applock/AppLockSettingsPreferenceController.kt
+@@ -19,6 +19,7 @@ package com.android.settings.security.applock
+ import android.app.Activity
+ import android.app.AppLockManager
+ import android.content.Context
++import android.content.Intent
+ import android.os.UserHandle
+ 
+ import androidx.activity.result.ActivityResult
+@@ -99,6 +100,7 @@ class AppLockSettingsPreferenceController(
+                 .setDestination(AppLockSettingsFragment::class.qualifiedName)
+                 .setSourceMetricsCategory(host.metricsCategory)
+                 .setTransitionType(TransitionType.TRANSITION_SLIDE)
++                .addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
+                 .launch()
+         }
+     }
+-- 
+2.32.0 (Apple Git-132)
+

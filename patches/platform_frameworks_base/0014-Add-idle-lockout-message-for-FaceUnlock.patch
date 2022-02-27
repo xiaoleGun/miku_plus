@@ -1,0 +1,42 @@
+From 1d26e95959e0bf6570a07609881cb76dc73b9cbf Mon Sep 17 00:00:00 2001
+From: jhenrique09 <jhsv09@gmail.com>
+Date: Fri, 11 Feb 2022 09:26:55 -0300
+Subject: [PATCH 14/23] Add idle lockout message for FaceUnlock
+
+Our impl disable face unlock if the device is not unlocked in 4 hours, a friendly message will be shown to the user
+
+Change-Id: I5b8af871bf6f3ee792fc2788c632b00524ce61cb
+Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>
+---
+ core/res/res/values/miku_strings.xml | 3 +++
+ core/res/res/values/strings.xml      | 1 +
+ 2 files changed, 4 insertions(+)
+
+diff --git a/core/res/res/values/miku_strings.xml b/core/res/res/values/miku_strings.xml
+index 58fb7160a956..57fefbca28d5 100644
+--- a/core/res/res/values/miku_strings.xml
++++ b/core/res/res/values/miku_strings.xml
+@@ -16,4 +16,7 @@
+     <!-- App lock -->
+     <string name="unlock_application">Unlock <xliff:g id="label" example="Telegram">%1$s</xliff:g></string>
+ 
++    <!-- Face unlock -->
++    <string name="face_unlock_disabled_idle">Face unlock disabled due to inactivity</string>
++
+ </resources>
+\ No newline at end of file
+diff --git a/core/res/res/values/strings.xml b/core/res/res/values/strings.xml
+index bba4ff3cfb2f..5e1c1000ca02 100644
+--- a/core/res/res/values/strings.xml
++++ b/core/res/res/values/strings.xml
+@@ -1761,6 +1761,7 @@
+ 
+     <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+     <string-array name="face_error_vendor">
++        <item>@string/face_unlock_disabled_idle</item>
+     </string-array>
+     <!-- Default error message to use when face_error_vendor does not contain a message. [CHAR LIMIT=NONE] -->
+     <string name="face_error_vendor_unknown">Something went wrong. Try again.</string>
+-- 
+2.32.0 (Apple Git-132)
+

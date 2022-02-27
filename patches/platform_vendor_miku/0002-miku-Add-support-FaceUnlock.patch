@@ -1,0 +1,35 @@
+From 2f3783ba56f21b6ee8e8d91ae23f7f6eebda6cca Mon Sep 17 00:00:00 2001
+From: jhenrique09 <jhsv09@gmail.com>
+Date: Thu, 10 Feb 2022 11:25:28 -0300
+Subject: [PATCH 2/2] miku: Add support FaceUnlock
+
+Change-Id: I0beb2311a7fa469182b71c54f0773aac36b53354
+---
+ build/product/miku_product.mk | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/build/product/miku_product.mk b/build/product/miku_product.mk
+index 9e66ade4..5a0dbf9e 100644
+--- a/build/product/miku_product.mk
++++ b/build/product/miku_product.mk
+@@ -47,6 +47,17 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+ PRODUCT_PACKAGES += \
+     bootanimation.zip
+ 
++# Face Unlock
++TARGET_FACE_UNLOCK_SUPPORTED ?= true
++ifeq ($(TARGET_FACE_UNLOCK_SUPPORTED),true)
++PRODUCT_PACKAGES += \
++    FaceUnlockService
++PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
++    ro.face_unlock_service.enabled=$(TARGET_FACE_UNLOCK_SUPPORTED)
++PRODUCT_COPY_FILES += \
++    frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.biometrics.face.xml
++endif
++
+ # Miku UI permission
+  PRODUCT_COPY_FILES += \
+      vendor/miku/config/permissions/privapp-permissions-miku.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-miku.xml
+-- 
+2.32.0 (Apple Git-132)
+

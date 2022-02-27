@@ -1,0 +1,318 @@
+From 1e1807cce98b86a9e82ae3bb22458f5dcb8030f3 Mon Sep 17 00:00:00 2001
+From: Alfred Mathew <alfredmathew05@gmail.com>
+Date: Tue, 22 Feb 2022 17:13:26 +0530
+Subject: [PATCH 07/23] services: applock: allow opting out of biometrics [1/2]
+
+* Cleaned up a little while at it
+
+Signed-off-by: Alfred Mathew <alfredmathew05@gmail.com>
+Signed-off-by: spezi77 <spezi7713@gmx.net>
+---
+ core/java/android/app/AppLockManager.java     | 37 +++++++++++-
+ .../android/app/IAppLockManagerService.aidl   |  4 ++
+ .../com/android/server/app/AppLockConfig.kt   | 13 ++++-
+ .../server/app/AppLockManagerService.kt       | 56 +++++++++++++++++--
+ .../android/server/app/BiometricUnlocker.kt   | 21 +++++--
+ 5 files changed, 115 insertions(+), 16 deletions(-)
+
+diff --git a/core/java/android/app/AppLockManager.java b/core/java/android/app/AppLockManager.java
+index 8320786bbf07..36b27b64c91e 100644
+--- a/core/java/android/app/AppLockManager.java
++++ b/core/java/android/app/AppLockManager.java
+@@ -18,20 +18,19 @@ package android.app;
+ 
+ import android.Manifest;
+ import android.annotation.NonNull;
+-import android.annotation.Nullable;
+ import android.annotation.SystemService;
+ import android.annotation.RequiresPermission;
+ import android.annotation.UserHandleAware;
+ import android.content.Context;
+ import android.os.RemoteException;
+ 
+-import java.util.concurrent.TimeUnit;
+ import java.util.List;
+ 
+ @SystemService(Context.APP_LOCK_SERVICE)
+ public final class AppLockManager {
+ 
+-    public static final long APP_LOCK_TIMEOUT_DEFAULT = 10 * 1000;
++    public static final long DEFAULT_TIMEOUT = 10 * 1000;
++    public static final boolean DEFAULT_BIOMETRICS_ALLOWED = true;
+ 
+     private final Context mContext;
+     private final IAppLockManagerService mService;
+@@ -127,11 +126,13 @@ public final class AppLockManager {
+ 
+     /**
+      * Set whether notification content should be hidden for a package.
++     * Caller must hold {@link android.permission.MANAGE_APP_LOCK}.
+      *
+      * @param packageName the package name.
+      * @param secure true to hide notification content.
+      */
+     @UserHandleAware
++    @RequiresPermission(Manifest.permission.MANAGE_APP_LOCK)
+     public void setSecureNotification(@NonNull String packageName, boolean secure) {
+         try {
+             mService.setSecureNotification(packageName, secure, mContext.getUserId());
+@@ -156,4 +157,34 @@ public final class AppLockManager {
+             throw e.rethrowFromSystemServer();
+         }
+     }
++
++    /**
++     * Set whether to allow unlocking with biometrics.
++     * Caller must hold {@link android.permission.MANAGE_APP_LOCK}.
++     *
++     * @param biometricsAllowed whether to use biometrics.
++     */
++    @UserHandleAware
++    @RequiresPermission(Manifest.permission.MANAGE_APP_LOCK)
++    public void setBiometricsAllowed(boolean biometricsAllowed) {
++        try {
++            mService.setBiometricsAllowed(biometricsAllowed, mContext.getUserId());
++        } catch (RemoteException e) {
++            throw e.rethrowFromSystemServer();
++        }
++    }
++
++    /**
++     * Check whether biometrics is allowed for unlocking.
++     *
++     * @return true if biometrics will be used for unlocking, false otheriwse.
++     */
++    @UserHandleAware
++    public boolean isBiometricsAllowed() {
++        try {
++            return mService.isBiometricsAllowed(mContext.getUserId());
++        } catch (RemoteException e) {
++            throw e.rethrowFromSystemServer();
++        }
++    }
+ }
+\ No newline at end of file
+diff --git a/core/java/android/app/IAppLockManagerService.aidl b/core/java/android/app/IAppLockManagerService.aidl
+index 8c1bc3b922db..e82328d2d3c6 100644
+--- a/core/java/android/app/IAppLockManagerService.aidl
++++ b/core/java/android/app/IAppLockManagerService.aidl
+@@ -35,4 +35,8 @@ interface IAppLockManagerService {
+     void setSecureNotification(in String packageName, in boolean secure, in int userId);
+ 
+     List<String> getPackagesWithSecureNotifications(in int userId);
++
++    void setBiometricsAllowed(in boolean biometricsAllowed, in int userId);
++
++    boolean isBiometricsAllowed(in int userId);
+ }
+\ No newline at end of file
+diff --git a/services/core/java/com/android/server/app/AppLockConfig.kt b/services/core/java/com/android/server/app/AppLockConfig.kt
+index a2762774a189..caab544b7398 100644
+--- a/services/core/java/com/android/server/app/AppLockConfig.kt
++++ b/services/core/java/com/android/server/app/AppLockConfig.kt
+@@ -46,12 +46,14 @@ internal class AppLockConfig(dataDir: File) {
+     val appLockPackages: Set<String>
+         get() = _appLockPackages.toSet()
+ 
+-    var appLockTimeout: Long = AppLockManager.APP_LOCK_TIMEOUT_DEFAULT
++    var appLockTimeout: Long = AppLockManager.DEFAULT_TIMEOUT
+ 
+     private val _packageNotificationMap = ArrayMap<String, Boolean>()
+     val packageNotificationMap: Map<String, Boolean>
+         get() = _packageNotificationMap.toMap()
+ 
++    var biometricsAllowed = AppLockManager.DEFAULT_BIOMETRICS_ALLOWED
++
+     init {
+         appLockDir.mkdirs()
+         FileUtils.setPermissions(appLockDir, S_IRWXU or S_IRWXG, -1, -1)
+@@ -108,7 +110,9 @@ internal class AppLockConfig(dataDir: File) {
+         try {
+             appLockConfigFile.inputStream().bufferedReader().use {
+                 val rootObject = JSONObject(it.readText())
+-                appLockTimeout = rootObject.optLong(KEY_TIMEOUT, AppLockManager.APP_LOCK_TIMEOUT_DEFAULT)
++                appLockTimeout = rootObject.optLong(KEY_TIMEOUT, AppLockManager.DEFAULT_TIMEOUT)
++                biometricsAllowed = rootObject.optBoolean(KEY_BIOMETRICS_ALLOWED,
++                    AppLockManager.DEFAULT_BIOMETRICS_ALLOWED)
+                 val packageObject = rootObject.optJSONObject(KEY_PACKAGES) ?: return@use
+                 packageObject.keys().forEach { pkg ->
+                     _appLockPackages.add(pkg)
+@@ -130,8 +134,9 @@ internal class AppLockConfig(dataDir: File) {
+ 
+     private fun reset() {
+         _appLockPackages.clear()
+-        appLockTimeout = AppLockManager.APP_LOCK_TIMEOUT_DEFAULT
++        appLockTimeout = AppLockManager.DEFAULT_TIMEOUT
+         _packageNotificationMap.clear()
++        biometricsAllowed = AppLockManager.DEFAULT_BIOMETRICS_ALLOWED
+     }
+ 
+     /**
+@@ -141,6 +146,7 @@ internal class AppLockConfig(dataDir: File) {
+         val rootObject = JSONObject()
+         try {
+             rootObject.put(KEY_TIMEOUT, appLockTimeout)
++            rootObject.put(KEY_BIOMETRICS_ALLOWED, biometricsAllowed)
+             val packageObject = JSONObject()
+             appLockPackages.forEach {
+                 val packageConfigObject = JSONObject().apply {
+@@ -171,5 +177,6 @@ internal class AppLockConfig(dataDir: File) {
+         private const val KEY_TIMEOUT = "timeout"
+         private const val KEY_PACKAGES = "packages"
+         private const val KEY_SECURE_NOTIFICATION = "secure_notification"
++        private const val KEY_BIOMETRICS_ALLOWED = "biometrics_allowed"
+     }
+ }
+\ No newline at end of file
+diff --git a/services/core/java/com/android/server/app/AppLockManagerService.kt b/services/core/java/com/android/server/app/AppLockManagerService.kt
+index 86224d8fa9e5..a6b32471f23b 100644
+--- a/services/core/java/com/android/server/app/AppLockManagerService.kt
++++ b/services/core/java/com/android/server/app/AppLockManagerService.kt
+@@ -21,6 +21,7 @@ import android.annotation.RequiresPermission
+ import android.app.ActivityManager
+ import android.app.ActivityTaskManager
+ import android.app.AlarmManager
++import android.app.AppLockManager
+ import android.app.IActivityTaskManager
+ import android.app.IAppLockManagerService
+ import android.app.KeyguardManager
+@@ -433,7 +434,6 @@ class AppLockManagerService(private val context: Context) :
+      * @return the timeout in milliseconds if configuration for
+      *     current user exists, -1 otherwise.
+      */
+-    @RequiresPermission(Manifest.permission.MANAGE_APP_LOCK)
+     override fun getTimeout(userId: Int): Long {
+         logD("getTimeout: userId = $userId")
+         val actualUserId = getActualUserId(userId, "getTimeout")
+@@ -507,6 +507,7 @@ class AppLockManagerService(private val context: Context) :
+      * @throws [SecurityException] if caller does not have permission
+      *     [Manifest.permissions.MANAGE_APP_LOCK].
+      */
++    @RequiresPermission(Manifest.permission.MANAGE_APP_LOCK)
+     override fun setSecureNotification(
+         packageName: String,
+         secure: Boolean,
+@@ -535,13 +536,13 @@ class AppLockManagerService(private val context: Context) :
+ 
+     /**
+      * Get the list of packages whose notifications contents are secure.
+-     * Caller must hold {@link android.permission.MANAGE_APP_LOCK}.
+      *
+      * @param userId the user id of the caller.
+      * @return a list of package names with secure notifications.
+      * @throws [SecurityException] if caller does not have permission
+      *     [Manifest.permissions.MANAGE_APP_LOCK].
+      */
++    @RequiresPermission(Manifest.permission.MANAGE_APP_LOCK)
+     override fun getPackagesWithSecureNotifications(userId: Int): List<String> {
+         logD("getPackagesWithSecureNotifications: userId = $userId")
+         enforceCallingPermission("getPackagesWithSecureNotifications")
+@@ -562,6 +563,49 @@ class AppLockManagerService(private val context: Context) :
+         }
+     }
+ 
++    /**
++     * Set whether to allow unlocking with biometrics.
++     *
++     * @param biometricsAllowed whether to use biometrics.
++     * @throws [SecurityException] if caller does not have permission
++     *     [Manifest.permissions.MANAGE_APP_LOCK].
++     */
++    @RequiresPermission(Manifest.permission.MANAGE_APP_LOCK)
++    override fun setBiometricsAllowed(biometricsAllowed: Boolean, userId: Int) {
++        logD("setBiometricsAllowed: biometricsAllowed = $biometricsAllowed, userId = $userId")
++        enforceCallingPermission("setBiometricsAllowed")
++        val actualUserId = getActualUserId(userId, "setBiometricsAllowed")
++        serviceScope.launch {
++            mutex.withLock {
++                userConfigMap[actualUserId]?.let {
++                    if (it.biometricsAllowed != biometricsAllowed) {
++                        it.biometricsAllowed = biometricsAllowed
++                        biometricUnlocker.biometricsAllowed = biometricsAllowed
++                        it.write()
++                    }
++                } ?: Slog.e(TAG, "setBiometricsAllowed requested by unknown user id $actualUserId")
++            }
++        }
++    }
++
++    /**
++     * Check whether biometrics is allowed for unlocking.
++     *
++     * @return true if biometrics will be used for unlocking, false otheriwse.
++     */
++    override fun isBiometricsAllowed(userId: Int): Boolean {
++        logD("isBiometricsAllowed: userId = $userId")
++        val actualUserId = getActualUserId(userId, "isBiometricsAllowed")
++        return runBlocking {
++            mutex.withLock {
++                userConfigMap[actualUserId]?.let { it.biometricsAllowed } ?: run {
++                    Slog.e(TAG, "isBiometricsAllowed requested by unknown user id $actualUserId")
++                    AppLockManager.DEFAULT_BIOMETRICS_ALLOWED
++                }
++            }
++        }
++    }
++
+     private fun enforceCallingPermission(msg: String) {
+         context.enforceCallingPermission(Manifest.permission.MANAGE_APP_LOCK, msg)
+     }
+@@ -599,8 +643,12 @@ class AppLockManagerService(private val context: Context) :
+             mutex.withLock {
+                 if (!userConfigMap.containsKey(userId)) {
+                     withContext(Dispatchers.IO) {
+-                        userConfigMap[userId] = AppLockConfig(
+-                            Environment.getDataSystemDeDirectory(userId)).also { it.read() }
++                        val config = AppLockConfig(
++                            Environment.getDataSystemDeDirectory(userId))
++                        userConfigMap[userId] = config
++                        config.read()
++                        biometricUnlocker.biometricsAllowed =
++                            config.biometricsAllowed
+                     }
+                 }
+             }
+diff --git a/services/core/java/com/android/server/app/BiometricUnlocker.kt b/services/core/java/com/android/server/app/BiometricUnlocker.kt
+index 294a4c7aa35a..6e7c6b082a56 100644
+--- a/services/core/java/com/android/server/app/BiometricUnlocker.kt
++++ b/services/core/java/com/android/server/app/BiometricUnlocker.kt
+@@ -37,6 +37,9 @@ internal class BiometricUnlocker(private val context: Context) {
+ 
+     private val biometricManager = context.getSystemService(BiometricManager::class.java)
+ 
++    // Set operation must be externally synchronized
++    var biometricsAllowed = false
++
+     /**
+      * Determine whether biometrics or device credentials can be used for
+      * unlocking operation.
+@@ -84,13 +87,19 @@ internal class BiometricUnlocker(private val context: Context) {
+         title: String,
+         callback: AuthenticationCallback,
+     ) {
+-        BiometricPrompt.Builder(context)
++        var authenticators = Authenticators.DEVICE_CREDENTIAL
++        if (biometricsAllowed) {
++            authenticators = authenticators or Authenticators.BIOMETRIC_STRONG
++        }
++        val prompt = BiometricPrompt.Builder(context)
+             .setTitle(title)
+-            .setAllowedAuthenticators(
+-                Authenticators.BIOMETRIC_STRONG or
+-                    Authenticators.DEVICE_CREDENTIAL
+-            )
++            .setAllowedAuthenticators(authenticators)
+             .build()
+-            .authenticate(CancellationSignal(), context.mainExecutor, callback)
++        prompt.authenticateUser(
++            CancellationSignal(),
++            context.mainExecutor,
++            callback,
++            context.userId,
++        )
+     }
+ }
+\ No newline at end of file
+-- 
+2.32.0 (Apple Git-132)
+

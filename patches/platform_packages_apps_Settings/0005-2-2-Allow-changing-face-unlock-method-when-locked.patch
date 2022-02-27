@@ -1,0 +1,192 @@
+From b24db120b9f3f8c073e2e8ea0dd1bd26e2e7a328 Mon Sep 17 00:00:00 2001
+From: jhenrique09 <jhsv09@gmail.com>
+Date: Fri, 18 Jun 2021 11:56:26 -0300
+Subject: [PATCH 05/11] [2/2] Allow changing face unlock method when locked
+
+Change-Id: I143bde86acc2a4ada27c0ef739eb87d20cfc6512
+Signed-off-by: dlwlrma123 <alexfinhart@gmail.com>
+---
+ res/values/miku_arrays.xml                    | 12 +++-
+ res/values/miku_strings.xml                   |  5 +-
+ res/xml/configure_notification_settings.xml   | 14 ++++-
+ res/xml/security_lockscreen_settings.xml      | 11 ++++
+ res/xml/security_settings_face.xml            | 11 ++++
+ ...creenUnlockMethodPreferenceController.java | 59 +++++++++++++++++++
+ 6 files changed, 109 insertions(+), 3 deletions(-)
+ create mode 100644 src/com/android/settings/biometrics/face/FaceSettingsLockscreenUnlockMethodPreferenceController.java
+
+diff --git a/res/values/miku_arrays.xml b/res/values/miku_arrays.xml
+index 83ef7146e9..7aba4fa72f 100644
+--- a/res/values/miku_arrays.xml
++++ b/res/values/miku_arrays.xml
+@@ -65,4 +65,14 @@
+         <item>1800000</item>
+     </string-array>
+     
+-</resources>
+\ No newline at end of file
++    <!-- Face Unlock -->
++    <string-array name="face_unlock_method_entries">
++        <item>@string/face_unlock_method_default</item>
++        <item>@string/face_unlock_method_swipe</item>
++    </string-array>
++    <string-array name="face_unlock_method_values">
++        <item>0</item>
++        <item>1</item>
++    </string-array>
++    
++</resources>
+diff --git a/res/values/miku_strings.xml b/res/values/miku_strings.xml
+index b03e48d990..bcc61b9f1c 100644
+--- a/res/values/miku_strings.xml
++++ b/res/values/miku_strings.xml
+@@ -111,5 +111,8 @@
+     <string name="security_settings_face_unlock_redo_face_scan_title">Redo face scan</string>
+     <string name="face_redo_confirm_btn">Redo</string>
+     <string name="face_redo_warning_msg">Do you want to remove the existing face scan and create a new one?</string>
+-
++    <string name="face_unlock_method_title">Allow face unlock on lock screen</string>
++    <string name="face_unlock_method_default">When the screen is turned on</string>
++    <string name="face_unlock_method_swipe">When swiping on lock screen</string>
++    
+ </resources>
+diff --git a/res/xml/configure_notification_settings.xml b/res/xml/configure_notification_settings.xml
+index 4e58e66887..5343b6416d 100644
+--- a/res/xml/configure_notification_settings.xml
++++ b/res/xml/configure_notification_settings.xml
+@@ -98,9 +98,21 @@
+             android:summary="@string/lock_screen_notifs_redact_work_summary"
+             settings:controller="com.android.settings.notification.RedactNotificationPreferenceController" />
+ 
++        <com.miku.settings.preferences.SecureSettingListPreference
++            android:key="face_unlock_method"
++            android:order="16"
++            android:title="@string/face_unlock_method_title"
++            android:summary="%s"
++            android:dialogTitle="@string/face_unlock_method_title"
++            android:entries="@array/face_unlock_method_entries"
++            android:entryValues="@array/face_unlock_method_values"
++            android:defaultValue="0"
++            settings:searchable="false"
++            settings:controller="com.android.settings.biometrics.face.FaceSettingsLockscreenUnlockMethodPreferenceController" />
++
+         <SwitchPreference
+             android:key="notification_lockscreen_bypass"
+-            android:order="16"
++            android:order="17"
+             android:title="@string/lockscreen_bypass_title"
+             android:summary="@string/lockscreen_bypass_summary"
+             settings:searchable="false"
+diff --git a/res/xml/security_lockscreen_settings.xml b/res/xml/security_lockscreen_settings.xml
+index b63d65010f..7d02d6f6f0 100644
+--- a/res/xml/security_lockscreen_settings.xml
++++ b/res/xml/security_lockscreen_settings.xml
+@@ -28,6 +28,17 @@
+             android:summary="@string/summary_placeholder"
+             settings:keywords="@string/keywords_lock_screen_notif"/>
+ 
++        <com.miku.settings.preferences.SecureSettingListPreference
++            android:key="face_unlock_method"
++            android:title="@string/face_unlock_method_title"
++            android:summary="%s"
++            android:dialogTitle="@string/face_unlock_method_title"
++            android:entries="@array/face_unlock_method_entries"
++            android:entryValues="@array/face_unlock_method_values"
++            android:defaultValue="0"
++            settings:searchable="false"
++            settings:controller="com.android.settings.biometrics.face.FaceSettingsLockscreenUnlockMethodPreferenceController" />
++
+         <SwitchPreference
+             android:key="security_dispaly_lockscreen_bypass"
+             android:title="@string/lockscreen_bypass_title"
+diff --git a/res/xml/security_settings_face.xml b/res/xml/security_settings_face.xml
+index d08392c13c..90467aeffc 100644
+--- a/res/xml/security_settings_face.xml
++++ b/res/xml/security_settings_face.xml
+@@ -52,6 +52,17 @@
+             settings:keywords="@string/keywords_face_unlock"
+             settings:controller="com.android.settings.biometrics.face.FaceSettingsConfirmPreferenceController"/>
+ 
++        <com.miku.settings.preferences.SecureSettingListPreference
++            android:key="face_unlock_method"
++            android:title="@string/face_unlock_method_title"
++            android:summary="%s"
++            android:dialogTitle="@string/face_unlock_method_title"
++            android:entries="@array/face_unlock_method_entries"
++            android:entryValues="@array/face_unlock_method_values"
++            android:defaultValue="0"
++            settings:searchable="false"
++            settings:controller="com.android.settings.biometrics.face.FaceSettingsLockscreenUnlockMethodPreferenceController" />
++
+         <com.android.settingslib.RestrictedSwitchPreference
+             android:key="security_lockscreen_bypass"
+             android:title="@string/lockscreen_bypass_title"
+diff --git a/src/com/android/settings/biometrics/face/FaceSettingsLockscreenUnlockMethodPreferenceController.java b/src/com/android/settings/biometrics/face/FaceSettingsLockscreenUnlockMethodPreferenceController.java
+new file mode 100644
+index 0000000000..e37f4dc8d3
+--- /dev/null
++++ b/src/com/android/settings/biometrics/face/FaceSettingsLockscreenUnlockMethodPreferenceController.java
+@@ -0,0 +1,59 @@
++/*
++ * Copyright (C) 2019 The Android Open Source Project
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License
++ */
++
++package com.android.settings.biometrics.face;
++
++import android.content.Context;
++import android.content.pm.PackageManager;
++import android.hardware.face.FaceManager;
++import android.os.UserHandle;
++import android.os.UserManager;
++
++import com.android.settings.core.BasePreferenceController;
++
++public class FaceSettingsLockscreenUnlockMethodPreferenceController
++        extends BasePreferenceController {
++
++    protected FaceManager mFaceManager;
++    private UserManager mUserManager;
++
++    public FaceSettingsLockscreenUnlockMethodPreferenceController(Context context, String preferenceKey) {
++        super(context, preferenceKey);
++        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE)) {
++            mFaceManager = context.getSystemService(FaceManager.class);
++        }
++
++        mUserManager = context.getSystemService(UserManager.class);
++    }
++
++    @Override
++    public int getAvailabilityStatus() {
++        if (mUserManager.isManagedProfile(UserHandle.myUserId())) {
++            return UNSUPPORTED_ON_DEVICE;
++        }
++
++        boolean faceAuthOnlyOnSecurityView  = mContext.getResources().getBoolean(
++                com.android.internal.R.bool.config_faceAuthOnlyOnSecurityView);
++
++        if (mFaceManager != null && mFaceManager.isHardwareDetected() &&
++                !faceAuthOnlyOnSecurityView) {
++            return mFaceManager.hasEnrolledTemplates(UserHandle.myUserId())
++                    ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
++        } else {
++            return UNSUPPORTED_ON_DEVICE;
++        }
++    }
++}
+\ No newline at end of file
+-- 
+2.32.0 (Apple Git-132)
+

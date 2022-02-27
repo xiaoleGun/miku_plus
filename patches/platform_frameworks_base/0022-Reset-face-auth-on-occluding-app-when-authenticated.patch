@@ -1,0 +1,38 @@
+From bd2ffda42cbadc229b64995d6098627ab05feb70 Mon Sep 17 00:00:00 2001
+From: jhenrique09 <jhsv09@gmail.com>
+Date: Sun, 20 Feb 2022 18:05:13 -0300
+Subject: [PATCH 22/23] Reset face auth on occluding app when authenticated
+
+Change-Id: I237f1bbb49dec279a22cfd78004f93a71843d25e
+Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>
+---
+ .../src/com/android/keyguard/KeyguardUpdateMonitor.java     | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/packages/SystemUI/src/com/android/keyguard/KeyguardUpdateMonitor.java b/packages/SystemUI/src/com/android/keyguard/KeyguardUpdateMonitor.java
+index fac534bf8cdf..591898da3dd0 100644
+--- a/packages/SystemUI/src/com/android/keyguard/KeyguardUpdateMonitor.java
++++ b/packages/SystemUI/src/com/android/keyguard/KeyguardUpdateMonitor.java
+@@ -755,6 +755,9 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
+ 
+     private void handleFingerprintAuthenticated(int authUserId, boolean isStrongBiometric) {
+         Trace.beginSection("KeyGuardUpdateMonitor#handlerFingerPrintAuthenticated");
++        if (mOccludingAppRequestingFace){
++            requestFaceAuthOnOccludingApp(false);
++        }
+         try {
+             final int userId;
+             try {
+@@ -946,6 +949,9 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
+ 
+     private void handleFaceAuthenticated(int authUserId, boolean isStrongBiometric) {
+         Trace.beginSection("KeyGuardUpdateMonitor#handlerFaceAuthenticated");
++        if (mOccludingAppRequestingFace){
++            requestFaceAuthOnOccludingApp(false);
++        }
+         try {
+             if (mGoingToSleep) {
+                 Log.d(TAG, "Aborted successful auth because device is going to sleep.");
+-- 
+2.32.0 (Apple Git-132)
+

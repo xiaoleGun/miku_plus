@@ -1,0 +1,30 @@
+From 51b4e6e8bc3515e55dd72dd21c9d2abec3133517 Mon Sep 17 00:00:00 2001
+From: xiaoleGun <1592501605@qq.com>
+Date: Sun, 27 Feb 2022 18:49:03 +0800
+Subject: [PATCH 2/2] [Miku-ify] Translate app lock for Miku UI [CN]
+
+Signed-off-by: xiaoleGun <1592501605@qq.com>
+---
+ res/values-zh-rCN/strings.xml | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/res/values-zh-rCN/strings.xml b/res/values-zh-rCN/strings.xml
+index 54290730..a4640be8 100644
+--- a/res/values-zh-rCN/strings.xml
++++ b/res/values-zh-rCN/strings.xml
+@@ -95,7 +95,10 @@
+     <!-- [CHAR_LIMIT=NONE] Developer Settings: Label for the option that turns off customizations for a given category.-->
+     <string name="theme_customization_device_default">Device default</string>
+ 
+-     <!-- UI settings -->
+-     <string name="monet_title">🎨 Monet 主题引擎</string>
++    <!-- UI settings -->
++    <string name="monet_title">🎨 Monet 主题引擎</string>
++
++    <string name="search">搜索</string>
++    <string name="search_apps">搜索应用</string>
+ 
+ </resources>
+-- 
+2.32.0 (Apple Git-132)
+

@@ -1,0 +1,200 @@
+From f16129c89d36bbeb58429efd9b17813f8ea58183 Mon Sep 17 00:00:00 2001
+From: jhenrique09 <jhsv09@gmail.com>
+Date: Fri, 18 Jun 2021 11:54:32 -0300
+Subject: [PATCH 19/23] Allow changing face unlock method when locked [1/2]
+
+Change-Id: I9a8e812bbe869dead94d631fa0a2f53f3bf67cc6
+Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>
+---
+ core/java/android/provider/Settings.java      |  6 +++
+ .../keyguard/KeyguardUpdateMonitor.java       | 42 ++++++++++++++++++-
+ .../phone/KeyguardBypassController.kt         | 27 ++++++++----
+ .../phone/StatusBarKeyguardViewManager.java   |  7 ++++
+ 4 files changed, 73 insertions(+), 9 deletions(-)
+
+diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
+index 8f8a9dc43e1d..e10b544af75f 100644
+--- a/core/java/android/provider/Settings.java
++++ b/core/java/android/provider/Settings.java
+@@ -10254,6 +10254,12 @@ public final class Settings {
+         @Readable
+         public static final String GAME_DASHBOARD_ALWAYS_ON = "game_dashboard_always_on";
+ 
++        /**
++         * Face Unlock Method
++         * @hide
++         */
++        public static final String FACE_UNLOCK_METHOD = "face_unlock_method";
++
+         /**
+          * These entries are considered common between the personal and the managed profile,
+          * since the managed profile doesn't get to change them.
+diff --git a/packages/SystemUI/src/com/android/keyguard/KeyguardUpdateMonitor.java b/packages/SystemUI/src/com/android/keyguard/KeyguardUpdateMonitor.java
+index 691cfa9d62e3..fac534bf8cdf 100644
+--- a/packages/SystemUI/src/com/android/keyguard/KeyguardUpdateMonitor.java
++++ b/packages/SystemUI/src/com/android/keyguard/KeyguardUpdateMonitor.java
+@@ -44,6 +44,7 @@ import android.app.trust.TrustManager;
+ import android.content.BroadcastReceiver;
+ import android.content.ComponentName;
+ import android.content.Context;
++import android.content.ContentResolver;
+ import android.content.Intent;
+ import android.content.IntentFilter;
+ import android.content.pm.IPackageManager;
+@@ -427,7 +428,12 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
+     private static int sCurrentUser;
+     private Runnable mUpdateBiometricListeningState = this::updateBiometricListeningState;
+ 
++    SettingsObserver mSettingsObserver;
++
+     private final boolean mFaceAuthOnlyOnSecurityView;
++    private static final int FACE_UNLOCK_BEHAVIOR_DEFAULT = 0;
++    private static final int FACE_UNLOCK_BEHAVIOR_SWIPE = 1;
++    private int mFaceUnlockBehavior = FACE_UNLOCK_BEHAVIOR_DEFAULT;
+     private boolean mBouncerFullyShown;
+ 
+     // Face unlock
+@@ -2063,6 +2069,8 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
+         mContext.getContentResolver().registerContentObserver(
+                 Settings.System.getUriFor(Settings.System.TIME_12_24),
+                 false, mTimeFormatChangeObserver, UserHandle.USER_ALL);
++        mSettingsObserver = new SettingsObserver(mHandler);
++        mSettingsObserver.observe();
+     }
+ 
+     private void updateLockScreenMode(boolean isEnabled) {
+@@ -2360,7 +2368,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
+                 && (!mSecureCameraLaunched || mOccludingAppRequestingFace)
+                 && !faceAuthenticated;
+ 
+-        if (shouldListen && mFaceAuthOnlyOnSecurityView && !mBouncerFullyShown){
++        if (shouldListen && mFaceUnlockBehavior == FACE_UNLOCK_BEHAVIOR_SWIPE && !mBouncerFullyShown){
+             shouldListen = false;
+         }
+ 
+@@ -2394,7 +2402,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
+     public void onKeyguardBouncerFullyShown(boolean fullyShow) {
+         if (mBouncerFullyShown != fullyShow){
+             mBouncerFullyShown = fullyShow;
+-            if (mFaceAuthOnlyOnSecurityView){
++            if (mFaceUnlockBehavior == FACE_UNLOCK_BEHAVIOR_SWIPE){
+                 updateFaceListeningState();
+             }
+         }
+@@ -3399,6 +3407,36 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
+         }
+     }
+ 
++    class SettingsObserver extends ContentObserver {
++        SettingsObserver(Handler handler) {
++            super(handler);
++        }
++
++        void observe() {
++            ContentResolver resolver = mContext.getContentResolver();
++            resolver.registerContentObserver(Settings.Secure.getUriFor(
++                    Settings.Secure.FACE_UNLOCK_METHOD), false, this,
++                    UserHandle.USER_ALL);
++            updateSettings();
++        }
++
++        @Override
++        public void onChange(boolean selfChange) {
++            updateSettings();
++        }
++    }
++
++    private void updateSettings() {
++        ContentResolver resolver = mContext.getContentResolver();
++        if (mFaceAuthOnlyOnSecurityView){
++            mFaceUnlockBehavior = FACE_UNLOCK_BEHAVIOR_SWIPE;
++        }else{
++            mFaceUnlockBehavior = Settings.Secure.getIntForUser(resolver,
++                Settings.Secure.FACE_UNLOCK_METHOD, FACE_UNLOCK_BEHAVIOR_DEFAULT,
++                UserHandle.USER_CURRENT);
++        }
++    }
++
+     /**
+      * Unregister all listeners.
+      */
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardBypassController.kt b/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardBypassController.kt
+index 140b5ef3932a..81d77b698119 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardBypassController.kt
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardBypassController.kt
+@@ -88,6 +88,8 @@ open class KeyguardBypassController : Dumpable, StackScrollAlgorithm.BypassContr
+ 
+     var bypassEnabledBiometric: Boolean = false
+ 
++    var faceUnlockMethod: Int = 0
++
+     var bouncerShowing: Boolean = false
+     var altBouncerShowing: Boolean = false
+     var launchingAffordance: Boolean = false
+@@ -128,13 +130,24 @@ open class KeyguardBypassController : Dumpable, StackScrollAlgorithm.BypassContr
+             }
+         })
+ 
+-        val dismissByDefault = if (context.resources.getBoolean(
+-                        com.android.internal.R.bool.config_faceAuthDismissesKeyguard)) 1 else 0
+-        tunerService.addTunable(object : TunerService.Tunable {
+-            override fun onTuningChanged(key: String?, newValue: String?) {
+-                bypassEnabledBiometric = tunerService.getValue(key, dismissByDefault) != 0
+-            }
+-        }, Settings.Secure.FACE_UNLOCK_DISMISSES_KEYGUARD)
++        if (context.resources.getBoolean(
++                com.android.internal.R.bool.config_faceAuthOnlyOnSecurityView)){
++            bypassEnabledBiometric = false
++        }else{
++            tunerService.addTunable(object : TunerService.Tunable {
++                override fun onTuningChanged(key: String?, newValue: String?) {
++                    faceUnlockMethod = tunerService.getValue(key, 0)
++                }
++            }, Settings.Secure.FACE_UNLOCK_METHOD)
++            val dismissByDefault = if (context.resources.getBoolean(
++                            com.android.internal.R.bool.config_faceAuthDismissesKeyguard)) 1 else 0
++            tunerService.addTunable(object : TunerService.Tunable {
++                override fun onTuningChanged(key: String?, newValue: String?) {
++                    bypassEnabledBiometric = (faceUnlockMethod == 0 &&
++                        tunerService.getValue(key, dismissByDefault) != 0)
++                }
++            }, Settings.Secure.FACE_UNLOCK_DISMISSES_KEYGUARD)
++        }
+         lockscreenUserManager.addUserChangedListener(
+                 object : NotificationLockscreenUserManager.UserChangedListener {
+                     override fun onUserChanged(userId: Int) {
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarKeyguardViewManager.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarKeyguardViewManager.java
+index db894ce84ee1..787b8e799028 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarKeyguardViewManager.java
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarKeyguardViewManager.java
+@@ -104,6 +104,7 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
+     private final UnlockedScreenOffAnimationController mUnlockedScreenOffAnimationController;
+     private final KeyguardMessageAreaController.Factory mKeyguardMessageAreaFactory;
+     private KeyguardMessageAreaController mKeyguardMessageAreaController;
++    private boolean mBouncerVisible = false;
+     private final BouncerExpansionCallback mExpansionCallback = new BouncerExpansionCallback() {
+         @Override
+         public void onFullyShown() {
+@@ -133,6 +134,7 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
+         }
+         @Override
+         public void onVisibilityChanged(boolean isVisible) {
++            mBouncerVisible = isVisible;
+             if (!isVisible) {
+                 cancelPostAuthActions();
+             }
+@@ -475,6 +477,11 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
+             }
+         }
+         updateStates();
++        mHandler.postDelayed(() -> {
++            if (mBouncerVisible) {
++                onKeyguardBouncerFullyShownChanged(mBouncerVisible);
++            }
++        }, 100);
+     }
+     private boolean isWakeAndUnlocking() {
+         int mode = mBiometricUnlockController.getMode();
+-- 
+2.32.0 (Apple Git-132)
+
