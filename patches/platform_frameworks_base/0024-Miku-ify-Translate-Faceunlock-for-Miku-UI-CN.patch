@@ -1,0 +1,70 @@
+From 67adb1d78bc566cae88c76646bae16244ab238c5 Mon Sep 17 00:00:00 2001
+From: xiaoleGun <1592501605@qq.com>
+Date: Fri, 4 Mar 2022 22:11:00 +0800
+Subject: [PATCH 24/24] [Miku-ify] Translate Faceunlock for Miku UI [CN]
+
+---
+ core/res/res/values-zh-rCN/miku_strings.xml   | 22 +++++++++++++++++++
+ .../res/values-zh-rCN/miku_strings.xml        | 19 ++++++++++++++++
+ 2 files changed, 41 insertions(+)
+ create mode 100644 core/res/res/values-zh-rCN/miku_strings.xml
+ create mode 100644 packages/SystemUI/res/values-zh-rCN/miku_strings.xml
+
+diff --git a/core/res/res/values-zh-rCN/miku_strings.xml b/core/res/res/values-zh-rCN/miku_strings.xml
+new file mode 100644
+index 000000000000..620e8ca00e26
+--- /dev/null
++++ b/core/res/res/values-zh-rCN/miku_strings.xml
+@@ -0,0 +1,22 @@
++<?xml version="1.0" encoding="utf-8"?>
++<!--
++     Copyright 2021 Miku UI
++     Licensed under the Apache License, Version 2.0 (the "License");
++     you may not use this file except in compliance with the License.
++     You may obtain a copy of the License at
++          http://www.apache.org/licenses/LICENSE-2.0
++     Unless required by applicable law or agreed to in writing, software
++     distributed under the License is distributed on an "AS IS" BASIS,
++     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++     See the License for the specific language governing permissions and
++     limitations under the License.
++-->
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++
++    <!-- App lock -->
++    <string name="unlock_application">解锁 <xliff:g id="label" example="Telegram">%1$s</xliff:g></string>
++
++    <!-- Face unlock -->
++    <string name="face_unlock_disabled_idle">面部解锁因不活跃将被禁用</string>
++
++</resources>
+\ No newline at end of file
+diff --git a/packages/SystemUI/res/values-zh-rCN/miku_strings.xml b/packages/SystemUI/res/values-zh-rCN/miku_strings.xml
+new file mode 100644
+index 000000000000..26c0fd3fd054
+--- /dev/null
++++ b/packages/SystemUI/res/values-zh-rCN/miku_strings.xml
+@@ -0,0 +1,19 @@
++<?xml version="1.0" encoding="utf-8"?>
++<!--
++     Copyright 2021 Miku UI
++     Licensed under the Apache License, Version 2.0 (the "License");
++     you may not use this file except in compliance with the License.
++     You may obtain a copy of the License at
++          http://www.apache.org/licenses/LICENSE-2.0
++     Unless required by applicable law or agreed to in writing, software
++     distributed under the License is distributed on an "AS IS" BASIS,
++     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++     See the License for the specific language governing permissions and
++     limitations under the License.
++-->
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++
++    <!-- Face Unlock -->
++    <string name="face_unlock_recognizing">你真好看，正在识别你...</string>
++
++</resources>
+\ No newline at end of file
+-- 
+2.32.0 (Apple Git-132)
+

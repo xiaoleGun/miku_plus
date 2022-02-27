@@ -1,7 +1,7 @@
 From 1d26e95959e0bf6570a07609881cb76dc73b9cbf Mon Sep 17 00:00:00 2001
 From: jhenrique09 <jhsv09@gmail.com>
 Date: Fri, 11 Feb 2022 09:26:55 -0300
-Subject: [PATCH 14/23] Add idle lockout message for FaceUnlock
+Subject: [PATCH 14/24] Add idle lockout message for FaceUnlock
 
 Our impl disable face unlock if the device is not unlocked in 4 hours, a friendly message will be shown to the user
 

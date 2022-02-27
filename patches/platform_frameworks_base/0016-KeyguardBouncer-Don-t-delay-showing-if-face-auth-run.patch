@@ -1,7 +1,7 @@
 From 9a17321090d70cfa6445f79a0178667791a220e0 Mon Sep 17 00:00:00 2001
 From: jhenrique09 <jhsv09@gmail.com>
 Date: Sat, 12 Feb 2022 17:46:32 -0300
-Subject: [PATCH 16/23] KeyguardBouncer: Don't delay showing if face auth
+Subject: [PATCH 16/24] KeyguardBouncer: Don't delay showing if face auth
  running
 
 Change-Id: I1897aa22a9c29627b2f03e14f093151453df7be4

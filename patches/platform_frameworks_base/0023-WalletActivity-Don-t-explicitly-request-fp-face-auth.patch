@@ -1,7 +1,7 @@
 From f6e9cce0b4d32fb756c749db20da0ce87641f70a Mon Sep 17 00:00:00 2001
 From: jhenrique09 <jhsv09@gmail.com>
 Date: Mon, 21 Feb 2022 00:34:45 -0300
-Subject: [PATCH 23/23] WalletActivity: Don't explicitly request fp/face auth
+Subject: [PATCH 23/24] WalletActivity: Don't explicitly request fp/face auth
 
 There is currently no feedback or indication that biometric authentication is in progress.
 

@@ -1,7 +1,7 @@
 From c91312c9ba31db213f2e4084564310c305cf9eb4 Mon Sep 17 00:00:00 2001
 From: Alfred Mathew <alfredmathew05@gmail.com>
 Date: Mon, 21 Feb 2022 00:36:22 +0530
-Subject: [PATCH 05/23] services: AppLockManagerService: ignore calls from
+Subject: [PATCH 05/24] services: AppLockManagerService: ignore calls from
  managed profiles
 
 * Fixes work profile apps crashing

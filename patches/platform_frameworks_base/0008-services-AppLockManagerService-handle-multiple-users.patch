@@ -1,7 +1,7 @@
 From 9c5e5eb5971d62c7aff72e344760ddf45db9baad Mon Sep 17 00:00:00 2001
 From: Alfred Mathew <alfredmathew05@gmail.com>
 Date: Tue, 22 Feb 2022 22:46:09 +0530
-Subject: [PATCH 08/23] services: AppLockManagerService: handle multiple users
+Subject: [PATCH 08/24] services: AppLockManagerService: handle multiple users
  properly
 
 * currentUserId has to be fetched everytime to ensure configuration is read properly.

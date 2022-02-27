@@ -1,7 +1,7 @@
 From 6ee7bfab499bd1135383841bdb2a190a5ea885de Mon Sep 17 00:00:00 2001
 From: jhonboy121 <alfredmathew05@gmail.com>
 Date: Fri, 25 Feb 2022 13:06:42 +0530
-Subject: [PATCH 11/23] services: applock: lock all packages when device is
+Subject: [PATCH 11/24] services: applock: lock all packages when device is
  locked
 
 Signed-off-by: jhonboy121 <alfredmathew05@gmail.com>

@@ -1,7 +1,7 @@
 From c9d13768cdee64414c1ceba1d4802e3e164e734f Mon Sep 17 00:00:00 2001
 From: jhonboy121 <alfredmathew05@gmail.com>
 Date: Thu, 24 Feb 2022 11:32:52 +0530
-Subject: [PATCH 09/23] services: AppLockManagerService: fix a few possible
+Subject: [PATCH 09/24] services: AppLockManagerService: fix a few possible
  lock re-entry suspension
 
 * improved readbility of code using early returns and so on

@@ -1,7 +1,7 @@
 From d73c87d40e4b476ce388e15225a62e6fb7de1f35 Mon Sep 17 00:00:00 2001
 From: Ethan Halsall <ethan.halsall@gmail.com>
 Date: Thu, 9 Apr 2020 23:35:54 +0100
-Subject: [PATCH 15/23] base: do not use new lockscreen layout for bypass
+Subject: [PATCH 15/24] base: do not use new lockscreen layout for bypass
 
 - bypassEnabled will always evaluate to false now.
 - Introduce bypassEnabledBiometric which is only used to tell the biometric service whether we can bypass lockscreen without swipe dependant on Settings.Secure.FACE_UNLOCK_DISMISSES_KEYGUARD.

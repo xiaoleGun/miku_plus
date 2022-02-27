@@ -1,7 +1,7 @@
 From 45bf689b8968b2634c228360c5c895650d07a1d8 Mon Sep 17 00:00:00 2001
 From: Alfred Mathew <alfredmathew05@gmail.com>
 Date: Mon, 21 Feb 2022 02:36:08 +0530
-Subject: [PATCH 04/23] services: AppLockManagerService: use hashcode of pkg
+Subject: [PATCH 04/24] services: AppLockManagerService: use hashcode of pkg
  name as request code
 
 * Should have thought about this ages ago

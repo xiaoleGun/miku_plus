@@ -28,7 +28,7 @@ done
 #platform_frameworks_base
 DISPLAY_MSG=1
 cp -r ${MIKU}/platform_frameworks_base ${SOURCE_DIR}/frameworks/base/miku && cd ${SOURCE_DIR}/frameworks/base
-for i in {0001..0023}
+for i in {0001..0024}
 do apply_patches frameworks/base miku $i
 done
 

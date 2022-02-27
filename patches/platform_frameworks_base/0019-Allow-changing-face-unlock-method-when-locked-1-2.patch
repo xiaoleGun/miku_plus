@@ -1,7 +1,7 @@
 From f16129c89d36bbeb58429efd9b17813f8ea58183 Mon Sep 17 00:00:00 2001
 From: jhenrique09 <jhsv09@gmail.com>
 Date: Fri, 18 Jun 2021 11:54:32 -0300
-Subject: [PATCH 19/23] Allow changing face unlock method when locked [1/2]
+Subject: [PATCH 19/24] Allow changing face unlock method when locked [1/2]
 
 Change-Id: I9a8e812bbe869dead94d631fa0a2f53f3bf67cc6
 Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>

@@ -1,7 +1,7 @@
 From bd2ffda42cbadc229b64995d6098627ab05feb70 Mon Sep 17 00:00:00 2001
 From: jhenrique09 <jhsv09@gmail.com>
 Date: Sun, 20 Feb 2022 18:05:13 -0300
-Subject: [PATCH 22/23] Reset face auth on occluding app when authenticated
+Subject: [PATCH 22/24] Reset face auth on occluding app when authenticated
 
 Change-Id: I237f1bbb49dec279a22cfd78004f93a71843d25e
 Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>

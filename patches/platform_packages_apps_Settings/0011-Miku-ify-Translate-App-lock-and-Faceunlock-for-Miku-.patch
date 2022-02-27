@@ -1,4 +1,4 @@
-From 4c3e7c9246d82ecb7e219b7fc5e938ff4d9112ce Mon Sep 17 00:00:00 2001
+From 054810e26ef173ca9c5f43e5b704be241e8269c3 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Sun, 27 Feb 2022 19:12:27 +0800
 Subject: [PATCH 11/11] [Miku-ify] Translate App lock and Faceunlock for Miku
@@ -6,9 +6,41 @@ Subject: [PATCH 11/11] [Miku-ify] Translate App lock and Faceunlock for Miku
 
 Signed-off-by: xiaoleGun <1592501605@qq.com>
 ---
+ res/values-zh-rCN/miku_arrays.xml  | 21 +++++++++++++++++++++
  res/values-zh-rCN/miku_strings.xml | 29 +++++++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
+ 2 files changed, 50 insertions(+)
 
+diff --git a/res/values-zh-rCN/miku_arrays.xml b/res/values-zh-rCN/miku_arrays.xml
+index b799daf748..3627c76311 100644
+--- a/res/values-zh-rCN/miku_arrays.xml
++++ b/res/values-zh-rCN/miku_arrays.xml
+@@ -44,4 +44,25 @@
+         <item>259200000</item>
+     </string-array>
+ 
++    <!-- App lock timeout -->
++    <string-array name="app_lock_timeout_entries">
++        <item>5秒</item>
++        <item>10秒</item>
++        <item>30秒</item>
++        <item>1分钟</item>
++        <item>5分钟</item>
++        <item>10分钟</item>
++        <item>30分钟</item>
++    </string-array>
++
++    <string-array name="app_lock_timeout_values" translatable="false">
++        <item>5000</item>
++        <item>10000</item>
++        <item>30000</item>
++        <item>60000</item>
++        <item>300000</item>
++        <item>600000</item>
++        <item>1800000</item>
++    </string-array>
++
+ </resources>
+\ No newline at end of file
 diff --git a/res/values-zh-rCN/miku_strings.xml b/res/values-zh-rCN/miku_strings.xml
 index 0c7a21636d..7289c119b3 100644
 --- a/res/values-zh-rCN/miku_strings.xml
