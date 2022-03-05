@@ -24,7 +24,7 @@ then
 fi
 
 echo "Applying patches"
-bash ./miku_plus/apply-patches.sh
+bash ./miku_plus/apply-patches.sh faceunlock
 echo ""
 
 echo "Success"

@@ -1,7 +1,9 @@
 #!/bin/bash
 
+if [ "$1" ]
+then
 SOURCE_DIR=$PWD
-MIKU=${SOURCE_DIR}/miku_plus/patches/
+FACEUNLOCK=${SOURCE_DIR}/miku_plus/patches/faceunlock/
 
 RED_BOLD="\e[1;31m"
 RED_BOLD_HIGHLIGHT="\e[1;41m"
@@ -18,42 +20,48 @@ apply_patches() {
   fi
 }
 
+if [ "$1" = "faceunlock" ]
+then
 #platform_device_miku_sepolicy
 DISPLAY_MSG=1
-cp -r ${MIKU}/platform_device_miku_sepolicy ${SOURCE_DIR}/device/miku/sepolicy/miku && cd ${SOURCE_DIR}/device/miku/sepolicy
+cp -r ${FACEUNLOCK}/platform_device_miku_sepolicy ${SOURCE_DIR}/device/miku/sepolicy/faceunlock && cd ${SOURCE_DIR}/device/miku/sepolicy
 for i in {0001..0001}
-do apply_patches device/miku/sepolicy miku $i
+do apply_patches device/miku/sepolicy faceunlock $i
 done
 
 #platform_frameworks_base
 DISPLAY_MSG=1
-cp -r ${MIKU}/platform_frameworks_base ${SOURCE_DIR}/frameworks/base/miku && cd ${SOURCE_DIR}/frameworks/base
+cp -r ${FACEUNLOCK}/platform_frameworks_base ${SOURCE_DIR}/frameworks/base/faceunlock && cd ${SOURCE_DIR}/frameworks/base
 for i in {0001..0024}
-do apply_patches frameworks/base miku $i
+do apply_patches frameworks/base faceunlock $i
 done
 
 #platform_packages_apps_Settings
 DISPLAY_MSG=1
-cp -r ${MIKU}/platform_packages_apps_Settings ${SOURCE_DIR}/packages/apps/Settings/miku && cd ${SOURCE_DIR}/packages/apps/Settings
+cp -r ${FACEUNLOCK}/platform_packages_apps_Settings ${SOURCE_DIR}/packages/apps/Settings/faceunlock && cd ${SOURCE_DIR}/packages/apps/Settings
 for i in {0001..0011}
-do apply_patches packages/apps/Settings miku $i
+do apply_patches packages/apps/Settings faceunlock $i
 done
 
 #platform_vendor_miku
 DISPLAY_MSG=1
-cp -r ${MIKU}/platform_vendor_miku ${SOURCE_DIR}/vendor/miku/miku && cd ${SOURCE_DIR}/vendor/miku
+cp -r ${FACEUNLOCK}/platform_vendor_miku ${SOURCE_DIR}/vendor/miku/faceunlock && cd ${SOURCE_DIR}/vendor/miku
 for i in {0001..0002}
-do apply_patches vendor/miku miku $i
+do apply_patches vendor/miku faceunlock $i
 done
 
 #platform_vendor_MikuSettings
 DISPLAY_MSG=1
-cp -r ${MIKU}/platform_vendor_MikuSettings ${SOURCE_DIR}/vendor/MikuSettings/miku && cd ${SOURCE_DIR}/vendor/MikuSettings
+cp -r ${FACEUNLOCK}/platform_vendor_MikuSettings ${SOURCE_DIR}/vendor/MikuSettings/faceunlock && cd ${SOURCE_DIR}/vendor/MikuSettings
 for i in {0001..0002}
-do apply_patches vendor/MikuSettings miku $i
+do apply_patches vendor/MikuSettings faceunlock $i
 done
 
-rm -rf ${SOURCE_DIR}/device/miku/*/{miku}
-rm -rf ${SOURCE_DIR}/frameworks/*/{miku}
-rm -rf ${SOURCE_DIR}/packages/apps/*/{miku}
-rm -rf ${SOURCE_DIR}/vendor/*/{miku}
+rm -rf ${SOURCE_DIR}/device/miku/*/{faceunlock}
+rm -rf ${SOURCE_DIR}/frameworks/*/{faceunlock}
+rm -rf ${SOURCE_DIR}/packages/apps/*/{faceunlock}
+rm -rf ${SOURCE_DIR}/vendor/*/{faceunlock}
+fi
+else
+echo "Error! Please enter parameters."
+fi
