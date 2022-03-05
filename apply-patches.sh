@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SOURCE_DIR=$PWD
-MIKU=${SOURCE_DIR}/miku_faceunlock/patches/
+MIKU=${SOURCE_DIR}/miku_plus/patches/
 
 RED_BOLD="\e[1;31m"
 RED_BOLD_HIGHLIGHT="\e[1;41m"
