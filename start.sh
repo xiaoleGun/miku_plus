@@ -9,18 +9,16 @@ sleep 3
 
 set -e
 
-if [ -d apply_patches_end ]
-then
-    echo "已经应用过补丁"
-    echo "即将退出脚本"
-    sleep 2
-    exit
-fi
-
 if [ ! -d packages/apps/FaceUnlockService ]
 then
-    echo "同步FaceUnlock依赖"
+    echo "同步FaceUnlock依赖2-1"
     git clone https://github.com/xiaoleGun-OpenSource/platform_packages_apps_FaceUnlockService packages/apps/FaceUnlockService
+    echo ""
+fi
+
+if [ ! -d external/faceunlock ]
+then
+    echo "同步FaceUnlock依赖2-2"
     git clone https://github.com/xiaoleGun-OpenSource/platform_external_faceunlock external/faceunlock
     echo ""
 fi

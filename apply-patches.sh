@@ -53,8 +53,6 @@ for i in {0001..0002}
 do apply_patches vendor/MikuSettings miku $i
 done
 
-mkdir apply_patches_end
-
 rm -rf ${SOURCE_DIR}/device/miku/*/{miku}
 rm -rf ${SOURCE_DIR}/frameworks/*/{miku}
 rm -rf ${SOURCE_DIR}/packages/apps/*/{miku}
