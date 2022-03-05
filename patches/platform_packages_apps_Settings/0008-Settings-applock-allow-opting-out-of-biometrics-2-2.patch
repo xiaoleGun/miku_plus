@@ -1,4 +1,4 @@
-From f6d0aec3bde1873163125d18e75b75ff936ed2dd Mon Sep 17 00:00:00 2001
+From 8085197029d110d1660bcdf9a38cedf9fa0a49be Mon Sep 17 00:00:00 2001
 From: Alfred Mathew <alfredmathew05@gmail.com>
 Date: Tue, 22 Feb 2022 17:10:54 +0530
 Subject: [PATCH 08/11] Settings: applock: allow opting out of biometrics [2/2]

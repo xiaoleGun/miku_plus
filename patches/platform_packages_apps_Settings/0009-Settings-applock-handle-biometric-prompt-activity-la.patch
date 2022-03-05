@@ -1,4 +1,4 @@
-From 6c546d6ec2a553c74bdc19f616c47b4da98ae491 Mon Sep 17 00:00:00 2001
+From 8226fea8addc9c25cee70ddd77e8382ed280ca22 Mon Sep 17 00:00:00 2001
 From: Alfred Mathew <alfredmathew05@gmail.com>
 Date: Tue, 22 Feb 2022 18:14:04 +0530
 Subject: [PATCH 09/11] Settings: applock: handle biometric prompt activity

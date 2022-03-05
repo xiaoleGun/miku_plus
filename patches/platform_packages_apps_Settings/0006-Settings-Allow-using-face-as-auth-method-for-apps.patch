@@ -1,4 +1,4 @@
-From 4c099f0665f4fcb30f9d8a321f5fd72f3e0829c7 Mon Sep 17 00:00:00 2001
+From 474d069caa05ce487b5e6b0125583ee79bb66034 Mon Sep 17 00:00:00 2001
 From: jhenrique09 <jhenrique09.mcz@hotmail.com>
 Date: Sun, 7 Mar 2021 01:26:34 -0300
 Subject: [PATCH 06/11] Settings: Allow using face as auth method for apps
@@ -6,7 +6,7 @@ Subject: [PATCH 06/11] Settings: Allow using face as auth method for apps
 Change-Id: Ib259d1f020f9ac29a9d85ae7edba55a2b2daa101
 Signed-off-by: dlwlrma123 <alexfinhart@gmail.com>
 ---
- res/values/miku_strings.xml                   |  4 +--
+ res/values/miku_strings.xml                   |  2 --
  .../security_settings_combined_biometric.xml  |  3 +-
  ...metricSettingsAppPreferenceController.java |  4 ++-
  ...iometricWaysToUsePreferenceController.java | 35 +++++++++++++++++++
@@ -14,11 +14,11 @@ Signed-off-by: dlwlrma123 <alexfinhart@gmail.com>
  ...aceSettingsFooterPreferenceController.java | 14 +++-----
  ...tingsRemoveButtonPreferenceController.java |  9 +----
  ...aceUnlockCategoryPreferenceController.java |  2 +-
- 8 files changed, 48 insertions(+), 30 deletions(-)
+ 8 files changed, 47 insertions(+), 29 deletions(-)
  create mode 100644 src/com/android/settings/biometrics/combination/BiometricWaysToUsePreferenceController.java
 
 diff --git a/res/values/miku_strings.xml b/res/values/miku_strings.xml
-index bcc61b9f1c..59ccb43499 100644
+index 65b7ad57ce..59ccb43499 100644
 --- a/res/values/miku_strings.xml
 +++ b/res/values/miku_strings.xml
 @@ -105,8 +105,6 @@
@@ -30,13 +30,6 @@ index bcc61b9f1c..59ccb43499 100644
      <string name="security_settings_face_unlock_redo_face_scan_summary">Remove existing face scan and create a new scan</string>
      <string name="security_settings_face_unlock_redo_face_scan_title">Redo face scan</string>
      <string name="face_redo_confirm_btn">Redo</string>
-@@ -114,5 +112,5 @@
-     <string name="face_unlock_method_title">Allow face unlock on lock screen</string>
-     <string name="face_unlock_method_default">When the screen is turned on</string>
-     <string name="face_unlock_method_swipe">When swiping on lock screen</string>
--    
-+
- </resources>
 diff --git a/res/xml/security_settings_combined_biometric.xml b/res/xml/security_settings_combined_biometric.xml
 index a394b7b468..6f51f4509f 100644
 --- a/res/xml/security_settings_combined_biometric.xml

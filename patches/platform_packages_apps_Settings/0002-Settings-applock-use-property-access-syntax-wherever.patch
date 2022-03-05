@@ -1,4 +1,4 @@
-From 70e28e54b80253ef990613a73ceeee6a7a450825 Mon Sep 17 00:00:00 2001
+From 2b6c0473e2a4c4bfa7fcde05324060411f2211a4 Mon Sep 17 00:00:00 2001
 From: Alfred Mathew <alfredmathew05@gmail.com>
 Date: Sun, 20 Feb 2022 21:14:35 +0530
 Subject: [PATCH 02/11] Settings: applock: use property access syntax wherever

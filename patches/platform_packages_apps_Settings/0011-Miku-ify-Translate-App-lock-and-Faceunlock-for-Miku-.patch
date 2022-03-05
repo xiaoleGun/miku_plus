@@ -1,4 +1,4 @@
-From 054810e26ef173ca9c5f43e5b704be241e8269c3 Mon Sep 17 00:00:00 2001
+From 01610b2d3dcf7fd75b85178bd1636d768eb7d340 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Sun, 27 Feb 2022 19:12:27 +0800
 Subject: [PATCH 11/11] [Miku-ify] Translate App lock and Faceunlock for Miku

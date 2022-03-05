@@ -1,4 +1,4 @@
-From c9d13768cdee64414c1ceba1d4802e3e164e734f Mon Sep 17 00:00:00 2001
+From 27d440294b7d58c878cf3bb178d6404565ceff42 Mon Sep 17 00:00:00 2001
 From: jhonboy121 <alfredmathew05@gmail.com>
 Date: Thu, 24 Feb 2022 11:32:52 +0530
 Subject: [PATCH 09/24] services: AppLockManagerService: fix a few possible

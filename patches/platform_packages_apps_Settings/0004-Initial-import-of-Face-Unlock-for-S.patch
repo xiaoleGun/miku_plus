@@ -1,4 +1,4 @@
-From 3fc4f9f038129dd55d4efc79248f8d5000aa94f5 Mon Sep 17 00:00:00 2001
+From 2738ac49b539931731aa9f362f05b2a0cdf88d34 Mon Sep 17 00:00:00 2001
 From: jhenrique09 <jhsv09@gmail.com>
 Date: Thu, 10 Feb 2022 22:27:30 -0300
 Subject: [PATCH 04/11] Initial import of Face Unlock for S
@@ -1181,7 +1181,7 @@ index 0000000000..b4ad610724
 +}
 diff --git a/src/com/android/settings/custom/biometrics/face/FaceSettingsRedoPreferenceController.java b/src/com/android/settings/custom/biometrics/face/FaceSettingsRedoPreferenceController.java
 new file mode 100644
-index 0000000000..1ae637b9d8
+index 0000000000..0d04770e1d
 --- /dev/null
 +++ b/src/com/android/settings/custom/biometrics/face/FaceSettingsRedoPreferenceController.java
 @@ -0,0 +1,138 @@
@@ -1216,7 +1216,7 @@ index 0000000000..1ae637b9d8
 +    private int mUserId;
 +    private byte[] mToken;
 +
-+    @Override 
++    @Override
 +    public String getPreferenceKey() {
 +        return KEY;
 +    }

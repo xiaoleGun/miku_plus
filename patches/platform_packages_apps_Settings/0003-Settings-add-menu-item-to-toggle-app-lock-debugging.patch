@@ -1,4 +1,4 @@
-From b43f0fed677caccccea0f14ebd128d8715a952e1 Mon Sep 17 00:00:00 2001
+From e8864cf3afad85963e9e630f7ad34ba9086a5a94 Mon Sep 17 00:00:00 2001
 From: Alfred Mathew <alfredmathew05@gmail.com>
 Date: Sun, 20 Feb 2022 20:06:13 +0530
 Subject: [PATCH 03/11] Settings: add menu item to toggle app lock debugging
@@ -7,22 +7,21 @@ Signed-off-by: Alfred Mathew <alfredmathew05@gmail.com>
 Signed-off-by: Joey Huab <joey@evolution-x.org>
 Signed-off-by: dlwlrma123 <alexfinhart@gmail.com>
 ---
- res/values/miku_strings.xml                   |  4 +-
+ res/values/miku_strings.xml                   |  2 +
  .../applock/AppLockSettingsFragment.kt        | 40 ++++++++++++++++++-
- 2 files changed, 42 insertions(+), 2 deletions(-)
+ 2 files changed, 41 insertions(+), 1 deletion(-)
 
 diff --git a/res/values/miku_strings.xml b/res/values/miku_strings.xml
-index 98d1233ecc..1e5e424be3 100644
+index 99c11c7f06..1e5e424be3 100644
 --- a/res/values/miku_strings.xml
 +++ b/res/values/miku_strings.xml
 @@ -101,5 +101,7 @@
      </string>
      <string name="app_lock_notifications_disabled_summary">Protect an application first</string>
      <string name="app_lock_footer_text">Bubbles will be automatically dismissed after timeout</string>
--    
 +    <string name="enable_debugging">Enable debugging</string>
 +    <string name="disable_debugging">Disable debugging</string>
-+
+ 
  </resources>
 diff --git a/src/com/android/settings/security/applock/AppLockSettingsFragment.kt b/src/com/android/settings/security/applock/AppLockSettingsFragment.kt
 index b3f47cf944..e691d3b305 100644

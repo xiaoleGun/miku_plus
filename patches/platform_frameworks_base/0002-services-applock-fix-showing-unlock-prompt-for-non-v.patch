@@ -1,4 +1,4 @@
-From 82362e79fe5a8c61a6623731a49203ccb5f73e73 Mon Sep 17 00:00:00 2001
+From 3743c62e476ea62cb2e123d6807ad3621950daf2 Mon Sep 17 00:00:00 2001
 From: Alfred Mathew <alfredmathew05@gmail.com>
 Date: Sun, 20 Feb 2022 14:54:04 +0530
 Subject: [PATCH 02/24] services: applock: fix showing unlock prompt for non

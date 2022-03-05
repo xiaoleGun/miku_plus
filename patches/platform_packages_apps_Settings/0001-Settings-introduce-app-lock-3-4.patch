@@ -1,4 +1,4 @@
-From 18a062d9e3352ea0f44273fa77607c564e1c9e8d Mon Sep 17 00:00:00 2001
+From 181d42847c1b6897d354be6453b5408187b0a2a0 Mon Sep 17 00:00:00 2001
 From: jhonboy121 <alfredmathew05@gmail.com>
 Date: Fri, 4 Feb 2022 23:31:45 +0530
 Subject: [PATCH 01/11] Settings: introduce app lock [3/4]
@@ -70,7 +70,7 @@ index 96cc3c71ed..7cd960aa55 100644
              android:icon="@drawable/ic_launcher_settings"
              android:theme="@style/Theme.Settings"
 diff --git a/res/values/miku_arrays.xml b/res/values/miku_arrays.xml
-index 63a84bd066..83ef7146e9 100644
+index 63a84bd066..45c46d2cfa 100644
 --- a/res/values/miku_arrays.xml
 +++ b/res/values/miku_arrays.xml
 @@ -44,4 +44,25 @@
@@ -97,11 +97,11 @@ index 63a84bd066..83ef7146e9 100644
 +        <item>600000</item>
 +        <item>1800000</item>
 +    </string-array>
-+    
++
  </resources>
 \ No newline at end of file
 diff --git a/res/values/miku_strings.xml b/res/values/miku_strings.xml
-index f2a8a31c77..98d1233ecc 100644
+index f2a8a31c77..99c11c7f06 100644
 --- a/res/values/miku_strings.xml
 +++ b/res/values/miku_strings.xml
 @@ -84,4 +84,22 @@
@@ -125,7 +125,7 @@ index f2a8a31c77..98d1233ecc 100644
 +    </string>
 +    <string name="app_lock_notifications_disabled_summary">Protect an application first</string>
 +    <string name="app_lock_footer_text">Bubbles will be automatically dismissed after timeout</string>
-+    
++
  </resources>
 diff --git a/res/xml/app_lock_settings.xml b/res/xml/app_lock_settings.xml
 new file mode 100644

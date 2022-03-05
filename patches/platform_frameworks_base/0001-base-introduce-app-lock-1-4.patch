@@ -1,4 +1,4 @@
-From 7a4249887f9e62fd317bfde309d3c3341b3db729 Mon Sep 17 00:00:00 2001
+From 67baecf3cf1ecec4bcf539aa872fd6fb9d9566bf Mon Sep 17 00:00:00 2001
 From: jhonboy121 <alfredmathew05@gmail.com>
 Date: Tue, 1 Feb 2022 19:54:15 +0530
 Subject: [PATCH 01/24] base: introduce app lock [1/4]
@@ -404,18 +404,17 @@ index 0aa8de740bf0..40415db63702 100644
      <attribution android:tag="GeofencingService" android:label="@string/geofencing_service"/>
      <!-- Attribution for Country Detector. -->
 diff --git a/core/res/res/values/miku_config.xml b/core/res/res/values/miku_config.xml
-index 748c2378ac5c..1fd294081898 100644
+index 748c2378ac5c..2fb8fb400c18 100644
 --- a/core/res/res/values/miku_config.xml
 +++ b/core/res/res/values/miku_config.xml
-@@ -25,5 +25,9 @@
- 
+@@ -26,4 +26,8 @@
       <!-- Whether to cleanup fingerprints upon connection to the daemon and when user switches -->
       <bool name="config_cleanupUnusedFingerprints">true</bool>
-+    
+ 
 +     <!-- List of system apps that are allowed to be locked with app lock.
 +          Use with extreme caution. -->
 +     <string-array name="config_appLockAllowedSystemApps" translatable="false">
- 
++
  </resources>
 diff --git a/core/res/res/values/miku_strings.xml b/core/res/res/values/miku_strings.xml
 new file mode 100644

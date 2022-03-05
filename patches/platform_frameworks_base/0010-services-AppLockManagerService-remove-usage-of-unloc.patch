@@ -1,4 +1,4 @@
-From 82c47df10ca6186dcaddc9537259e803c7b98bfb Mon Sep 17 00:00:00 2001
+From ec9e97e2fdef4f989fe289d07c628b09d8e59047 Mon Sep 17 00:00:00 2001
 From: jhonboy121 <alfredmathew05@gmail.com>
 Date: Thu, 24 Feb 2022 18:26:51 +0530
 Subject: [PATCH 10/24] services: AppLockManagerService: remove usage of

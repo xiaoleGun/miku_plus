@@ -1,4 +1,4 @@
-From 2f3783ba56f21b6ee8e8d91ae23f7f6eebda6cca Mon Sep 17 00:00:00 2001
+From ba6e5202844044724bcefe20d686686a9c96a113 Mon Sep 17 00:00:00 2001
 From: jhenrique09 <jhsv09@gmail.com>
 Date: Thu, 10 Feb 2022 11:25:28 -0300
 Subject: [PATCH 2/2] miku: Add support FaceUnlock

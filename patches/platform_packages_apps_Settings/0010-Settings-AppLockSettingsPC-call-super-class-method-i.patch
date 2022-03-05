@@ -1,4 +1,4 @@
-From 167ba289265afacbabba0b66bb3fc67e73c28367 Mon Sep 17 00:00:00 2001
+From b0406813099f9670eb55ae38cfe855da8a356401 Mon Sep 17 00:00:00 2001
 From: jhonboy121 <alfredmathew05@gmail.com>
 Date: Thu, 24 Feb 2022 11:59:18 +0530
 Subject: [PATCH 10/11] Settings: AppLockSettingsPC: call super class method if

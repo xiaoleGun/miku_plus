@@ -1,4 +1,4 @@
-From c95e851b9a26b30303c30f874d96213040b7dc30 Mon Sep 17 00:00:00 2001
+From a9334a5595b0be62be1cff5d13cc7b7dee908309 Mon Sep 17 00:00:00 2001
 From: Alfred Mathew <alfredmathew05@gmail.com>
 Date: Tue, 22 Feb 2022 14:19:30 +0530
 Subject: [PATCH 06/24] services: applock: disable for work profile apps

@@ -1,4 +1,4 @@
-From f826e0a942f57d6cf949ea3c8e9f3ac3fa57a7e2 Mon Sep 17 00:00:00 2001
+From a5269c4c15a96962006c627443b4508a8a27ed30 Mon Sep 17 00:00:00 2001
 From: jhonboy121 <alfredmathew05@gmail.com>
 Date: Sun, 27 Feb 2022 13:25:22 +0800
 Subject: [PATCH 1/2] miku: Import BasePreferenceController and
@@ -24,7 +24,7 @@ Subject: [PATCH 1/2] miku: Import BasePreferenceController and
 
 diff --git a/res/layout/app_list_item.xml b/res/layout/app_list_item.xml
 new file mode 100644
-index 00000000..bdf927a9
+index 00000000..86d4106a
 --- /dev/null
 +++ b/res/layout/app_list_item.xml
 @@ -0,0 +1,65 @@
@@ -92,7 +92,7 @@ index 00000000..bdf927a9
 +        settings:layout_constraintBottom_toBottomOf="@id/icon"
 +        settings:layout_constraintEnd_toEndOf="parent"
 +        settings:layout_constraintTop_toTopOf="@id/icon" />
-+</androidx.constraintlayout.widget.ConstraintLayout> 
++</androidx.constraintlayout.widget.ConstraintLayout>
 diff --git a/res/layout/app_list_layout.xml b/res/layout/app_list_layout.xml
 new file mode 100644
 index 00000000..d97c87cf
@@ -128,7 +128,7 @@ index 00000000..d97c87cf
 +</FrameLayout>
 diff --git a/res/menu/app_list_menu.xml b/res/menu/app_list_menu.xml
 new file mode 100644
-index 00000000..fd33084b
+index 00000000..a83f70f3
 --- /dev/null
 +++ b/res/menu/app_list_menu.xml
 @@ -0,0 +1,21 @@
@@ -152,10 +152,10 @@ index 00000000..fd33084b
 +        android:icon="@drawable/ic_find_in_page_24px"
 +        android:showAsAction="ifRoom|collapseActionView"
 +        android:actionViewClass="android.widget.SearchView" />
-+</menu> 
++</menu>
 diff --git a/res/values/dimens.xml b/res/values/dimens.xml
 new file mode 100644
-index 00000000..8389414d
+index 00000000..37aa9222
 --- /dev/null
 +++ b/res/values/dimens.xml
 @@ -0,0 +1,22 @@
@@ -176,7 +176,7 @@ index 00000000..8389414d
 +-->
 +
 +<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-+    
++
 +    <dimen name="default_margin">16dp</dimen>
 +    <dimen name="default_padding">16dp</dimen>
 +
@@ -279,7 +279,7 @@ index 00000000..ae47a07d
 +}
 diff --git a/src/com/miku/exsettings/fragments/AppListFragment.kt b/src/com/miku/exsettings/fragments/AppListFragment.kt
 new file mode 100644
-index 00000000..92239c28
+index 00000000..68e690df
 --- /dev/null
 +++ b/src/com/miku/exsettings/fragments/AppListFragment.kt
 @@ -0,0 +1,317 @@
@@ -462,7 +462,7 @@ index 00000000..92239c28
 +     * Set a custom filter to filter out items from the list.
 +     *
 +     * @param customFilter a function that takes a [PackageInfo] and
-+     * returns a [Boolean] indicating whether to show the item or not. 
++     * returns a [Boolean] indicating whether to show the item or not.
 +     */
 +    fun setCustomFilter(customFilter: ((packageInfo: PackageInfo) -> Boolean)) {
 +        fragmentScope.launch {

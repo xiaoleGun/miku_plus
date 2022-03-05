@@ -1,4 +1,4 @@
-From a4f3232aa60a0d4da8e03fdb4edd5a7a6d03ea9e Mon Sep 17 00:00:00 2001
+From 285174f654159e40f6984cb259a8606bccf0d98b Mon Sep 17 00:00:00 2001
 From: jhenrique09 <jhsv09@gmail.com>
 Date: Fri, 11 Feb 2022 22:34:49 -0300
 Subject: [PATCH 17/24] SystemUI: Tell user when face unlock detection is
