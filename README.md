@@ -9,6 +9,7 @@ This is an Android project for Miku fans. If you don't like it, please close thi
 
 # Function
 - Faceunlock
+- Per-app volume control
 
 ## Apply-patches
 - Clone this repo:
@@ -17,7 +18,7 @@ This is an Android project for Miku fans. If you don't like it, please close thi
     ```
 - Finally, start the build script:
     ```
-    bash miku_plus/start.sh
+    bash miku_plus/start.sh faceunlock volume
     ```
 
 ## Credits

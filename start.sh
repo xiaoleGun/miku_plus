@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ "$1" -o "$2" ]
+then
+if [[ "$1" = "faceunlock" ]] || [[ "$2" = "faceunlock" ]] || [[ "$1" = "volume" ]] || [[ "$2" = "volume" ]] 
+then
 echo ""
 echo "Miku UI Plus"
 echo "Executing in 3 seconds - CTRL-C to exit"
@@ -24,8 +28,14 @@ then
 fi
 
 echo "Applying patches"
-bash ./miku_plus/apply-patches.sh faceunlock
+bash ./miku_plus/apply-patches.sh $1 $2
 echo ""
 
 echo "Success"
 . build/envsetup.sh
+else
+echo "Error! Please enter the correct parameters."
+fi
+else
+echo "Error! Please enter parameters."
+fi

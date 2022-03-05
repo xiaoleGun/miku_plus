@@ -1,9 +1,8 @@
 #!/bin/bash
 
-if [ "$1" ]
-then
 SOURCE_DIR=$PWD
-FACEUNLOCK=${SOURCE_DIR}/miku_plus/patches/faceunlock/
+FACEUNLOCK=${SOURCE_DIR}/miku_plus/patches/faceunlock
+VOLUME=${SOURCE_DIR}/miku_plus/patches/volume
 
 RED_BOLD="\e[1;31m"
 RED_BOLD_HIGHLIGHT="\e[1;41m"
@@ -20,7 +19,7 @@ apply_patches() {
   fi
 }
 
-if [ "$1" = "faceunlock" ]
+if [[ "$1" = "faceunlock" ]] || [[ "$2" = "faceunlock" ]] 
 then
 #platform_device_miku_sepolicy
 DISPLAY_MSG=1
@@ -62,6 +61,27 @@ rm -rf ${SOURCE_DIR}/frameworks/*/{faceunlock}
 rm -rf ${SOURCE_DIR}/packages/apps/*/{faceunlock}
 rm -rf ${SOURCE_DIR}/vendor/*/{faceunlock}
 fi
-else
-echo "Error! Please enter parameters."
+
+if [[ "$1" = "volume" ]] || [[ "$2" = "volume" ]] 
+then
+#platform_frameworks_av
+DISPLAY_MSG=1
+cp -r ${VOLUME}/platform_frameworks_av ${SOURCE_DIR}/frameworks/av/volume && cd ${SOURCE_DIR}/frameworks/av
+for i in {0001..0001}
+do apply_patches frameworks/av volume $i
+done
+
+#platform_frameworks_base
+DISPLAY_MSG=1
+cp -r ${VOLUME}/platform_frameworks_base ${SOURCE_DIR}/frameworks/base/volume && cd ${SOURCE_DIR}/frameworks/base
+for i in {0001..0001}
+do apply_patches frameworks/base volume $i
+done
+
+#platform_packages_apps_Settings
+DISPLAY_MSG=1
+cp -r ${VOLUME}/platform_packages_apps_Settings ${SOURCE_DIR}/packages/apps/Settings/volume && cd ${SOURCE_DIR}/packages/apps/Settings
+for i in {0001..0002}
+do apply_patches packages/apps/Settings volume $i
+done
 fi
